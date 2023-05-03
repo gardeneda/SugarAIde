@@ -1,0 +1,39 @@
+{
+  "name": "2800-202310-bby21",
+  "version": "1.0.0",
+  "description": "An application designed for 2800 in BCIT. Attempts to create an application that uses generative AI to achieve a solution, which in this case is to allow users to assess their risks of diabetes type 2. ",
+  "main": "server.js",
+  "scripts": {
+    "start:dev": "nodemon server.js",
+    "start:prod": "NODE_ENV=production nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gardeneda/2800-202310-BBY21.git"
+  },
+  "keywords": [
+    "OpenAI",
+    "Generative",
+    "AI",
+    "ChatGPT",
+    "Diabetes",
+    "Tracker",
+    "Web",
+    "Application"
+  ],
+  "author": "Isaiah Youm, Hiroshi Nakasone, Ran Park, Jimmy Nguyen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gardeneda/2800-202310-BBY21/issues"
+  },
+  "homepage": "https://github.com/gardeneda/2800-202310-BBY21#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "openai": "^3.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
