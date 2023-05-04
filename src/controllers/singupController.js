@@ -1,5 +1,4 @@
 
-
-app.get('/signup', (req, res) => {
+exports.createHTML = (req, res) => {
     res.render('signup');
-});
+};

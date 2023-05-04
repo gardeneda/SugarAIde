@@ -2,10 +2,12 @@
 /*  Required Packages and Constant Declaration */
 const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
-app.set('view engine', 'ejs');
 const Joi = require("joi");
+const express = require('express');
 const bcrypt = require("bcrypt");
 const app = express();
+app.set('view engine', 'ejs');
+
 
 const database = require(`${__dirname}/../config/databaseConfig`);
 const userCollection = database
@@ -14,9 +16,9 @@ const userCollection = database
 
   const expireTime = 60 * 60 * 1000;
 
-app.get('/login', (req, res) => {
-    res.render('login');
-});
+exports.createHTML = (req, res) => {
+    res.render('/login')
+};
 
 exports.checkUserInput = (req, res, next) => {
     email = req.body.email;
