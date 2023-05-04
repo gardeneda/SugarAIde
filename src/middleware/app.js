@@ -17,7 +17,7 @@ const node_session_secret = process.env.NODE_SESSION_SECRET;
 const botRouter = require(`${__dirname}/../routes/botRouter`);
 const signupRouter = require(`${__dirname}/../routes/signupRouter`);
 const loginRouter = require(`${__dirname}/../routes/loginRouter`);
-const memberRouter = require(`${__dirname}/../routes/memberRouter`);
+const mainRouter = require(`${__dirname}/../routes/mainRouter`);
 
 // app.set('views', path.join(__dirname, 'src', 'views'));
 
@@ -58,9 +58,9 @@ app.use(
 
 app.use("/img", express.static(`${__dirname}/../public/img`));
 
-// app.use("/signup", signupRouter);
+app.use("/signup", signupRouter);
 
-// app.use("/login", loginRouter);
+app.use("/login", loginRouter);
 
 // app.use("/main", mainRouter);
 
@@ -80,7 +80,8 @@ app.get("/", (req, res) => {
 
 app.get("*", (req, res) => {
   const html = `
-		<h2>Page Does Not Exist - 404</h2>
+		<h2>Page Does Not Exist - 404 </h2>
+    <img src='./images/sadrobot.png'>
 		</br>
 		<a href='/'>Go back to main</a>
 	`;

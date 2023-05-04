@@ -17,7 +17,7 @@ const userCollection = database
   const expireTime = 60 * 60 * 1000;
 
 exports.createHTML = (req, res) => {
-    res.render('/login')
+    res.render('login')
 };
 
 exports.checkUserInput = (req, res, next) => {
@@ -63,7 +63,7 @@ exports.login = async (req, res, next) => {
         req.session.username = result[0].username;
         req.session.cookie.maxAge = expireTime;
     
-        res.redirect("/member");
+        res.redirect("/main");
         return;
     } else {
         console.log("incorrect password");
