@@ -3,7 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const app = express();
 
-const botRouter = require(`${__dirname}/routes/botRouter`);
+const botRouter = require(`${__dirname}/../routes/botRouter`);
 
 // Morgan is a development dependency that allows us to visualize status codes better
 // for API tests. 
