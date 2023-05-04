@@ -63,7 +63,7 @@ exports.login = async (req, res, next) => {
         req.session.username = result[0].username;
         req.session.cookie.maxAge = expireTime;
     
-        res.redirect("/main");
+        res.render("main");
         return;
     } else {
         console.log("incorrect password");
