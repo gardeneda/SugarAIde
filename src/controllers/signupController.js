@@ -16,8 +16,8 @@ const saltRounds = 12;
 /* ///////////////////////////////////////////////// */
 
 /* 
-    Checks if all fields for the user sign-up form is
-    all filled out. There should be no empty fields.
+  Checks if all fields for the user sign-up form is
+  all filled out. There should be no empty fields.
 */
 
 exports.createHTML = (req, res) => {
