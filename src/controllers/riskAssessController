@@ -40,7 +40,7 @@ const diabProbabilityLifestyle = function (
         (0.0009 * menthlth) +
         (0.005 * physhlth);
 
-    const probability = 1 / (1 + Math.E(logOdds));
+    const probability = 1 / (1 + Math.exp(-logOdds));
 
     return probability;
 }
@@ -73,7 +73,7 @@ const diabProbabilityMedical = function (
         (0.0814 * HbA1c) +
         (0.0023 * bloodglucose);
 
-    probability = 1 / (1 + Math.E(logOdds));
+    probability = 1 / (1 + Math.exp(-logOdds));
 
     return probability;
 }
@@ -128,17 +128,22 @@ exports.diabProbability = function (
     they provided, and renders the page with the according data.
 */
 exports.createHTML = async (req, res, next) => {
+    if (!req.session.authenticated) {
+        res.send("Must log-in");
+        return;
+    }
+
     const email = req.session.email;
 
     const user = await userCollection.findOne({ email: email });
-    console.log(`This is the value of the user's age. ${user.healthinfo.age}`);
+    console.log(`This is the value of the user's age. ${user.healthinfo?.age}`);
 
     const risk = this.diabProbability(
-        user.healthinfo.age, user.healthinfo.bmi, user.healthinfo.highchol,
-        user.healthinfo.smoker, user.healthinfo.stroke, user.healthinfo.fruit,
-        user.healthinfo.veggie, user.healthinfo.hvyalcohol, user.healthinfo.menthlth,
-        user.healthinfo.physhlth, user.healthinfo.hypertension, user.healthinfo.heartdisease,
-        user.healthinfo.HbA1c, user.healthinfo.bloodglucose
+        user.healthinfo?.age, user.healthinfo?.bmi, user.healthinfo?.highchol,
+        user.healthinfo?.smoker, user.healthinfo?.stroke, user.healthinfo?.fruit,
+        user.healthinfo?.veggie, user.healthinfo?.hvyalcohol, user.healthinfo?.menthlth,
+        user.healthinfo?.physhlth, user.healthinfo?.hypertension, user.healthinfo?.heartdisease,
+        user.healthinfo?.HbA1c, user.healthinfo?.bloodglucose
     );
 
     // Use the dot notation for subcollections.
@@ -146,5 +151,8 @@ exports.createHTML = async (req, res, next) => {
         $set: { "healthinfo.risk": risk }
     });
 
-    res.render("risk-assessment", { risk: risk });
+    const formattedRisk = (risk.toFixed(3) * 100) + "%";
+
+    console.log(formattedRisk);
+    res.render("risk-assessment", { risk: formattedRisk });
 }
