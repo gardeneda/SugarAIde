@@ -62,7 +62,7 @@ app.use("/signup", signupRouter);
 
 app.use("/login", loginRouter);
 
-// app.use("/main", mainRouter);
+app.use("/main", mainRouter);
 
 app.use("/logout", (req, res) => {
 	req.session.destroy();
