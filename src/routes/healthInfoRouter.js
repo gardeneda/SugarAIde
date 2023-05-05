@@ -9,6 +9,7 @@ router.route('/')
 
 
 router.route('/form')
-    .get(healthInfoController.createForm);
+    .get(healthInfoController.createForm)
+    .post(healthInfoController.processForm);
 
 module.exports = router;

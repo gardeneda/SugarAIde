@@ -43,7 +43,7 @@ const diabProbabilityLifestyle = function (
     const probability = 1 / (1 + Math.E(logOdds));
 
     return probability;
-};
+}
 
 /*
   This is the formula attained from the MLR (OLS Regression) test for
@@ -76,7 +76,7 @@ const diabProbabilityMedical = function (
     probability = 1 / (1 + Math.E(logOdds));
 
     return probability;
-};
+}
 
 /*
     Returns the highest probability out of the two functions of
@@ -121,7 +121,7 @@ exports.dibaProbability = function (
     );
 
     return (a > b) ? a : b;
-};
+}
 
 /*
 
@@ -136,4 +136,4 @@ exports.updateProbabilityUser = (req, res, next) => {
         { username: username, email: email },
         { $set: { risk: probability } }
     )
-};
+}
