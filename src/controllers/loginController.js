@@ -55,8 +55,6 @@ exports.login = async (req, res, next) => {
         return;
     }
 
-    console.log(result[0].init);
-
     if (await bcrypt.compare(password, result[0].password)) {
         console.log("correct password");
         req.session.authenticated = true;
@@ -64,6 +62,8 @@ exports.login = async (req, res, next) => {
         req.session.username = result[0].username;
         req.session.cookie.maxAge = expireTime;
 
+        // Check if it's the user's first time logging in..
+        // If so, direct to /health and nullify the first-time token (init).
         if (result[0].init === 1) {
             userCollection.updateOne({ email: req.session.email }, { $set: { init: 0 } });
             res.redirect('/health');

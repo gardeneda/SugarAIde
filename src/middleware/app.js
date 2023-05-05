@@ -19,6 +19,7 @@ const healthInfoRouter = require(`${__dirname}/../routes/healthInfoRouter`);
 const signupRouter = require(`${__dirname}/../routes/signupRouter`);
 const loginRouter = require(`${__dirname}/../routes/loginRouter`);
 const mainRouter = require(`${__dirname}/../routes/mainRouter`);
+const riskAssessRouter = require(`${__dirname}/../routes/riskAssessRouter`);
 
 // app.set('views', path.join(__dirname, 'src', 'views'));
 
@@ -67,17 +68,19 @@ app.use("/login", loginRouter);
 
 app.use("/health", healthInfoRouter);
 
+app.use("/risk", riskAssessRouter);
+
 app.use("/logout", (req, res) => {
-	req.session.destroy();
-	res.redirect("/");
+  req.session.destroy();
+  res.redirect("/");
 });
 
 app.get("/", (req, res) => {
   if (req.session.authenticated) {
-	    res.render('main');
-	  
+    res.render('main');
+
   } else {
-	    res.render("home");
+    res.render("home");
   }
 });
 

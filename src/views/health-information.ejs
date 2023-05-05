@@ -120,6 +120,23 @@
                 <!-- Used for spacing between entreis. -->
                 <div>&nbsp;</div>
 
+                <div class="col-12">
+                  <label for="age" class="form-label">Age</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="age"
+                    placeholder="Enter your age."
+                    pattern="[0-9]{1,3}"
+                    name="age"
+                    required
+                  />
+                  <div class="invalid-feedback">Please enter a valid age.</div>
+                </div>
+
+                <!-- Used for spacing between entreis. -->
+                <div>&nbsp;</div>
+
                 <div class="col-sm-12">
                   <label for="" class="form-label"
                     >Do you have high cholesterol? (Optional)</label
@@ -187,7 +204,7 @@
                 <div>&nbsp;</div>
 
                 <div class="col-12">
-                  <label for="address" class="form-label"
+                  <label for="menthlth" class="form-label"
                     >How many days did you feel depressed the past 30 days?
                     (Optional)</label
                   >
@@ -206,7 +223,7 @@
                 <div>&nbsp;</div>
 
                 <div class="col-12">
-                  <label for="address" class="form-label"
+                  <label for="physhlth" class="form-label"
                     >How many days did you feel your physical health was poor
                     the past 30 days? (Optional)
                   </label>
@@ -225,7 +242,7 @@
                 <div>&nbsp;</div>
 
                 <div class="col-sm-12">
-                  <label for="" class="form-label"
+                  <label for="fruits" class="form-label"
                     >Do you eat fruits every day?</label
                   >
                   <div class="form-check">
@@ -257,7 +274,7 @@
                 <div>&nbsp;</div>
 
                 <div class="col-sm-12">
-                  <label for="" class="form-label"
+                  <label for="veggie" class="form-label"
                     >Do you eat vegetables every day?</label
                   >
                   <div class="form-check">
@@ -289,7 +306,7 @@
                 <div>&nbsp;</div>
 
                 <div class="col-sm-12">
-                  <label for="" class="form-label"
+                  <label for="hvyalcohol" class="form-label"
                     >Have you drank more than (7 if female, 14 if male) beers or
                     alcohol dosage equivalents the past week? (Optional)</label
                   >
@@ -324,7 +341,7 @@
                 <div>&nbsp;</div>
 
                 <div class="col-sm-12">
-                  <label for="" class="form-label"
+                  <label for="hypertension" class="form-label"
                     >Do you currently have hypertension?</label
                   >
                   <div class="form-check">
@@ -360,7 +377,7 @@
                 <div>&nbsp;</div>
 
                 <div class="col-sm-12">
-                  <label for="" class="form-label"
+                  <label for="heardisease" class="form-label"
                     >Do you, or did you have a heart disease?</label
                   >
                   <div class="form-check">
@@ -389,6 +406,38 @@
                     <label class="form-check-label" for="no-heartdisease"
                       >No</label
                     >
+                  </div>
+                </div>
+
+                <!-- Used for spacing between entreis. -->
+                <div>&nbsp;</div>
+
+                <div class="col-sm-12">
+                  <label for="stroke" class="form-label"
+                    >Have you ever had a stroke?</label
+                  >
+                  <div class="form-check">
+                    <input
+                      id="yes-stroke"
+                      type="radio"
+                      class="form-check-input"
+                      name="stroke"
+                      value="1"
+                      checked
+                      required
+                    />
+                    <label class="form-check-label" for="yes-stroke">Yes</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      id="no-stroke"
+                      type="radio"
+                      class="form-check-input"
+                      name="stroke"
+                      value="0"
+                      required
+                    />
+                    <label class="form-check-label" for="no-stroke">No</label>
                   </div>
                 </div>
 
