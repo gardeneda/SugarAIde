@@ -1,0 +1,10 @@
+Features to Implement
+
+Isaiah
+* As a user I want to know whether or not I am at risk for diabetes type II
+  - Integrate OpenAI API into middleware and server.
+  - Set up Data Analysis by prepping Jupyter Notebook
+  - Perform Linear Regression tests on the data set we have
+  - Perform Multiple Linear Regression tests on the data set we have
+  - Train the OpenAI API to understand the results of our data analysis
+  - Allow users to ask the AI for their diabetes risk assessment (no front end)
