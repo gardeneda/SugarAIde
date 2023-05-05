@@ -21,7 +21,7 @@ const saltRounds = 12;
 */
 
 exports.createHTML = (req, res) => {
-    res.render('signup');
+  res.render('signup');
 };
 
 exports.checkInput = (req, res, next) => {
@@ -95,9 +95,13 @@ exports.createUser = async (req, res) => {
     username: username,
     email: email,
     password: hashedPassword,
+
+    // Checks if it's the user's first time.
+    // If it is, we'll be sending them a health-information survey.
+    init: 1
   });
 
   console.log("Inserted User");
-  res.render('main')
+  res.redirect('/')
 };
 

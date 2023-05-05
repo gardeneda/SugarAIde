@@ -1,7 +1,7 @@
 const { Configuration, OpenAIApi } = require("openai");
 
-const dotenv = require('dotenv');
-dotenv.config({path: './.env'});
+const dotenv = require("dotenv");
+dotenv.config({ path: "./.env" });
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -32,5 +32,3 @@ exports.getAllThings = async (req, res, next) => {
   }
   next();
 }
-
-
