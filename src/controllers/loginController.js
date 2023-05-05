@@ -40,17 +40,12 @@ exports.checkUserInput = (req, res, next) => {
 
 
 const checkFirstTime = async function (account) {
-    const status = await userCollection.findOne({ email: req.session.email }, (err, doc) => {
-        console.log(doc.init);
-        if (doc.init === 1) {
-            return true;
-
-        } else {
-            return false;
-        }
-    });
-
-    return status;
+    const status = await userCollection.findOne({ email: account });
+    if (status && status.init === 1) {
+        return true;
+    } else {
+        return false;
+    }
 };
 
 exports.login = async (req, res, next) => {
@@ -61,8 +56,6 @@ exports.login = async (req, res, next) => {
         .find({ email: email })
         .project({ email: 1, password: 1, _id: 1, username: 1 })
         .toArray();
-
-    console.log(result);
 
     if (result.length != 1) {
         res.send(
@@ -78,12 +71,15 @@ exports.login = async (req, res, next) => {
         req.session.username = result[0].username;
         req.session.cookie.maxAge = expireTime;
 
-        if (checkFirstTime) {
+        const status = await checkFirstTime(email);
+        console.log(`The status returns this: ${status}`);
+
+        if (status) {
             userCollection.updateOne({ email: req.session.email }, { $set: { init: 0 } });
             res.redirect('/health');
 
         } else {
-            res.redirect('/main');
+            res.redirect('/');
         }
 
     } else {
