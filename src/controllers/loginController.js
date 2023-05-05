@@ -39,22 +39,13 @@ exports.checkUserInput = (req, res, next) => {
 };
 
 
-const checkFirstTime = async function (account) {
-    const status = await userCollection.findOne({ email: account });
-    if (status && status.init === 1) {
-        return true;
-    } else {
-        return false;
-    }
-};
-
 exports.login = async (req, res, next) => {
     email = req.body.email;
     password = req.body.password;
 
     const result = await userCollection
         .find({ email: email })
-        .project({ email: 1, password: 1, _id: 1, username: 1 })
+        .project({ email: 1, password: 1, _id: 1, username: 1, init: 1 })
         .toArray();
 
     if (result.length != 1) {
@@ -64,6 +55,8 @@ exports.login = async (req, res, next) => {
         return;
     }
 
+    console.log(result[0].init);
+
     if (await bcrypt.compare(password, result[0].password)) {
         console.log("correct password");
         req.session.authenticated = true;
@@ -71,10 +64,7 @@ exports.login = async (req, res, next) => {
         req.session.username = result[0].username;
         req.session.cookie.maxAge = expireTime;
 
-        const status = await checkFirstTime(email);
-        console.log(`The status returns this: ${status}`);
-
-        if (status) {
+        if (result[0].init === 1) {
             userCollection.updateOne({ email: req.session.email }, { $set: { init: 0 } });
             res.redirect('/health');
 
