@@ -15,6 +15,7 @@ const mongodb_session_secret = process.env.MONGODB_SESSION_SECRET;
 const node_session_secret = process.env.NODE_SESSION_SECRET;
 
 const botRouter = require(`${__dirname}/../routes/botRouter`);
+const healthInfoRouter = require(`${__dirname}/../routes/healthInfoRouter`);
 const signupRouter = require(`${__dirname}/../routes/signupRouter`);
 const loginRouter = require(`${__dirname}/../routes/loginRouter`);
 const mainRouter = require(`${__dirname}/../routes/mainRouter`);
@@ -63,6 +64,8 @@ app.use("/signup", signupRouter);
 app.use("/login", loginRouter);
 
 // app.use("/main", mainRouter);
+
+app.use("/health", healthInfoRouter);
 
 app.use("/logout", (req, res) => {
 	req.session.destroy();
