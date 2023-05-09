@@ -58,7 +58,11 @@ app.use(
   })
 );
 
-app.use("/img", express.static(`${__dirname}/../public/img`));
+app.use("/css", express.static(`${__dirname}/../../public/css`));
+
+app.use("/img", express.static(`${__dirname}/../../public/img`));
+
+app.use("/js", express.static(`${__dirname}/../../public/js`));
 
 app.use("/signup", signupRouter);
 

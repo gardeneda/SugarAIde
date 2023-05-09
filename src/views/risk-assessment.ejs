@@ -2,57 +2,35 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Enter Health Information</title>
+    <title>Risk Level</title>
 
     <!-- Bootstrap Link -->
-    <link
+    <!-- <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
-    />
+    /> -->
 
     <!-- Font Awesome Script Connected to Isaiah's Account -->
-    <script
+    <!-- <script
       src="https://kit.fontawesome.com/36e5d26d04.js"
       crossorigin="anonymous"
-    ></script>
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-      .form-signin {
-        width: 100%;
-        max-width: 330px;
-        padding: 15px;
-        margin: auto;
-      }
-    </style>
+    ></script> -->
+
+    <link rel="stylesheet" href="/css/risk.css"/>
+    
   </head>
   <body>
     <div class="p-5 text-center bg-body-tertiary rounded-3">
-      <svg
-        class="bi mt-4 mb-3"
-        style="color: var(--bs-indigo)"
-        width="100"
-        height="100"
-      >
-        <use xlink:href="#bootstrap"></use>
-      </svg>
       <h1 class="text-body-emphasis"></h1>
-      <p class="col-lg-8 mx-auto fs-5 text-muted">
-        The risk percentage of you getting diabetes is <%= risk %>
-      </p>
+      <div class="progress-container p-5 text-center bg-body-tertiary">
+        <div class="circular-progress">
+          <span class="progress-value">
+            <%= risk %>
+          </span>
+        </div>
+      </div>
     </div>
   </body>
 </html>
