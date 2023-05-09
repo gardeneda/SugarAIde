@@ -1,6 +1,4 @@
-body{
-  background-color: #F9858b;
-}
+
 
 .bg-pink{
     background-color: #F9858b;
@@ -9,11 +7,7 @@ body{
     background-color: #FFFFFF
 }
 
-#bannerTitle{
-  color: #ed335f;
-  font-family: Arial, Helvetica, sans-serif;
-}
-.features h1 {
+.features h2 {
   text-align: center;
   font-size: 30px;
   font-weight: 300;
@@ -29,25 +23,19 @@ body{
   font-weight: bold;
 }
 
-.features h1:hover {
-  color: #761137;
-}
 
-.features h1:after,
-.features h1:before {
+.features h2:after,
+.features h2:before {
   content: " ";
   display: block;
-  border-bottom: 2px solid #274c77;
-  border-top: 2px solid #274c67;
+  border-bottom: 2px solid #F9858b;
+  border-top: 2px solid #F9858b;
   height: 5px;
   background-color: #f8f8f8;
 }
-.bi-robot{
-  background-color: #F9858b;
-  padding: 1px;
-}
 
-h2{
+
+h3{
   color: #ed335f;
 }
 
