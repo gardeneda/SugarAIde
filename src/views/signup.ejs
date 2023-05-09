@@ -24,24 +24,35 @@
         padding: 15px;
         margin: auto;
       }
+
+      .card {
+        width: 18rem;
+        margin: 0 auto;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
     </style>
   </head>
   <body>
-    <form class="form-signin" action="/signup" method="post">
-      <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-      <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
-
-      <label for="inputUsername" class="sr-only">Username</label>
-      <input type="text" id="inputUsername" class="form-control" name="username" placeholder="Username" required autofocus>
-      <br>
-      <label for="inputEmail" class="sr-only">Email address</label>
-      <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Email address" required autofocus>
-      <br>
-      <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" required>
-      <br>
-      <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="window.location.href='main'">Sign up</button>
-      <p class="mt-5 mb-3 text-muted">&copy; SugarAIde 2023</p>
-    </form>
+    <div class="card" style="width: 18rem;">
+      <form class="form-signin" action="/signup" method="post">
+        <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
+        <label for="inputUsername" class="sr-only">Username</label>
+        <input type="text" id="inputUsername" class="form-control" name="username" placeholder="Username" required autofocus>
+        <br>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Email address" required autofocus>
+        <br>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" required>
+        <br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="window.location.href='main'">Sign up</button>
+      </form>
+    </div>
   </body>
 </html>

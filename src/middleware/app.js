@@ -57,8 +57,9 @@ app.use(
     resave: true,
   })
 );
+app.use("/css", express.static(`${__dirname}/../../public/css`));
 
-app.use("/img", express.static(`${__dirname}/../public/img`));
+app.use("/img", express.static(`${__dirname}/../../public/img`));
 
 app.use("/signup", signupRouter);
 

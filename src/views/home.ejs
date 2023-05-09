@@ -3,12 +3,16 @@
   <head>
     <meta charset="utf-8">
     <title>SugarAIde</title>
+    <!--Bootstrap CSS-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!--Custom CSS-->
+    <link rel="stylesheet" href="css/home.css">
   </head>
   <body>
     <!--Nav Bar-->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="#">SugarAIde</a>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-pink">
+      <a class="navbar-brand" href="./home.ejs">SugarAIde</a>
       <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -27,39 +31,63 @@
         </ul>
       </div>
     </nav>
+    <br>
     <!-- Main jumbotron for a primary marketing message or call to action -->
-  <div class="jumbotron">
-    <div class="container">
-        <br>
-      <h2 class="display-4">SugarAIde</h2>
-      <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-      <p><a class="btn btn-primary btn-lg" onclick="window.location.href='login'" role="button">Login &raquo;</a></p>
-      <p><a class="btn btn-light btn-lg" onclick="window.location.href='signup'" role="button">Sign up &raquo;</a></p>
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5 bg-beige">
+      <div class="col-10 col-sm-8 col-lg-6">
+        <img src="/img/sugarAIdeLogo.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+      </div>
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-bold lh-1 mb-3" id="bannerTitle">SugarAIde</h1>
+        <p class="lead">Your AI-powered partner for a healthy life, one byte at a time.</p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+          <p><a class="btn bg-pink btn-lg px-4 me-md-2" onclick="window.location.href='login'" role="button">Login &raquo;</a></p>
+          <p><a class="btn btn-light btn-lg px-4" onclick="window.location.href='signup'" role="button">Sign up &raquo;</a></p>
+        </div>
+        </div>
+      </div>
 
-    </div>
+  <!--Features Header-->
+  <div class="features">
+    <h1>Features</h1>
   </div>
-
-  <div class="container">
-    <!-- Example row of columns -->
-    <div class="row">
-      <div class="col-md-4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+  <!--Features-->
+  <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+    <div class="feature col">
+      <div class="feature-icon bg-pink bg-gradient">
+        <svg class="bi" width="1em" height="1em"><use xlink:href="#collection"></use></svg>
       </div>
-      <div class="col-md-4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-      </div>
-      <div class="col-md-4">
-        <h2>Heading</h2>
-        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-      </div>
+      <h2>Diabetes Prevention Virtual Assistant</h2>
+      <p class="feature-p">Our app's virtual assistant helps sedentary individuals assess their risk for diabetes and provides personalized recommendations to prevent it. 
+        Get support and guidance for a healthier, happier you!</p>
     </div>
+    <div class="feature col">
+      <div class="feature-icon bg-pink bg-gradient">
+        <svg class="bi" width="1em" height="1em"><use xlink:href="#people-circle"></use></svg>
+      </div>
+      <h2>Personalized Health Suggestions</h2>
+      <p class="feature-p">SugarAIde provides personalized health suggestions to help health enthusiasts improve their wellbeing on a daily basis.
+        Receive insights and customized tips to optimize your health and wellness journey. </p>
+    </div>
+    <div class="feature col">
+      <div class="feature-icon bg-pink bg-gradient">
+        <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use></svg>
+      </div>
+      <h2>Nutritional Tracker</h2>
+      <p class="feature-p">The Nutritional Tracker feature makes it easy to monitor your calorie and nutrient intake, reducing your risk for diabetes. 
+        Track your food consumption and receive personalized insights to prevent diabetes.</p>
+    </div>
+    <div class="feature col">
+      <div class="feature-icon bg-pink bg-gradient">
+        <svg class="bi bi-robot" width="1em" height="1em">
+          <use xlink:href="#toggles2"></use>
+        </svg>
+      </div>
+      <h2>Activity Tracker</h2>
+      <p class="feature-p">Our Activity Tracker feature log your daily activities and receive personalized feedback and insights to prevent diabetes. </p>
+    </div>
+  </div> 
 
-    <hr>
 
   </div> <!-- /container -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
