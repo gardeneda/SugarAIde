@@ -57,6 +57,8 @@ app.use(
     resave: true,
   })
 );
+app.use("/css", express.static(`${__dirname}/../../public/css`));
+
 
 app.use("/font", express.static(`${__dirname}/../../public/font`));
 
