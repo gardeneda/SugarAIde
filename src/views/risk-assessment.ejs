@@ -21,44 +21,34 @@
     <link rel="stylesheet" href="/css/risk.css" />
   </head>
   <body>
-
-    <p class="hidden" id="risk-level">
-      <%= risk %>
-    </p>
+    <p class="hidden" id="risk-level"><%= risk %></p>
 
     <div class="container">
       <!-- Begin of Row 1 -->
-      <div
-        class="row justify-content-center align-content-center"
-      >
+      <div class="row justify-content-center align-content-center py-3">
         <div class="justify-content-center align-content-center">
-          <h1 class="text-body-emphasis text-center">Probability of Getting Diabetes</h1>
+          <h1 class="text-body-emphasis text-center">
+            Probability of Getting Diabetes
+          </h1>
           <div class="progress-container">
             <div class="circular-progress">
               <span class="progress-value"> 0% </span>
             </div>
           </div>
         </div>
-        <div class="col-md-6 px-4 py-3">
-          <p class="mx-4 fs-5 text-muted">
-            At SugarAIde, we highly value the privacy of our users' personal
-            information.
-            <br />
-            Especially their health information.
-            <br />
-            <br />
-            We require access to this information to provide our full range of
-            services. However, we understand the sensitivity of this data and will
-            only collect, store and use it with the explicit consent of the user.
-            <br />
-            <br />
-          </p>
-        </div>
       </div>
       <!-- End of Row 2 -->
 
-      <!-- Begin of Row 2 -->
       <div class="row py-md-3">
+        <div class="col-md-12 mx-4 fs-5 text-center text-muted">
+          <% if (risk < 40) { %> <%- include("templates/low-risk") %> <% } else
+          if (risk < 70) { %> <%- include("templates/mid-risk") %> <% } else {
+          %> <%- include("templates/high-risk") %> <% } %>
+        </div>
+      </div>
+
+      <!-- Begin of Row 2 -->
+      <div class="row py-3">
         <div class="col text-center button-box mx-2">
           <a href="/login" class="btn btn-outline-primary me-2">Back to Main</a>
           <a href="/signup" class="btn btn-primary">Get Suggestions</a>
