@@ -15,6 +15,7 @@ const mongodb_session_secret = process.env.MONGODB_SESSION_SECRET;
 const node_session_secret = process.env.NODE_SESSION_SECRET;
 
 const botRouter = require(`${__dirname}/../routes/botRouter`);
+const chatRouter = require(`${__dirname}/../routes/chatRouter`);
 const healthInfoRouter = require(`${__dirname}/../routes/healthInfoRouter`);
 const signupRouter = require(`${__dirname}/../routes/signupRouter`);
 const loginRouter = require(`${__dirname}/../routes/loginRouter`);
@@ -67,6 +68,8 @@ app.use("/css", express.static(`${__dirname}/../../public/css`));
 app.use("/img", express.static(`${__dirname}/../../public/img`));
 
 app.use("/js", express.static(`${__dirname}/../../public/js`));
+
+app.use("/chat", chatRouter);
 
 app.use("/signup", signupRouter);
 
