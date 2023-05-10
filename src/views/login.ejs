@@ -5,43 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Log In</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="/css/login.css">
     <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-      .form-signin {
-        width: 100%;
-        max-width: 330px;
-        padding: 15px;
-        margin: auto;
-      }
 
-      .card {
-        width: 18rem;
-        margin: 0 auto;
-      }
-      body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-      }
     </style>
   </head>
   <body>
     <div class="card" style="width: 18rem;">
       <form class="form-signin" action="/login" method="post">
-        <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        <img class="mb-4 mx-auto d-block" src="/img/sugarAideLogo.png" alt="" width="250" height="250">
         <h1 class="h3 mb-3 font-weight-normal">Please log in</h1>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input name= "email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
@@ -49,7 +21,7 @@
         <label for="inputPassword" class="sr-only">Password</label>
         <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
         <br>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="window.location.href='main'">Log in</button>
+        <button class="btn btn-lg bg-pink btn-block" type="submit" onclick="window.location.href='main'">Log in</button>
       </form>
       </div>
   </body>
