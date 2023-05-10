@@ -59,7 +59,14 @@ app.use(
 );
 app.use("/css", express.static(`${__dirname}/../../public/css`));
 
+
+app.use("/font", express.static(`${__dirname}/../../public/font`));
+
+app.use("/css", express.static(`${__dirname}/../../public/css`));
+
 app.use("/img", express.static(`${__dirname}/../../public/img`));
+
+app.use("/js", express.static(`${__dirname}/../../public/js`));
 
 app.use("/signup", signupRouter);
 
