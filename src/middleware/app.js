@@ -58,6 +58,8 @@ app.use(
   })
 );
 
+app.use("/font", express.static(`${__dirname}/../../public/font`));
+
 app.use("/css", express.static(`${__dirname}/../../public/css`));
 
 app.use("/img", express.static(`${__dirname}/../../public/img`));

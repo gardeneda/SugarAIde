@@ -151,8 +151,7 @@ exports.createHTML = async (req, res, next) => {
         $set: { "healthinfo.risk": risk }
     });
 
-    const formattedRisk = (risk.toFixed(3) * 100) + "%";
-
+    const formattedRisk = (risk.toFixed(3) * 100);
     console.log(formattedRisk);
     res.render("risk-assessment", { risk: formattedRisk });
 }

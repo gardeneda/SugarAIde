@@ -1,4 +1,12 @@
 
+/* @font-face {
+    font-family: "Poppins";
+    src: url(/fonts/Poppins-Regular.ttf),
+         url(/fonts/Poppins-Medium.ttf),
+         url(/fonts/Poppins-Thin.ttf);
+} */
+
+
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;
@@ -19,6 +27,16 @@
   margin: auto;
 }
 
+.hidden {
+    displaY: none;
+}
+
+/* 
+    CSS and JS reagarding how to implement the Circular Progress Bar has been attained from: 
+      https://www.youtube.com/watch?v=SKU2gExpkPI&ab_channel=CodingLab
+
+    All code has been tweaked and added upon with the core functionality from the above retained.
+*/
 body {
     height: 100vh;
     display: flex;
@@ -26,11 +44,33 @@ body {
     justify-content: center;
 }
 
+.row {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    /* flex-wrap: nowrap; */
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    /* width: 100%;
+    height: 100%;
+    padding: 10% 0;
+    border-radius: 8px; */
+    flex-direction: column;
+    align-items: center;
+}
+
 .progress-container {
     display: flex;
-    width: 420px;
-    padding:50px 0;
+    width: 520px;
+    /* width: 100%; */
+    /* height: 100%; */
+    padding: 50px 0;
+    /* padding: 10% 0; */
     border-radius: 8px;
+    /* border-radius: 10%; */
     background: #fff;
     flex-direction: column;
     align-items: center;
@@ -38,25 +78,43 @@ body {
 
 .circular-progress {
     position: relative;
-    height: 250px;
-    width: 250px;
+    height: 350px;
+    /* height: 100%; */
+    width: 350px;
+    /* width: 100%; */
     border-radius: 50%;
-    background-color: #f0ff;
-    background: conic-gradient( #7d2ae8 3.6deg, #ededed 0deg);
+    background-color: #f0ff !important;
+    background: conic-gradient( #F9858b 3.6deg, #efefef 0deg);
     display: flex;
     align-items: center;
     justify-content: center;
+
 }
 
 .circular-progress::before {
     content: "";
     position: absolute;
-    height: 210px;
-    width: 210px;
+    height: 310px;
+    /* height: 100%; */
+    width: 310px;
+    /* width: 100%; */
     border-radius: 50%;
     background-color: #fff;
 }
 
 .progress-value {
     position: relative;
+    font-size: 3rem;
+}
+
+.button-box {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.btn {
+    margin-right: 2%;
 }
