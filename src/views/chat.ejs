@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Risk Level</title>
+    <title>Sugar</title>
 
     <!-- Bootstrap Link -->
     <link
@@ -18,15 +18,23 @@
       crossorigin="anonymous"
     ></script>
 
-    <!-- <link rel="stylesheet" href="/css/chat.css" /> -->
+    <link rel="stylesheet" href="/css/chat.css" />
   </head>
   <body>
-    <div id="chat">
-        <ul id="messages"></ul>
-        <form id="chat-form" action="">
-          <input id="chat-input" autocomplete="off" /><button>Send</button>
-        </form>
-      </div>
-
+    <div class="chat-container">
+      <ul id="messages"></ul>
+      <form id="chat-form" action="/chat" method="post">
+        <input
+          id="chat-input"
+          type="text"
+          name="userMessage"
+          autocomplete="off"
+          placeholder="Type your message here."
+        />
+        <button class="btn btn-primary" type="submit">
+          <i class="fa-regular fa-paper-plane"></i>
+        </button>
+      </form>
+    </div>
   </body>
 </html>
