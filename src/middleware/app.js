@@ -19,6 +19,7 @@ const healthInfoRouter = require(`${__dirname}/../routes/healthInfoRouter`);
 const signupRouter = require(`${__dirname}/../routes/signupRouter`);
 const loginRouter = require(`${__dirname}/../routes/loginRouter`);
 const mainRouter = require(`${__dirname}/../routes/mainRouter`);
+const profileRouter = require(`${__dirname}/../routes/profileRouter`);
 const riskAssessRouter = require(`${__dirname}/../routes/riskAssessRouter`);
 const exerciseRouter = require(`${__dirname}/../routes/exerciseRouter`);
 const exerciseFormRouter = require(`${__dirname}/../routes/exerciseFormRouter`);
@@ -78,6 +79,8 @@ app.use("/signup", signupRouter);
 app.use("/login", loginRouter);
 
 app.use("/main", mainRouter);
+
+app.use("/profile", profileRouter);
 
 app.use("/health", healthInfoRouter);
 
