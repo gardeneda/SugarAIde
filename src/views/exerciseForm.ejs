@@ -14,15 +14,21 @@
     </div>
 
     <div id="Cardiovascular" class="tabcontent">
-        <form id="exerciseForm">
-            <label for="exercise">Exercise</label>
+        <form 
+        id="cardiovascularForm"          
+        action="/exerciseForm/form"
+        class="needs-validation"
+        novalidate=""
+        method="post">
+            <input type="hidden" name="formId" value="cardiovascularForm">
+            <label for="exercise">Exercise </label>
             <input type="text" id="exercise" name="exercise" placeholder="Exercise">
             <br><br>
-            <label for="duration">Duration</label>
-            <input type="text" id="duration" name="duration" placeholder="Duration">
+            <label for="duration">Duration (hours)</label>
+            <input type="number" id="duration" name="duration" placeholder="Duration">
             <br><br>
             <label for="calories_burned">Calories Burned</label>
-            <input type="text" id="calories_burned" name="calories_burned" placeholder="Calories">
+            <input type="number" id="calories_burned" name="calories_burned" placeholder="Calories">
             <br><br>
             <label for="date">Date</label>
             <input type="date" id="lname" name="date" placeholder="Date..">
@@ -35,15 +41,24 @@
     </div>
 
     <div id="Weightlifting" class="tabcontent">
-        <form>
-            <label for="exercise">Exercise</label>
+        <form
+        id="weightliftingForm"
+        action="/exerciseForm/form"
+        class="needs-validation"
+        novalidate=""
+        method="post">
+            <input type="hidden" name="formId" value="weightliftingForm">
+            <label for="exercise">Exercise </label>
             <input type="text" id="exercise" name="exercise" placeholder="Exercise">
             <br><br>
-            <label for="weight">Weight</label>
-            <input type="text" id="weight" name="weight" placeholder="Weight">
+            <label for="weight">Weight (lb) </label>
+            <input type="number" id="weight" name="weight" placeholder="Weight">
             <br><br>
             <label for="sets">Sets</label>
-            <input type="text" id="sets" name="sets" placeholder="Sets">
+            <input type="number" id="sets" name="sets" placeholder="Sets">
+            <br><br>
+            <label for="reps">Reps</label>
+            <input type="number" id="reps" name="reps" placeholder="Reps">
             <br><br>
             <label for="date">Date</label>
             <input type="date" id="date" name="date" placeholder="Date..">
