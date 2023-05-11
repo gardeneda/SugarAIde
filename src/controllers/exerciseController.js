@@ -10,3 +10,11 @@ app.set('view engine', 'ejs');
 exports.createHTML = (req, res) => {
     res.render('exercisePage')
 };
+
+exports.renderCalendar = async (req, res) => {
+    const userEmail = req.session.email;
+    const user = await userCollection.findOne({ email: userEmail });
+    const events = user.cardioVascinfo.concat(user.weightLiftinginfo);
+
+    res.render("calendar", { events });
+};

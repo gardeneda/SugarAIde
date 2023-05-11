@@ -32,11 +32,11 @@ exports.processForm = async (req, res, next) => {
 
         updateData = {
             $push: {
-                cardioVascinfo: {
+                exerciseLog: {
+                    date: new Date().toString(),
                     exercise: exercise,
                     duration: duration,
                     calories_burned: calories_burned,
-                    date: date,
                     notes: notes
                 }
             }
@@ -45,15 +45,18 @@ exports.processForm = async (req, res, next) => {
         const weight = Number(req.body.weight);
         const sets = Number(req.body.sets);
         const reps = Number(req.body.reps);
+        const calories_burned = Number(req.body.calories_burned);
+
 
         updateData = {
             $push: {
-                weightLiftinginfo: {
+                exerciseLog: {
+                    date: new Date().toString(),
                     exercise: exercise,
+                    calories_burned: calories_burned,
                     weight: weight,
-                    sets: sets,
+                    set: sets,
                     reps: reps,
-                    date: date,
                     notes: notes
                 }
             }
