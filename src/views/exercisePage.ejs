@@ -1,10 +1,11 @@
-<%- include("templates/header") %>
+
 <html lang='en'>
   <head>
     <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.6/index.global.min.js'></script>
     <script>
-
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -12,10 +13,11 @@
         });
         calendar.render();
       });
-
     </script>
   </head>
   <body>
     <div id='calendar'></div>
+    <p><a class="btn bg-pink btn-lg px-4 me-md-2" onclick="window.location.href='exerciseForm'" role="button">Add Activity &raquo;</a></p>
+
   </body>
 </html>

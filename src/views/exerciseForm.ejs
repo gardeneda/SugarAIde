@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/css/exerciseForm.css">
+    </head>
+    <body>
+        <h2>Tabs</h2>
+        <p>Click on the buttons inside the tabbed menu:</p>
+
+    <div class="tab">
+        <button class="tablinks" onclick="openExercise(event, 'Cardiovascular')">Cardiovascular</button>
+        <button class="tablinks" onclick="openExercise(event, 'Weightlifting')">Weightlifting</button>
+    </div>
+
+    <div id="Cardiovascular" class="tabcontent">
+        <form id="exerciseForm">
+            <label for="exercise">Exercise</label>
+            <input type="text" id="exercise" name="exercise" placeholder="Exercise">
+            <br><br>
+            <label for="duration">Duration</label>
+            <input type="text" id="duration" name="duration" placeholder="Duration">
+            <br><br>
+            <label for="calories_burned">Calories Burned</label>
+            <input type="text" id="calories_burned" name="calories_burned" placeholder="Calories">
+            <br><br>
+            <label for="date">Date</label>
+            <input type="date" id="lname" name="date" placeholder="Date..">
+            <br><br>
+            <label for="notes">Notes</label>
+            <textarea rows="3" cols="40" id="notes" name="notes"></textarea>            
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <div id="Weightlifting" class="tabcontent">
+        <form>
+            <label for="exercise">Exercise</label>
+            <input type="text" id="exercise" name="exercise" placeholder="Exercise">
+            <br><br>
+            <label for="weight">Weight</label>
+            <input type="text" id="weight" name="weight" placeholder="Weight">
+            <br><br>
+            <label for="sets">Sets</label>
+            <input type="text" id="sets" name="sets" placeholder="Sets">
+            <br><br>
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date" placeholder="Date..">
+            <br><br>
+            <label for="notes">Notes</label>
+            <textarea rows="3" cols="40" id="notes" name="notes"></textarea>            
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <script src="/js/exerciseForm.js"></script>
+    </body>
+</html> 

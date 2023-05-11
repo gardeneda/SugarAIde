@@ -8,5 +8,5 @@ app.set('view engine', 'ejs');
 
 
 exports.createHTML = (req, res) => {
-    res.render('exercisePage')
+    res.render('exerciseForm')
 };

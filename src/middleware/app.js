@@ -20,6 +20,9 @@ const signupRouter = require(`${__dirname}/../routes/signupRouter`);
 const loginRouter = require(`${__dirname}/../routes/loginRouter`);
 const mainRouter = require(`${__dirname}/../routes/mainRouter`);
 const riskAssessRouter = require(`${__dirname}/../routes/riskAssessRouter`);
+const exerciseRouter = require(`${__dirname}/../routes/exerciseRouter`);
+const exerciseFormRouter = require(`${__dirname}/../routes/exerciseFormRouter`);
+
 
 // app.set('views', path.join(__dirname, 'src', 'views'));
 
@@ -77,6 +80,12 @@ app.use("/main", mainRouter);
 app.use("/health", healthInfoRouter);
 
 app.use("/risk", riskAssessRouter);
+
+app.use("/exercisePage", exerciseRouter);
+
+app.use("/exerciseForm", exerciseFormRouter);
+
+
 
 app.use("/logout", (req, res) => {
   req.session.destroy();
