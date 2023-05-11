@@ -1,0 +1,38 @@
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 px-3 mb-4 border-bottom">
+        
+    <div class="col-md-3 mb-2 mb-md-0">
+      <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+        <%- include("svg.ejs") %>
+      </a>
+    </div>
+
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+      <% for (let i = 0; i < locals.navLinks.length; i ++) { %>
+       <li>
+        <a 
+          href=<%= navLinks[i].link %> 
+          class="nav-link px-2 link-secondary
+            <% if (locals.navLinks[i].link == locals.currentURL) { %> rounded bg-primary text-white <% } %>"> 
+          <%= locals.navLinks[i].name %>
+        </a></li>
+      <% } %>
+    </ul>
+    
+    <!-- If not logged in, they'll have the option to log-in AND sign-up.
+    Status is 0 if not logged in (AKA session is inactive)-->
+    <% if (status == 0) { %>
+    <div class="col-md-3 text-end">
+      <a href="/login" class="btn btn-outline-primary me-2">Login</a>
+      <a href="/signup" class="btn btn-primary">Sign-up</a>
+    </div>
+    <% } %>
+
+    <!-- Would be weird to have users the options to login or sign-out
+    if they're already logged in. Status is 1 if session is active.-->
+    <% if (status == 1) { %>
+      <div class="col-md-3 text-end">
+        <a href="/logout" class="btn btn-outline-primary me-2">Logout</a>
+      </div>
+    <% } %>
+
+  </header>

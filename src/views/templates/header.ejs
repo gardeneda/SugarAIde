@@ -1,0 +1,37 @@
+<nav id="custom-nav" class="navbar navbar-expand-lg bg-body-tertiary fixed-top bg-pink">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">SugarAIde</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <% for (let i = 0; i < locals.navLinks.length; i++) { %>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" 
+             href=<%= locals.navLinks[i].link %>
+             > <%= locals.navLinks[i].name %>
+            </a>
+          </li>
+          <% } %>
+          
+          <% if (locals.status == 0) { %>
+            <li class="nav-item">
+              <a href="/login" class="nav-link">Login</a>
+            </li>
+            <li class="nav-item">
+              <a href="/signup" class="nav-link">Sign-up</a>
+            </li>
+          <% } %>
+            
+          <!-- Would be weird to have users the options to login or sign-out
+            if they're already logged in. Status is 1 if session is active.-->
+          <% if (locals.status == 1) { %>
+            <li class="nav-item">
+                <a href="/logout" class="nav-link">Logout</a>
+            </li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+  </nav>
