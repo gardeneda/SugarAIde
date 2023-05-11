@@ -92,8 +92,8 @@ app.use("/exerciseForm", exerciseFormRouter);
 // EJS creates a "locals" parameter on app.
 // We can set this to create 'global' variables that
 // EJS scripts can refer to.
-app.use("/", (req, res, next) => {
-	
+app.use("*", (req, res, next) => {
+  // const thisURL = new URL(req.url);
 	if (!req.session.authenticated) {
 
 		app.locals.status = 0;
@@ -103,8 +103,9 @@ app.use("/", (req, res, next) => {
 		app.locals.status = 1;
 	}
 
-	app.locals.navLinks = navLinks;
-	app.locals.currentURL = url.parse(req.url).pathname;
+  app.locals.navLinks = navLinks;
+  // app.locals.currentURL = req.path;
+  console.log(`This is the base URL ${req.path}`);
 	next();
 });
 

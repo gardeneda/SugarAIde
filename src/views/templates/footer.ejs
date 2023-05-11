@@ -1,38 +1,24 @@
-<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 px-3 mb-4 border-bottom">
-        
-    <div class="col-md-3 mb-2 mb-md-0">
-      <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-        <%- include("svg.ejs") %>
-      </a>
+<div class="container">
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <div class="col-md-4 d-flex align-items-center">
+      <span class="mb-3 mb-md-0 text-body-secondary">SugarAIde 2023</span>
     </div>
 
-    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-      <% for (let i = 0; i < locals.navLinks.length; i ++) { %>
-       <li>
-        <a 
-          href=<%= navLinks[i].link %> 
-          class="nav-link px-2 link-secondary
-            <% if (locals.navLinks[i].link == locals.currentURL) { %> rounded bg-primary text-white <% } %>"> 
-          <%= locals.navLinks[i].name %>
-        </a></li>
-      <% } %>
+    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+      <li class="ms-3"><a class="text-body-secondary" href="#"><i class="fa-brands fa-instagram"></i></a></li>
+      <li class="ms-3"><a class="text-body-secondary" href="#"><i class="fa-brands fa-youtube"></i></a></li>
+      <li class="ms-3"><a class="text-body-secondary" href="#"><i class="fa-brands fa-reddit"></i></a></li>
     </ul>
-    
-    <!-- If not logged in, they'll have the option to log-in AND sign-up.
-    Status is 0 if not logged in (AKA session is inactive)-->
-    <% if (status == 0) { %>
-    <div class="col-md-3 text-end">
-      <a href="/login" class="btn btn-outline-primary me-2">Login</a>
-      <a href="/signup" class="btn btn-primary">Sign-up</a>
-    </div>
-    <% } %>
+  </footer>
+</div>
 
-    <!-- Would be weird to have users the options to login or sign-out
-    if they're already logged in. Status is 1 if session is active.-->
-    <% if (status == 1) { %>
-      <div class="col-md-3 text-end">
-        <a href="/logout" class="btn btn-outline-primary me-2">Logout</a>
-      </div>
-    <% } %>
-
-  </header>
+<script 
+  src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" 
+  integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" 
+  crossorigin="anonymous">
+</script>
+<script 
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" 
+  integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" 
+  crossorigin="anonymous">
+</script>

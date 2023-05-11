@@ -1,8 +1,8 @@
 const navLinks = [
     { name: "Home", link: "/" },
-    { name: "Health", link: "/health" },
+    { name: "Health", link: "/health/form" },
     { name: "Risk", link: "/risk" },
-    { name: "F", link: "/doesnotexist" }
+    { name: "Exercise", link: "/exercisePage" }
 ]
 
 module.exports = navLinks;
