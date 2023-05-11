@@ -7,4 +7,8 @@ const router = express.Router();
 router.route('/')
     .get(profileController.createHTML);
 
+router.route('/change-password/:username')
+    .post(profileController.changePassword);
+
+
 module.exports = router;
