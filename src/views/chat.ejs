@@ -31,15 +31,15 @@
 	<body>
 		<%- include("templates/header") %>
 
+    <div class="settings text-body-emphasis">
+      <div class="sugar">Sugar (Virtual Assistant)</div>
+      <div id="clear-btn" class="delete btn btn-danger">Clear Log</div>
+    </div>
 		<div class="container-master">
 			<div class="chat-container">
-				<div class="settings">
-					<div class="sugar">Sugar (Virtual Assistant)</div>
-					<div class="delete btn btn-danger">Clear Log</div>
-				</div>
-				<div class="content-container">
+				<div id="chat-destination" class="content-container">
 					<!-- 
-            Message Box templates (received-chats) and (outgoing-chats) attained from 
+            Message Bubble Templates (received-chats) and (outgoing-chats) attained from 
            Reference:  https://www.scaler.com/topics/chat-interface-project-css/
           -->
 					<!-- <div class="AI-message-box">
@@ -52,13 +52,14 @@
 						<div class="received-msg">
 							<div class="received-msg-inbox">
 								<p>
-									 Lorem ipsum, dolor sit amet
-									consectetur adipisicing elit. Non quas nemo eum, earum sunt,
-									nobis similique quisquam eveniet pariatur commodi modi
-									voluptatibus iusto omnis harum illum iste distinctio expedita
-									illo!
+									 Hello! I am here to help assist you in your journey to prevent diabetes.
+                   If you tell me what you ate, or have done any exercises, I'll log that for 
+                   you in your tracker! Otherwise, please ask me other questions!
+                   <br/>
+                   <br/>
+                   Just answer in complete sentences for me!
 								</p>
-								<span class="time">18:06 PM | July 24 </span>
+								<span class="time">5/13/2023, 2:18:01 AM</span>
 							</div>
 						</div>
 					</div>
@@ -66,40 +67,43 @@
 						<div class="outgoing-msg">
 							<div class="outgoing-chats-msg">
 								<p class="multi-msg">
-									Lorem ipsum dolor sit amet consectetur adipisicing
-									elit. Illo nobis deleniti earum magni recusandae assumenda.
+									Your messages will appear here in this manner!
 								</p>
-								<p class="multi-msg">Lorem ipsum dolor sit amet consectetur.</p>
+								<p class="multi-msg">
+                  Once again, please answer in full sentences.
+                  Sugar likes to complete your sentences for you otherwise,
+                  and may come off as rude.
+                </p>
 
-								<span class="time">18:30 PM | July 24 </span>
+								<span class="time">5/13/2023, 3:18:01 AM</span>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-
-			<!-- ENTRY CONTAINER -->
-			<div class="entry-container">
-				<!-- Text-Box for User Entry -->
-				<!-- Heading (Typing ...) -->
-				<div class="headings">
-					<span id="AI-status">Sugar is typing ... </span>
-				</div>
-				<form id="chat-form" action="/chat" method="post">
-					<input
-						class="form-control"
-						id="chat-input"
-						type="text"
-						name="userMessage"
-						autocomplete="off"
-						placeholder="Type your message here."
-					/>
-					<button class="btn btn-primary" type="submit">
-						<i class="fa-regular fa-paper-plane"></i>
-					</button>
-				</form>
-			</div>
 		</div>
+    <div>&nbsp;</div>
+    <!-- ENTRY CONTAINER -->
+    <div class="entry-container">
+      <!-- Text-Box for User Entry -->
+      <!-- Heading (Typing ...) -->
+      <div class="headings">
+        <span id="ai-status" class="hidden">Sugar is typing ...</span>
+      </div>
+      <div id="chat-form">
+        <input
+          class="form-control"
+          id="chat-input"
+          type="text"
+          name="userMessage"
+          autocomplete="off"
+          placeholder="Type your message here."
+        />
+        <button id="send-message-btn" class="btn btn-primary">
+          <i class="fa-regular fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
 
     <template id="ai-message">
       <div class="received-chats">
@@ -108,7 +112,7 @@
         </div>
         <div class="received-msg">
           <div class="received-msg-inbox">
-            <p id="ai-message-content"></p>
+            <p id="ai-message-content">PLACEHOLDER</p>
             <span id="ai-message-time" class="time"></span>
           </div>
         </div>
@@ -119,7 +123,7 @@
       <div class="outgoing-chats">
         <div class="outgoing-msg">
           <div class="outgoing-chats-msg">
-            <p id="user-message-content" class="multi-msg"></p>
+            <p id="user-message-content" class="multi-msg">PLACEHOLDER</p>
             <span id="user-message-time" class="time"></span>
           </div>
         </div>

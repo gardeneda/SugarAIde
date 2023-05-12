@@ -5,7 +5,7 @@ body {
 }
 
 .container-master {
-    height: 100%;
+    height: 80%;
 }
 
 .chat-container {
@@ -19,6 +19,7 @@ body {
 
 .content-container {
     margin-top: 5%;
+    margin-bottom: 10%;
 }
 
 #chat-form {
@@ -33,8 +34,9 @@ body {
 .headings {
     float: left;
     clear: right;
-    position: relative;
-    margin: 0% 1.5% 2% 1.5%;
+    position: sticky;
+    margin-bottom: 2%;
+    margin-left: 1%;
 }
 
 .entry-container {
@@ -43,9 +45,14 @@ body {
     flex-direction: column;
     width: 85%;
     position: sticky;
-    bottom: 10%;
+    bottom: 5%;
 }
 
+.hidden {
+    display: none;
+}
+
+/* 
 .AI-message-box {
     display: flex;
 
@@ -71,20 +78,17 @@ body {
 .user-message {
     border-radius: 20% 20% 20% 0%;
     background-color: #efefef;
-}
+} */
 
 .settings {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-right: 2%;
+    margin: 3%;
 }
 
-.delete {
 
-}
-
-/* Message box template and CSS (the code you see below) are attained from below: */
+/* Message bubbles and CSS (the code you see below): */
 /* Reference: https://www.scaler.com/topics/chat-interface-project-css/ */
 /* Styling the avatar  */
 .received-chats-img {
