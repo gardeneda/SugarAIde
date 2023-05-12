@@ -1,6 +1,166 @@
-.chat-container {
-    margin: 10%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+body {
+    height: 100vh;
+    width: 100vw;
 }
+
+.container-master {
+    height: 100%;
+}
+
+.chat-container {
+    background-color: #ffffff;
+    height: 100%;
+    margin: 5%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+
+.content-container {
+    margin-top: 5%;
+}
+
+#chat-form {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.headings {
+    float: left;
+    clear: right;
+    position: relative;
+    margin: 0% 1.5% 2% 1.5%;
+}
+
+.entry-container {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    position: sticky;
+    bottom: 10%;
+}
+
+.AI-message-box {
+    display: flex;
+
+    flex-direction: row;
+    align-items: start;
+    background-color: #efefef;
+}
+
+.AI-message {
+    border-radius: 0% 20% 20% 20%;
+}
+
+.user-message-box {
+    display: flex;
+    margin-top: 5%;
+    margin-right: 0%;
+    padding-right: 0;
+    flex-direction: row-reverse;;
+    align-items: end;
+    background-color: #efefef;
+}
+
+.user-message {
+    border-radius: 20% 20% 20% 0%;
+    background-color: #efefef;
+}
+
+.settings {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 2%;
+}
+
+.delete {
+
+}
+
+/* Message box template and CSS (the code you see below) are attained from below: */
+/* Reference: https://www.scaler.com/topics/chat-interface-project-css/ */
+/* Styling the avatar  */
+.received-chats-img {
+    display: inline-block;
+    width: 50px;
+    float: left;
+    clear: right;
+}
+
+.received-chats-img img {
+    width: 100px;
+}
+
+.received-msg {
+    display: inline-block;
+    padding: 0 0 0 10px;
+    vertical-align: top;
+    width: 92%;
+}
+
+.received-msg-inbox {
+    width: 57%;
+}
+
+.received-msg-inbox p {
+    background: #efefef none repeat scroll 0 0;
+    border-radius: 10px;
+    color: #646464;
+    font-size: 14px;
+    margin-left: 1rem;
+    padding: 1rem;
+    width: 100%;
+    box-shadow: rgb(0 0 0 / 25%) 0px 5px 5px 2px;
+}
+    p {
+    overflow-wrap: break-word;
+}
+
+/* Styling the msg-sent time  */
+.time {
+    color: #777;
+    display: block;
+    font-size: 12px;
+    margin: 8px 0 0;
+}
+
+.outgoing-chats {
+    overflow: hidden;
+    margin: 26px 20px;
+}
+
+.outgoing-chats-msg p {
+    background-color: #3a12ff;
+    background-image: linear-gradient(45deg, #f9858b 45%, #f985B9 95%);
+    color: #fff;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #fff;
+    padding: 5px 10px 5px 12px;
+    width: 100%;
+    padding: 1rem;
+    box-shadow: rgb(0 0 0 / 25%) 0px 2px 5px 2px;
+}
+.outgoing-chats-msg {
+        float: right;
+        width: 46%;
+    }
+
+/* Styling the avatar */
+.outgoing-chats-img {
+    display: inline-block;
+    width: 50px;
+    float: right;
+    margin-right: 1rem;
+}
+
+
+
+
