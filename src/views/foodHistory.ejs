@@ -1,66 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <title>My chart.js chart</title>
-</head>
-<body>
-    <!--Navbar-->
-    <%- include('templates/header.ejs') %>
-    <!--temp css-->
-    <div class="container mx-auto" style="margin-top: 75px;">
-        <select id="chart-type">
-            <option value="calories">Calories (kcal)</option>
-            <option value="sugar">Sugar (g)</option>
-        </select>
-        <canvas id="myChart"></canvas>
-    </div>
-    <script>
-        let myChart = document.getElementById('myChart').getContext('2d');
+	<head>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1"
+			charset="utf-8"
+		/>
+		<title>Log In</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+			crossorigin="anonymous"
+		/>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+			crossorigin="anonymous"
+		></script>
+		<!-- Font Awesome Script Connected to Isaiah's Account -->
+		<script
+			src="https://kit.fontawesome.com/36e5d26d04.js"
+			crossorigin="anonymous"
+		></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<title>My chart.js chart</title>
+	</head>
+	<body>
+		<!--Navbar-->
+		<%- include('templates/header.ejs') %>
+		<!--temp css-->
+		<div class="container mx-auto" style="margin-top: 75px">
+			<select id="chart-type">
+				<option value="calories">Calories (kcal)</option>
+				<option value="sugar">Sugar (g)</option>
+			</select>
+			<canvas id="myChart"></canvas>
+		</div>
+		<script>
+			let myChart = document.getElementById("myChart").getContext("2d");
 
-        let foodChart = new Chart(myChart, {
-            type: 'bar',
-            data: {
-                //bar labels
-                labels:['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
-                datasets:[{
-                    label:'Calories',
-                    //bars; values to be visually displayed
-                    data:[2650,2050,2200,1850,1850,2750,2350],
-                    //bar colour (array for individual bars)
-                    backgroundColor: ['rgba(54, 162, 235, 0.8)'],
-                }]
-            },
-        });
-        //resizes chart based on display size
-        window.addEventListener('resize', function() {
-            foodChart.resize();
-        });
-        // event listener for dropdown menu
-        document.getElementById("chart-type").addEventListener("change", function() {
-            let selectedOption = document.getElementById("chart-type").value;
-            if (selectedOption === "calories") {
-                foodChart.data.datasets[0].label = "Calories";
-                foodChart.data.datasets[0].data = [2650, 2050, 2200, 1850, 1850, 2750, 2350];
-                foodChart.data.datasets[0].backgroundColor = ['rgba(54, 162, 235, 0.8)'];
-            } else if (selectedOption === "sugar") {
-                foodChart.data.datasets[0].label = "Sugar";
-                foodChart.data.datasets[0].data = [50, 35, 20, 40, 30, 25, 60];
-                foodChart.data.datasets[0].backgroundColor = ['rgba(255, 99, 132, 0.8)'];
-            } else if (selectedOption === "protein") {
-                foodChart.data.datasets[0].label = "Protein";
-                foodChart.data.datasets[0].data = [33, 67, 45, 33, 87, 53, 39];
-                foodChart.data.datasets[0].backgroundColor = ['rgba(255, 99, 132, 0.8)'];
-            }
-            foodChart.update();
-        });
-    </script>
-    <!--footer-->
-    <%- include('templates/footer.ejs') %>
-    <!--/.footer-->
-</body>
+			let foodChart = new Chart(myChart, {
+				type: "bar",
+				data: {
+					//bar labels
+					labels: [
+						"Sunday",
+						"Monday",
+						"Tuesday",
+						"Wednesday",
+						"Thursday",
+						"Friday",
+						"Saturday",
+					],
+					datasets: [
+						{
+							label: "Calories",
+							//bars; values to be visually displayed
+							data: [2650, 2050, 2200, 1850, 1850, 2750, 2350],
+							//bar colour (array for individual bars)
+							backgroundColor: ["rgba(54, 162, 235, 0.8)"],
+						},
+					],
+				},
+			});
+			//resizes chart based on display size
+			window.addEventListener("resize", function () {
+				foodChart.resize();
+			});
+			// event listener for dropdown menu
+			document
+				.getElementById("chart-type")
+				.addEventListener("change", function () {
+					let selectedOption = document.getElementById("chart-type").value;
+					if (selectedOption === "calories") {
+						foodChart.data.datasets[0].label = "Calories";
+						foodChart.data.datasets[0].data = [
+							2650, 2050, 2200, 1850, 1850, 2750, 2350,
+						];
+						foodChart.data.datasets[0].backgroundColor = [
+							"rgba(54, 162, 235, 0.8)",
+						];
+					} else if (selectedOption === "sugar") {
+						foodChart.data.datasets[0].label = "Sugar";
+						foodChart.data.datasets[0].data = [50, 35, 20, 40, 30, 25, 60];
+						foodChart.data.datasets[0].backgroundColor = [
+							"rgba(255, 99, 132, 0.8)",
+						];
+					} else if (selectedOption === "protein") {
+						foodChart.data.datasets[0].label = "Protein";
+						foodChart.data.datasets[0].data = [33, 67, 45, 33, 87, 53, 39];
+						foodChart.data.datasets[0].backgroundColor = [
+							"rgba(255, 99, 132, 0.8)",
+						];
+					}
+					foodChart.update();
+				});
+		</script>
+		<!--footer-->
+		<%- include('templates/footer') %>
+		<!--/.footer-->
+	</body>
 </html>
