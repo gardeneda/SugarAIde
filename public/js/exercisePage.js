@@ -102,12 +102,13 @@ async function getExerciseData() {
 
 function displayDailyLogs(dailyLogs) {
   const dailyLogsDiv = document.getElementById("dailyLogs");
-  let content = "<table><thead><tr><th>Exercise</th><th>Duration (hours)</th></tr></thead><tbody>";
+  let content = "<table><thead><tr><th>Exercise</th><th>Duration (hours)</th><th>Calories</th></tr></thead><tbody>";
 
   dailyLogs.forEach(log => {
     content += `<tr>
                 <td>${log.exercise}</td>
                 <td>${log.duration}</td>
+                <td>${log.calories_burned}</td>
                 </tr>`;
   });
 
