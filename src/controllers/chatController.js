@@ -122,7 +122,12 @@ exports.updateData = async function (data, type, account) {
 	}
 };
 
-exports.sendMessage = function () {};
+/*
+	Sends the user the AI's leftover message from the parsing.
+*/
+exports.sendMessage = function (message) {
+
+};
 
 /*
     Sends the OpenAI API the message prompt to retrieve its answers.
@@ -161,4 +166,6 @@ exports.processUserMessage = async (req, res, next) => {
     console.log(data, dataType);
     console.log("\n\n");
 	exports.updateData(data.json, dataType, req.session.email);
+	res.json(data);
+
 };
