@@ -22,6 +22,7 @@ const mainRouter = require(`${__dirname}/../routes/mainRouter`);
 const riskAssessRouter = require(`${__dirname}/../routes/riskAssessRouter`);
 const exerciseRouter = require(`${__dirname}/../routes/exerciseRouter`);
 const exerciseFormRouter = require(`${__dirname}/../routes/exerciseFormRouter`);
+const foodHistoryRouter = require(`${__dirname}/../routes/foodHistoryRouter`);
 
 
 const navLinks = require(`${__dirname}/../utils/navlinkManager.js`);
@@ -88,6 +89,8 @@ app.use("/risk", riskAssessRouter);
 app.use("/exercisePage", exerciseRouter);
 
 app.use("/exerciseForm", exerciseFormRouter);
+
+app.use("/foodHistory", foodHistoryRouter);
 
 // EJS creates a "locals" parameter on app.
 // We can set this to create 'global' variables that
