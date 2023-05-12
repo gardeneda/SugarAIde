@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/profile.css" />
+  </head>
+  <body>
+    <div class="container bootstrap snippets bootdeys">
+      <div class="row">
+        <div class="col-xs-12 col-sm-9">
+            <div class="panel panel-default">
+              <div class="panel-body text-center">
+                <img
+                  src="/img/temp_profile.jpg"
+                  class="img-circle profile-avatar"
+                  alt="User Profile"
+                />
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">User info</h4>
+              </div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Name: </label><%= username %>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Email: </label><%= email %>
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">Health info</h4>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Height: </label><%= height %>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Weight: </label><%= weight %>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Gender: </label><%= gender %>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Age: </label><%= age %>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Diabetes risk level: </label><%= risk.toFixed(1) * 100%>%
+              </div>
+            </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
