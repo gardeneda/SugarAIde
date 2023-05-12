@@ -92,13 +92,12 @@ exports.checkJSONType = function (response) {
     updates the user's database accordingly. 
 */
 exports.updateData = async function (data, type, account) {
-	const dateObject = {
-		date: new Date().toString(),
-	};
+	const dateObject = new Date().toString();
 
 	switch (type) {
 		case "food":
-			let nutritionModel = Object.assign({ consumed: data }, dateObject);
+			let nutritionModel = data;
+			nutritionModel.date = dateObject;
 
 			await userCollection.updateOne(
 				{ email: account },
@@ -110,7 +109,8 @@ exports.updateData = async function (data, type, account) {
 			break;
 
 		case "exercise":
-			let exerciseModel = Object.assign({ exercised: data }, dateObject);
+			let exerciseModel = data;
+			exerciseModel.date = dateObject;
 			await userCollection.updateOne(
 				{ email: account },
 				{ $push: { exerciseLog: exerciseModel } }

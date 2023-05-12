@@ -105,7 +105,6 @@ app.use("*", (req, res, next) => {
 
   app.locals.navLinks = navLinks;
   // app.locals.currentURL = req.path;
-  console.log(`This is the base URL ${req.path}`);
 	next();
 });
 
