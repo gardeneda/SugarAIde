@@ -27,5 +27,67 @@
   }
   h2{
     color: #F9858b;
-    font-weight: 200;
+     font-weight: 200;
   }
+
+  .tab {
+    overflow: hidden;
+    background-color: #F9858b;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  /* Style the buttons that are used to open the tab content */
+  .tab button {
+    background-color: inherit;
+    width: 50%;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+  }
+  
+  /* Change background color of buttons on hover */
+  .tab button:hover {
+    background-color: #F9858b;
+  }
+  
+  /* Create an active/current tablink class */
+  .tab button.active {
+    background-color: #e77076;
+  }
+  
+  /* Style the tab content */
+  .tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+  }
+
+  /*  table */
+#dailyLogs table {
+  width: 100%; 
+  border-collapse: collapse; 
+}
+
+/* table headers */
+#dailyLogs th {
+  background-color: #F9858b; 
+  color: white; 
+  text-align: left;
+  padding: 8px; 
+}
+
+/* Style the table cells */
+#dailyLogs td {
+  border: 1px solid #ddd; 
+  padding: 8px; 
+}
+
+
+#dailyLogs tr:hover {
+  background-color: #f5f5f5;}

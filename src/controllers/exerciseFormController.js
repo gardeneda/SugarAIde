@@ -46,9 +46,12 @@ exports.processForm = async (req, res, next) => {
         const weight = Number(req.body.weight);
         const sets = Number(req.body.sets);
         const reps = Number(req.body.reps);
+        let duration = Number(req.body.duration);
         const calories_burned = Number(req.body.calories_burned);
 
-
+        if (isNaN(duration)) {
+            duration = 0;
+        }
         updateData = {
             $push: {
                 exerciseLog: {

@@ -8,7 +8,6 @@ body {
   background-color: #F9858b;
   display: flex;
   justify-content: space-around;
-  border-top: 1px solid #F9858b; /* Add this line to create a border at the top */
 }
 
 /* Style the buttons inside the tab */

@@ -12,9 +12,23 @@
   <body>
     <div id="calendar"></div>
     <h2>Your week so far:</h2>
-    <div class="container">
-      <canvas id="chart"></canvas>
+    <!-- Tab links -->
+    <div class="tab">
+      <button class="tablinks" onclick="openLog(event, 'activityChart')">Weekly Stats</button>
+      <button class="tablinks" onclick="openLog(event, 'logs')">Daily Log</button>
     </div>
+
+    <!-- Tab content -->
+    <div id="activityChart" class="tabcontent">
+      <div class="container">
+        <canvas id="chart"></canvas>
+      </div>
+    </div>
+
+    <div id="logs" class="tabcontent">
+      <div id="dailyLogs"></div>
+    </div>
+
     <br>
     <div class="center-content">
       <p>
