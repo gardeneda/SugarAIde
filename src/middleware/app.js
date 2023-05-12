@@ -19,10 +19,17 @@ const healthInfoRouter = require(`${__dirname}/../routes/healthInfoRouter`);
 const signupRouter = require(`${__dirname}/../routes/signupRouter`);
 const loginRouter = require(`${__dirname}/../routes/loginRouter`);
 const mainRouter = require(`${__dirname}/../routes/mainRouter`);
+const profileRouter = require(`${__dirname}/../routes/profileRouter`);
 const riskAssessRouter = require(`${__dirname}/../routes/riskAssessRouter`);
 const exerciseRouter = require(`${__dirname}/../routes/exerciseRouter`);
 const exerciseFormRouter = require(`${__dirname}/../routes/exerciseFormRouter`);
+
+const forgotPasswordRouter = require(`${__dirname}/../routes/forgotPasswordRouter`);
+const resetPasswordRouter = require(`${__dirname}/../routes/resetPasswordRouter`);
+const checkCaloriesRouter = require(`${__dirname}/../routes/checkCaloriesRouter`);
+const calorieRequirmentRouter = require(`${__dirname}/../routes/calorieRequirmentRouter`);
 const foodHistoryRouter = require(`${__dirname}/../routes/foodHistoryRouter`);
+
 
 
 const navLinks = require(`${__dirname}/../utils/navlinkManager.js`);
@@ -80,7 +87,13 @@ app.use("/signup", signupRouter);
 
 app.use("/login", loginRouter);
 
+app.use("/forgotPassword", forgotPasswordRouter);
+
+app.use("/resetPassword", resetPasswordRouter);
+
 app.use("/main", mainRouter);
+
+app.use("/profile", profileRouter);
 
 app.use("/health", healthInfoRouter);
 
@@ -90,6 +103,10 @@ app.use("/exercisePage", exerciseRouter);
 
 app.use("/exerciseForm", exerciseFormRouter);
 
+app.use("/checkCalories", checkCaloriesRouter);
+
+app.use("/calorieRequirement", calorieRequirmentRouter);
+
 app.use("/foodHistory", foodHistoryRouter);
 
 // EJS creates a "locals" parameter on app.
@@ -98,6 +115,7 @@ app.use("/foodHistory", foodHistoryRouter);
 app.use("*", (req, res, next) => {
   // const thisURL = new URL(req.url);
 	if (!req.session.authenticated) {
+
 
 		app.locals.status = 0;
 
