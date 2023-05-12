@@ -1,0 +1,115 @@
+
+/* @font-face {
+    font-family: "Poppins";
+    src: url(/fonts/Poppins-Regular.ttf),
+         url(/fonts/Poppins-Medium.ttf),
+         url(/fonts/Poppins-Thin.ttf);
+} */
+
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.hidden {
+    display: none;
+}
+
+/* 
+    CSS and JS reagarding how to implement the Circular Progress Bar has been attained from: 
+      https://www.youtube.com/watch?v=SKU2gExpkPI&ab_channel=CodingLab
+
+    All code has been tweaked and added upon with the core functionality from the above retained.
+*/
+body {
+    height: 100vh;
+}
+
+.row {
+    height: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    /* height: 100%; */
+    /* padding: 10% 0;
+    border-radius: 8px; */
+    align-items: center;
+}
+
+.progress-container {
+    display: flex;
+    width: 520px;
+    /* width: 100%; */
+    /* height: 100%; */
+    padding: 50px 0;
+    /* padding: 10% 0; */
+    border-radius: 8px;
+    /* border-radius: 10%; */
+    background: #fff;
+    flex-direction: column;
+    align-items: center;
+}
+
+.circular-progress {
+    position: relative;
+    height: 350px;
+    /* height: 100%; */
+    width: 350px;
+    /* width: 100%; */
+    border-radius: 50%;
+    background-color: #f0ff !important;
+    background: conic-gradient( #F9858b 3.6deg, #efefef 0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.circular-progress::before {
+    content: "";
+    position: absolute;
+    height: 310px;
+    /* height: 100%; */
+    width: 310px;
+    /* width: 100%; */
+    border-radius: 50%;
+    background-color: #fff;
+}
+
+.progress-value {
+    position: relative;
+    font-size: 3rem;
+}
+
+.button-box {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.btn {
+    margin-right: 2%;
+}

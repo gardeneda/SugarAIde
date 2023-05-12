@@ -8,3 +8,4 @@ Isaiah
   - Perform Multiple Linear Regression tests on the data set we have
   - Train the OpenAI API to understand the results of our data analysis
   - Allow users to ask the AI for their diabetes risk assessment (no front end)
+* As a user, I want to tell the virtual assistant what I ate to let it record my calories and nutritional intake for me.

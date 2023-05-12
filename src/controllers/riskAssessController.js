@@ -5,7 +5,7 @@ const database = require(`${__dirname}/../config/databaseConfig`);
 const userCollection = database
     .db(process.env.MONGODB_DATABASE)
     .collection("users");
-
+    
 /*
   This is the formula attained from the MLR (OLS Regression) test for
   the coefficients of all of the variables linked to diabetes from
@@ -136,7 +136,6 @@ exports.createHTML = async (req, res, next) => {
     const email = req.session.email;
 
     const user = await userCollection.findOne({ email: email });
-    console.log(`This is the value of the user's age. ${user.healthinfo?.age}`);
 
     const risk = this.diabProbability(
         user.healthinfo?.age, user.healthinfo?.bmi, user.healthinfo?.highchol,
@@ -151,8 +150,7 @@ exports.createHTML = async (req, res, next) => {
         $set: { "healthinfo.risk": risk }
     });
 
-    const formattedRisk = (risk.toFixed(3) * 100) + "%";
+    const formattedRisk = (risk.toFixed(3) * 100);
 
-    console.log(formattedRisk);
     res.render("risk-assessment", { risk: formattedRisk });
 }

@@ -1,0 +1,44 @@
+
+
+.bg-pink{
+    background-color: #F9858b;
+}
+.bg-beige{
+    background-color: #FFFFFF
+}
+
+.features h2 {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 300;
+  color: #F9858b;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 5%;
+  display: grid;
+  grid-template-columns: 1fr max-content 1fr;
+  grid-template-rows: 27px 0;
+  grid-gap: 20px;
+  align-items: center;
+  font-weight: bold;
+}
+
+
+.features h2:after,
+.features h2:before {
+  content: " ";
+  display: block;
+  border-bottom: 2px solid #F9858b;
+  border-top: 2px solid #F9858b;
+  height: 5px;
+  background-color: #f8f8f8;
+}
+
+
+h3{
+  color: #F9858b;
+}
+
+.feature-p{
+  color: white;
+}

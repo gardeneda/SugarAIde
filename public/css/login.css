@@ -1,0 +1,34 @@
+.bg-pink{
+    background-color: #F9858b;
+}
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+  .form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+  }
+
+  .card {
+    width: 18rem;
+    margin: 0 auto;
+  }
+  
+  col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
