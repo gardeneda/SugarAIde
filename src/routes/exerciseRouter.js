@@ -7,5 +7,4 @@ const router = express.Router();
 router.route('/')
     .get(exerciseController.createHTML);
 
-
 module.exports = router;
