@@ -2,11 +2,12 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="/css/exerciseForm.css">
     </head>
     <body>
-        <h2>Tabs</h2>
-        <p>Click on the buttons inside the tabbed menu:</p>
+        <h2>Actvity Log</h2>
+        <p>Please fill out the log with your completed activity.</p>
 
     <div class="tab">
         <button class="tablinks" onclick="openExercise(event, 'Cardiovascular')">Cardiovascular</button>
@@ -17,15 +18,13 @@
         <form 
         id="cardiovascularForm"          
         action="/exerciseForm/form"
-        class="needs-validation"
-        novalidate=""
         method="post">
             <input type="hidden" name="formId" value="cardiovascularForm">
             <label for="exercise">Exercise </label>
-            <input type="text" id="exercise" name="exercise" placeholder="Exercise">
+            <input type="text" id="exercise" name="exercise" placeholder="Exercise" required>
             <br><br>
             <label for="duration">Duration (hours)</label>
-            <input type="number" id="duration" name="duration" placeholder="Duration">
+            <input type="number" id="duration" name="duration" placeholder="Duration" required>
             <br><br>
             <label for="calories_burned">Calories Burned</label>
             <input type="number" id="calories_burned" name="calories_burned" placeholder="Calories">
@@ -33,7 +32,9 @@
             <label for="notes">Notes</label>
             <textarea rows="3" cols="40" id="notes" name="notes"></textarea>            
             <br><br>
-            <input type="submit" value="Submit">
+            <div class="submit-buttons">
+                <input class="btn bg-pink btn-lg px-4 me-md-2" type="submit" value="Submit">
+            </div>
         </form>
     </div>
 
@@ -41,15 +42,16 @@
         <form
         id="weightliftingForm"
         action="/exerciseForm/form"
-        class="needs-validation"
-        novalidate=""
         method="post">
             <input type="hidden" name="formId" value="weightliftingForm">
             <label for="exercise">Exercise </label>
-            <input type="text" id="exercise" name="exercise" placeholder="Exercise">
+            <input type="text" id="exercise" name="exercise" placeholder="Exercise" required>
+            <br><br>
+            <label for="duration">Duration (hours)</label>
+            <input type="number" id="duration" name="duration" placeholder="Duration" required>
             <br><br>
             <label for="calories_burned">Calories Burned</label>
-            <input type="number" id="calories_burned" name="calories_burned" placeholder="Calories">
+            <input type="number" id="calories_burned" name="calories_burned" placeholder="Calories" re>
             <br><br>
             <label for="weight">Weight (lb) </label>
             <input type="number" id="weight" name="weight" placeholder="Weight">
@@ -63,7 +65,9 @@
             <label for="notes">Notes</label>
             <textarea rows="3" cols="40" id="notes" name="notes"></textarea>            
             <br><br>
-            <input type="submit" value="Submit">
+            <div class="submit-buttons">
+                <input class="btn bg-pink btn-lg px-4 me-md-2" type="submit" value="Submit">
+            </div>
         </form>
     </div>
     <script src="/js/exerciseForm.js"></script>

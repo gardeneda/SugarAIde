@@ -34,6 +34,7 @@ exports.processForm = async (req, res, next) => {
             $push: {
                 exerciseLog: {
                     date: new Date().toString(),
+                    end_date: new Date().toString(),
                     exercise: exercise,
                     duration: duration,
                     calories_burned: calories_burned,
@@ -52,7 +53,9 @@ exports.processForm = async (req, res, next) => {
             $push: {
                 exerciseLog: {
                     date: new Date().toString(),
+                    end_date: new Date().toString(),
                     exercise: exercise,
+                    duration: duration,
                     calories_burned: calories_burned,
                     weight: weight,
                     set: sets,
