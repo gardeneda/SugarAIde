@@ -95,7 +95,8 @@ exports.createUser = async (req, res) => {
     username: username,
     email: email,
     password: hashedPassword,
-
+    nutritionLog: [],
+    exerciseLog: [],
     // Checks if it's the user's first time.
     // If it is, we'll be sending them a health-information survey.
     init: 1

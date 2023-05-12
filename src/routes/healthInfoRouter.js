@@ -1,11 +1,12 @@
 const express = require('express');
 
+const validation = require(`${__dirname}/../utils/validation`);
 const healthInfoController = require(`${__dirname}/../controllers/healthInfoController`);
 
 const router = express.Router();
 
 router.route('/')
-    .get(healthInfoController.createHTML);
+    .get(validation.checkValidSession, healthInfoController.createHTML);
 
 
 router.route('/form')

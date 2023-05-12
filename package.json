@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start:dev": "nodemon server.js",
-    "start:prod": "NODE_ENV=production nodemon server.js"
+    "start:prod": "NODE_ENV=production nodemon server.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -42,6 +43,7 @@
     "path": "^0.12.7"
   },
   "devDependencies": {
+    "jest": "^29.5.0",
     "nodemon": "^2.0.22"
   }
 }

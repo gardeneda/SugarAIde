@@ -4,6 +4,7 @@ const session = require('express-session');
 const morgan = require('morgan');
 const MongoStore = require('connect-mongo');
 const path = require("path");
+const url = require("url");
 const app = express();
 
 const mongodb_host = process.env.MONGODB_HOST;
@@ -11,10 +12,9 @@ const mongodb_user = process.env.MONGODB_USER;
 const mongodb_password = process.env.MONGODB_PASSWORD;
 
 const mongodb_session_secret = process.env.MONGODB_SESSION_SECRET;
-
 const node_session_secret = process.env.NODE_SESSION_SECRET;
 
-const botRouter = require(`${__dirname}/../routes/botRouter`);
+const chatRouter = require(`${__dirname}/../routes/chatRouter`);
 const healthInfoRouter = require(`${__dirname}/../routes/healthInfoRouter`);
 const signupRouter = require(`${__dirname}/../routes/signupRouter`);
 const loginRouter = require(`${__dirname}/../routes/loginRouter`);
@@ -23,6 +23,8 @@ const riskAssessRouter = require(`${__dirname}/../routes/riskAssessRouter`);
 const exerciseRouter = require(`${__dirname}/../routes/exerciseRouter`);
 const exerciseFormRouter = require(`${__dirname}/../routes/exerciseFormRouter`);
 
+
+const navLinks = require(`${__dirname}/../utils/navlinkManager.js`);
 
 // app.set('views', path.join(__dirname, 'src', 'views'));
 
@@ -60,8 +62,8 @@ app.use(
     resave: true,
   })
 );
-app.use("/css", express.static(`${__dirname}/../../public/css`));
 
+app.use("/css", express.static(`${__dirname}/../../public/css`));
 
 app.use("/font", express.static(`${__dirname}/../../public/font`));
 
@@ -70,6 +72,8 @@ app.use("/css", express.static(`${__dirname}/../../public/css`));
 app.use("/img", express.static(`${__dirname}/../../public/img`));
 
 app.use("/js", express.static(`${__dirname}/../../public/js`));
+
+app.use("/chat", chatRouter);
 
 app.use("/signup", signupRouter);
 
@@ -85,7 +89,25 @@ app.use("/exercisePage", exerciseRouter);
 
 app.use("/exerciseForm", exerciseFormRouter);
 
+// EJS creates a "locals" parameter on app.
+// We can set this to create 'global' variables that
+// EJS scripts can refer to.
+app.use("*", (req, res, next) => {
+  // const thisURL = new URL(req.url);
+	if (!req.session.authenticated) {
 
+		app.locals.status = 0;
+
+	} else {
+
+		app.locals.status = 1;
+	}
+
+  app.locals.navLinks = navLinks;
+  // app.locals.currentURL = req.path;
+  console.log(`This is the base URL ${req.path}`);
+	next();
+});
 
 app.use("/logout", (req, res) => {
   req.session.destroy();
@@ -112,9 +134,6 @@ app.get("*", (req, res) => {
   res.status(404);
   res.send(html);
 });
-
-
-app.use('/v1/chat/test', botRouter);
 
 module.exports = app;
 
