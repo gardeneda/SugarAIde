@@ -8,4 +8,10 @@ router.route('/')
     .get(exerciseFormController.createHTML);
 
 
+router.route('/form')
+    .get(exerciseFormController.createHTML)
+    .post(exerciseFormController.processForm);
+
+
+
 module.exports = router;
