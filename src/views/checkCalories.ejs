@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8"/>
     <title>Daily Requirement</title>
     <link
       rel="stylesheet"
@@ -24,8 +24,7 @@
         }
       }
       .form-signin {
-        width: 100%;
-        max-width: 330px;
+        width: 80%;
         padding: 15px;
         margin: auto;
       }
@@ -49,15 +48,15 @@
         </div>
 
         <div class="row g-5">
-          <div class="col-md-12 col-lg-12">
+          <div class="col-md-8">
             <form
               class="needs-validation"
               novalidate=""
-              action="/requirement/form"
+              action="/checkCalories"
               method="post"
             >            
-              <div class="row g-3">
-                <div class="col-sm-6">
+              <div class="row">
+                <div class="col-sm-4">
                   <label for="activity" class="form-label">Activity</label>
                     <select id="activity" name="activity" required>
                       <option value="" selected disabled hidden>Choose activity level</option>
@@ -70,16 +69,13 @@
                 </div>
                 <!-- Used for spacing between entreis. -->
                 <div>&nbsp;</div>
-
+                <!-- Used for spacing between entreis. -->
+                <div>&nbsp;</div>
+                <!-- Used for spacing between entreis. -->
+                <div>&nbsp;</div>
                 <button class="w-100 btn btn-primary btn-lg" type="submit">
                   Submit Information
                 </button>
-
-                <!-- Used for spacing between entreis. -->
-                <div>&nbsp;</div>
-
-                <!-- Used for spacing between entreis. -->
-                <div>&nbsp;</div>
               </div>
             </form>
           </div>

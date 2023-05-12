@@ -11,11 +11,7 @@ const userCollection = database
     .collection("users");
 
 exports.createHTML = async (req, res, next) => {
-    if (!req.session.authenticated) {
-        res.send("Must log-in");
-        //res.redirect(/login);
-        return;
-    } else {
+
         var email = req.session.email;
 
         // Find the user with the given username
@@ -33,8 +29,6 @@ exports.createHTML = async (req, res, next) => {
             weight: user.healthinfo?.weight,
             gender: user.healthinfo?.gender,
             age: user.healthinfo?.age,
-            risk: user.healthinfo?.risk
+            risk: (user.healthinfo?.risk).toFixed(1) * 100
         });
-
-    }
 }

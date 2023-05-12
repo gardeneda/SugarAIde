@@ -100,7 +100,7 @@ app.use("/exerciseForm", exerciseFormRouter);
 
 app.use("/checkCalories", checkCaloriesRouter);
 
-//app.use("calorieRequirment", calorieRequirmentRouter);
+app.use("/calorieRequirement", calorieRequirmentRouter);
 
 
 app.use("/logout", (req, res) => {

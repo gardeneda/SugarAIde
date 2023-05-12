@@ -15,6 +15,7 @@ body{
 }
 .panel-title {
   font-size: 17px;
+  font-weight: bold;
 }
 .panel-title > small {
   font-size: .75em;
@@ -29,7 +30,7 @@ body{
 
 .panel-default > .panel-heading {
     color: #333333;
-    background-color: transparent;
+    background-color: lightgray;
     border-color: rgba(0, 0, 0, 0.07);
 }
 
