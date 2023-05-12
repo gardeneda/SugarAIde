@@ -1,11 +1,12 @@
+
 const express = require('express');
-
 const exerciseController = require(`${__dirname}/../controllers/exerciseController`);
-
 const router = express.Router();
 
-router.route('/')
-    .get(exerciseController.createHTML);
-
+router.get('/', exerciseController.createHTML);
+router.get('/calendarData', exerciseController.getCalendarData); 
 
 module.exports = router;
+
+   
+
