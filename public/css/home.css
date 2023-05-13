@@ -42,3 +42,9 @@ h3{
 .feature-p{
   color: white;
 }
+
+
+#logo-container {
+  display: flex;
+  flex-direction: column;
+}
