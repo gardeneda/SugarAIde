@@ -23,15 +23,3 @@ exports.createHTML = (req, res) => {
   res.render('foodHistory')
 };
 
-/* 
-    Checks if the user has a valid session/cookie.
-    If not redirects them to the login page.
-*/
-exports.checkCookie = (req, res, next) => {
-  if (!req.session.authenticated) {
-    res.redirect("/");
-    return;
-  }
-  next();
-};
-
