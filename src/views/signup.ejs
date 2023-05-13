@@ -25,13 +25,13 @@
 	</head>
 	<body>
 		<%- include("templates/header") %>
-		<div class="row px-5 py-5">
-			<div class="col px-5 py-5">
-				<div class="card" style="width: 18rem">
+		<div class="row px-4 py-5">
+			<div id="form-container" class="col px-5 py-5">
+				<div style="width: 18rem">
 					<form class="form-signin" action="/signup" method="post">
 						<img
 							class="mb-4 mx-auto d-block"
-							src="/img/sugarAide-logo.svg"
+							src="/img/logo.jpg"
 							alt=""
 							width="250"
 						/>
@@ -69,9 +69,10 @@
 						/>
 						<br />
 						<button
-							class="btn btn-lg bg-pink btn-block"
+							class="btn btn-lg text-white btn-block"
 							type="submit"
 							onclick="window.location.href='main'"
+							style="background: linear-gradient(#F9858b, #F985B9);"
 						>
 							Sign up
 						</button>
