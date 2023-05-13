@@ -70,7 +70,7 @@ async function sendMessageAndReceiveResponse() {
     aiStatus.classList.remove("hidden");
     const request = { userMessage: userMessage };
     try {
-        const response = await fetch("https://weak-rose-springbok-cape.cyclic.app/chat", {
+        const response = await fetch("https://drab-rose-indri-sari.cyclic.app/chat", {
             method: "post",
             headers: {
                 'Content-Type': 'application/json'
