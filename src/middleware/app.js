@@ -13,7 +13,7 @@ const mongodb_password = process.env.MONGODB_PASSWORD;
 const mongodb_session_secret = process.env.MONGODB_SESSION_SECRET;
 const node_session_secret = process.env.NODE_SESSION_SECRET;
 
-const navLinks = require(`${__dirname}/../utils/navlinkManager.js`);
+const navLinks = require(`${__dirname}/../utils/navLinkManager.js`);
 const chatRouter = require(`${__dirname}/../routes/chatRouter`);
 const healthInfoRouter = require(`${__dirname}/../routes/healthInfoRouter`);
 const signupRouter = require(`${__dirname}/../routes/signupRouter`);
