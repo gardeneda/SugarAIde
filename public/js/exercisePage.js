@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       datasets: [{
         label: 'Time (Hours)',
         data: weeklyLogs[weeklyLogs.length - 1].durations,
-        backgroundColor: 'blue',
+        backgroundColor: '#0077b6',
         borderWidth: 1,
       }]
     },

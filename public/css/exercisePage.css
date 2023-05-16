@@ -82,7 +82,7 @@
 #dailyLogs th {
   background-color: #F9858b; 
   color: white; 
-  text-align: left;
+  text-align: center;
   padding: 8px; 
 }
 
@@ -106,4 +106,17 @@
   cursor: pointer;
   font-size: 14px;
   font-weight: 200;
+}
+
+td{
+  text-align: center;
+}
+
+a{
+  color: black;
+  text-decoration: none;
+}
+
+.fc-today-button{
+  text-transform: capitalize !important;
 }
