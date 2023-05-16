@@ -23,7 +23,7 @@
     font-weight: 200;
 }
 .fc-button {
-    background-color: #F9858b !important;
+  background: linear-gradient(#F9858b, #F985B9) !important;
   }
   h2{
     color: #F9858b;
@@ -32,7 +32,7 @@
 
   .tab {
     overflow: hidden;
-    background-color: #F9858b;
+    background: linear-gradient(#F9858b, #F985B9);
     display: flex;
     justify-content: space-around;
   }
@@ -91,3 +91,15 @@
 
 #dailyLogs tr:hover {
   background-color: #f5f5f5;}
+
+delete-btn{
+  background-color: #e45c63;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 200;
+}

@@ -11,6 +11,9 @@ router.route('/')
 router.route('/calendarData')
     .get(exerciseController.getCalendarData);
 
+router.delete('/calendarData/:id', exerciseController.deleteExerciseData);
+
+
 module.exports = router;
 
    

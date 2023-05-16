@@ -1,3 +1,7 @@
+window.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("defaultOpen").click();
+});
+
 function openExercise(evt, exercise) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
@@ -11,3 +15,4 @@ function openExercise(evt, exercise) {
     document.getElementById(exercise).style.display = "block";
     evt.currentTarget.className += " active";
   }
+
