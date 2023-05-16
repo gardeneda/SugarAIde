@@ -29,7 +29,7 @@
     <h2>Your week so far:</h2>
     <!-- Tab links -->
     <div class="tab">
-      <button class="tablinks" onclick="openLog(event, 'activityChart')">Weekly Stats</button>
+      <button class="tablinks active" id="defaultOpen" onclick="openLog(event, 'activityChart')">Weekly Stats</button>
       <button class="tablinks" onclick="openLog(event, 'logs')">Daily Log</button>
     </div>
 
@@ -48,7 +48,8 @@
     <div class="center-content">
       <p>
         <a
-          class="btn bg-pink btn-lg px-4 me-md-2"
+				  class="btn btn-lg text-white btn-block"
+          style="background: linear-gradient(#F9858b, #F985B9);"
           onclick="window.location.href='exerciseForm'"
           role="button"
         >Add Activity &raquo;</a

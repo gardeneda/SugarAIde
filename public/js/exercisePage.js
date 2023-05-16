@@ -16,12 +16,15 @@ document.addEventListener("DOMContentLoaded", async function () {
       datasets: [{
         label: 'Time (Hours)',
         data: weeklyLogs[weeklyLogs.length - 1].durations,
-        backgroundColor: '#e77076',
+        backgroundColor: '#0077b6',
         borderWidth: 1,
       }]
     },
     options: {}
   });
+});
+window.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("defaultOpen").click();
 });
 
 function openLog(evt, view) {
@@ -46,7 +49,7 @@ function openLog(evt, view) {
 }
 
 async function getExerciseData() {
-  const response = await fetch("https://drab-rose-indri-sari.cyclic.app/exercisePage/calendarData");
+  const response = await fetch("http://localhost:5050/exercisePage/calendarData");
   const data = await response.json();
 
   const exerciseLog = data.exercise;
@@ -100,24 +103,62 @@ async function getExerciseData() {
   return { eventArray, weeklyLogs };
 }
 
+function attachDeleteButtonListeners() {
+  document.querySelectorAll(".delete-btn").forEach(button => {
+    const id = button.getAttribute("data-id");
+    button.addEventListener("click", () => deleteExerciseEntry(id));
+  });
+}
+
+
+
 function displayDailyLogs(dailyLogs) {
+  console.log(dailyLogs);
   const dailyLogsDiv = document.getElementById("dailyLogs");
-  let content = "<table><thead><tr><th>Exercise</th><th>Duration (hours)</th><th>Calories</th></tr></thead><tbody>";
+  let content = "<table><thead><tr><th>Exercise</th><th>Duration (hours)</th><th>Calories</th><th>Remove</th></tr></thead><tbody>";
 
   dailyLogs.forEach(log => {
+    console.log(log);
     content += `<tr>
                 <td>${log.exercise}</td>
                 <td>${log.duration}</td>
                 <td>${log.calories_burned}</td>
+                <td><button class="delete-btn" data-id="${log.id}">X</button></td>
                 </tr>`;
   });
 
   content += "</tbody></table>";
 
   dailyLogsDiv.innerHTML = content;
+  attachDeleteButtonListeners();
 }
 
+async function deleteExerciseEntry(id) {
+  // Select the button and the row
+  const button = document.querySelector(`button[data-id="${id}"]`);
+  const row = button.closest("tr");
+
+  // If they exist, remove the row
+  if (button && row) {
+    row.remove();
+  }
+
+  try {
+    // Now make the request
+    await fetch(`http://localhost:5050/exercisePage/calendarData/${id}`, {
+      method: "DELETE",
+    });
+
+  } catch (error) {
+    console.error("Failed to delete exercise entry", error);
+    // Handle the error here, e.g., alert the user, reload the list, etc.
+  }
+}
+
+
 let currentDay = new Date().getDate();
+let currentWeek = getWeekNumber(new Date());
+
 
 setInterval(() => {
   const now = new Date();
@@ -127,7 +168,26 @@ setInterval(() => {
   }
 }, 60 * 60000); // check every hour
 
+setInterval(async () => {
+  const now = new Date();
+  const nowWeek = getWeekNumber(now);
+  
+  if (nowWeek !== currentWeek) {
+    currentWeek = nowWeek;
 
+    // Fetch new data and update the chart
+    var {eventArray, weeklyLogs} = await getExerciseData();
+    exerciseChart.data.datasets[0].data = weeklyLogs[weeklyLogs.length - 1].durations;
+    exerciseChart.update();
+  }
+}, 60 * 60000); // check every hour
+
+function getWeekNumber(d) {
+  d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+  d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay()||7));
+  const yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
+  return Math.ceil((((d - yearStart) / 86400000) + 1)/7);
+}
 
 function formatDate(date) {
   const year = date.getFullYear();
@@ -136,3 +196,4 @@ function formatDate(date) {
 
   return `${year}-${month}-${day}`;
 }
+
