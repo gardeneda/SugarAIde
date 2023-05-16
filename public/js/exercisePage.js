@@ -110,6 +110,8 @@ function attachDeleteButtonListeners() {
   });
 }
 
+
+
 function displayDailyLogs(dailyLogs) {
   console.log(dailyLogs);
   const dailyLogsDiv = document.getElementById("dailyLogs");
@@ -122,27 +124,6 @@ function displayDailyLogs(dailyLogs) {
                 <td>${log.duration}</td>
                 <td>${log.calories_burned}</td>
                 <td><button class="delete-btn" data-id="${log.id}">X</button></td>
-                </tr>`;
-  });
-
-  content += "</tbody></table>";
-
-  dailyLogsDiv.innerHTML = content;
-  attachDeleteButtonListeners();
-}
-
-function displayDailyLogs(dailyLogs) {
-  console.log(dailyLogs);
-  const dailyLogsDiv = document.getElementById("dailyLogs");
-  let content = "<table><thead><tr><th>Exercise</th><th>Duration (hours)</th><th>Calories</th><th>Remove</th></tr></thead><tbody>";
-
-  dailyLogs.forEach(log => {
-    console.log(log);
-    content += `<tr>
-                <td>${log.exercise}</td>
-                <td>${log.duration}</td>
-                <td>${log.calories_burned}</td>
-                <td><button class="delete-btn" data-id="${log.id}">Delete</button></td>
                 </tr>`;
   });
 
