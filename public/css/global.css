@@ -1,0 +1,6 @@
+#isLoggedOut-Container,
+#isLoggedIn-Container {
+    width: 100%;
+    display: flex !important;
+    justify-content:flex-end !important;
+}

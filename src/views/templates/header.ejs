@@ -1,6 +1,6 @@
 <nav style="background: linear-gradient(#F9858b, #F985B9);" class="navbar navbar-expand-lg">
     <div class="container-fluid">
-      <a class="navbar-brand text-white" href="#">SugarAIde</a>
+      <a class="navbar-brand text-white" href="/">SugarAIde</a>
       <button class="navbar-toggler" 
       type="button" 
       data-bs-toggle="collapse" 
@@ -23,24 +23,27 @@
             </a>
           </li>
           <% } %>
-          
+        </ul>
+
           <% if (locals.status == 0) { %>
-            <li class="nav-item btn-outline-primary">
-              <a href="/login" class="btn btn-danger">Login</a>
-            </li>
-            <li class="nav-item">
-              <a href="/signup" class="btn btn-warning">Sign-up</a>
-            </li>
+            <div id="isLoggedOut-Container">
+              <div id="isLoggedOut">
+                <a href="/login" class="btn text-white btn-outline-danger">Login</a>
+                <a href="/signup" class="btn text-white btn-danger">Sign-up</a>
+              </div>
+            </div>
           <% } %>
             
           <!-- Would be weird to have users the options to login or sign-out
             if they're already logged in. Status is 1 if session is active.-->
           <% if (locals.status == 1) { %>
-            <li class="">
-                <a href="/logout" class="btn btn-danger">Logout</a>
-            </li>
+            <div id="isLoggedIn-Container">
+              <div class="nav-button" id="isLoggedIn">
+                  <a href="/logout" class="btn text-white btn-danger" id="logout">Logout</a>
+              </div>
+            </div>
           <% } %>
-        </ul>
+
       </div>
     </div>
   </nav>
