@@ -14,6 +14,7 @@ const mongodb_session_secret = process.env.MONGODB_SESSION_SECRET;
 const node_session_secret = process.env.NODE_SESSION_SECRET;
 
 const navLinks = require(`${__dirname}/../utils/navLinkManager.js`);
+const { highlightCurrentLink } = require(`${__dirname}/../utils/navLinkManager.js`); 
 const chatRouter = require(`${__dirname}/../routes/chatRouter`);
 const healthInfoRouter = require(`${__dirname}/../routes/healthInfoRouter`);
 const signupRouter = require(`${__dirname}/../routes/signupRouter`);
@@ -81,8 +82,14 @@ app.use("/", (req, res, next) => {
 		app.locals.status = 1;
 	}
 
-  app.locals.navLinks = navLinks;
+  //app.locals.navLinks = navLinks;
   // app.locals.currentURL = req.path;
+
+  const currentURL = req.path; 
+  const highlightedLinks = highlightCurrentLink(currentURL); 
+  app.locals.navLinks = highlightedLinks;
+
+
 	next();
 });
 
