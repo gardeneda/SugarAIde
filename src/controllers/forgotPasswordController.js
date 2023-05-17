@@ -71,7 +71,6 @@ exports.forgotPassword = async (req, res, next) => {
 
     smtpTransport.sendMail(mailOptions, (err) => {
         if (err) return next(err);
-        //res.send({ msg : 'An e-mail has been sent to ' + user.email + ' with further instructions.' });
         res.render('forgotPassword', { msg : 'An e-mail has been sent to ' + user.email + ' with further instructions.' });
     });
 
