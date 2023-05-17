@@ -66,6 +66,35 @@ app.use(
   })
 );
 
+// EJS creates a "locals" parameter on app.
+// We can set this to create 'global' variables that
+// EJS scripts can refer to.
+app.use("/", (req, res, next) => {
+  // const thisURL = new URL(req.url);
+	if (!req.session.authenticated) {
+
+
+		app.locals.status = 0;
+
+	} else {
+
+		app.locals.status = 1;
+	}
+
+  app.locals.navLinks = navLinks;
+  // app.locals.currentURL = req.path;
+	next();
+});
+
+app.get("/", (req, res) => {
+  if (req.session.authenticated) {
+    res.render('main');
+
+  } else {
+    res.render("home");
+  }
+});
+
 app.use("/css", express.static(`${__dirname}/../../public/css`));
 
 app.use("/font", express.static(`${__dirname}/../../public/font`));
@@ -104,38 +133,9 @@ app.use("/calorieRequirement", calorieRequirmentRouter);
 
 app.use("/foodHistory", foodHistoryRouter);
 
-// EJS creates a "locals" parameter on app.
-// We can set this to create 'global' variables that
-// EJS scripts can refer to.
-app.use("*", (req, res, next) => {
-  // const thisURL = new URL(req.url);
-	if (!req.session.authenticated) {
-
-
-		app.locals.status = 0;
-
-	} else {
-
-		app.locals.status = 1;
-	}
-
-  app.locals.navLinks = navLinks;
-  // app.locals.currentURL = req.path;
-	next();
-});
-
 app.use("/logout", (req, res) => {
   req.session.destroy();
   res.redirect("/");
-});
-
-app.get("/", (req, res) => {
-  if (req.session.authenticated) {
-    res.render('main');
-
-  } else {
-    res.render("home");
-  }
 });
 
 app.get("*", (req, res) => {
