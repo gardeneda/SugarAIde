@@ -10,22 +10,14 @@ const userCollection = database
 
 const bot = require(`${__dirname}/../utils/botManager`);
 
-// const userChatObject = {
-//   role: "user",
-// };
-
-// const chatRequest = {
-//     "model": "gpt-3.5-turbo"
-// }
-
 /* End of Required Packages and Constant Declaration */
 /* ///////////////////////////////////////////////// */
 
 /*
     Optimizes and fine-tunes the user message so that the AI
 */
-exports.modifyMessage = function (userMessage) {
-	const optimizePrompt = process.env.ASK_AI;
+exports.modifyMessage = function (prompt, userMessage) {
+	const optimizePrompt = prompt;
 
 	const request = {
 		model: "text-davinci-003",
@@ -136,8 +128,8 @@ exports.sendMessage = function (message) {
     and then sends
 
 */
-exports.modifyDataUseable = async function (userMessage) {
-	const optimizedMessage = exports.modifyMessage(userMessage);
+exports.modifyDataUseable = async function (prompt, userMessage) {
+	const optimizedMessage = exports.modifyMessage(prompt, userMessage);
 	const response = await bot.processMessage(optimizedMessage);
 	const formattedResponse = exports.stripJSON(response);
 	const dataType = exports.checkJSONType(formattedResponse);
@@ -161,7 +153,7 @@ exports.createHTML = (req, res, next) => {
 */
 exports.processUserMessage = async (req, res, next) => {
 	const userMessage = req.body.userMessage;
-    const [data, dataType] = await exports.modifyDataUseable(userMessage);
+    const [data, dataType] = await exports.modifyDataUseable(process.env.ASK_AI, userMessage);
     console.log("\n\n This below is the data separated from the AI's response.");
     console.log(data, dataType);
     console.log("\n\n");
