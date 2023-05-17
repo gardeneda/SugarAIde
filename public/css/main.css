@@ -25,3 +25,43 @@
   .box2 { background-color: orange; }
   .box3 { background-color: purple; }
   .box4 { background-color: grey; }
+
+  /*Button CSS*/
+  .parent {
+    display: flex;
+    flex-direction: column;
+    height: 30%;
+    width: 100%;
+    align-items: center;
+  }
+  .parent button {
+    background: linear-gradient(#F9858b, #F985B9);
+    color: white;
+    border: none;
+    padding: 5px;
+    font-size: 31px;
+    height: 50%;
+    width: 50%;
+    box-shadow: 0 2px 4px darkslategray;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .parent button:active {
+    background-color: #dc7277;
+    box-shadow: 0 0 2px darkslategray;
+    transform: translateY(2px);
+  }
+  .round-6 {
+    border-radius: 70%;
+  }
+
+  .card-header{
+    background: linear-gradient(#F9858b, #F985B9);
+    color: white;
+  }
+  .card{
+    width: 98%;
+    }
+.btn{
+  background: linear-gradient(#F9858b, #F985B9);
+}

@@ -46,7 +46,7 @@ function openLog(evt, view) {
 }
 
 async function getExerciseData() {
-  const response = await fetch("https://drab-rose-indri-sari.cyclic.app/exercisePage/calendarData");
+  const response = await fetch("http://localhost:5050/exercisePage/calendarData");
   const data = await response.json();
 
   const exerciseLog = data.exercise;

@@ -5,14 +5,13 @@ dotenv.config({ path: "./.env" });
 const express = require('express');
 const app = express();
 app.set('view engine', 'ejs');
-
-
 const database = require(`${__dirname}/../config/databaseConfig`);
-const userCollection = database
-  .db(process.env.MONGODB_DATABASE)
-  .collection("users");
 
-const imageNumber = 4;
+const userCollection = database
+    .db(process.env.MONGODB_DATABASE)
+    .collection("users");
+    
+
 /* End of Required Packages and Constant Declaration */
 /* ///////////////////////////////////////////////// */
 
@@ -36,3 +35,9 @@ exports.checkCookie = (req, res, next) => {
   next();
 };
 
+exports.getExerciseData = async (req, res, next) => {
+  const userEmail = req.session.email;
+  const user = await userCollection.findOne({ email: userEmail });
+  const exerciseLog = user.exerciseLog;
+  res.json({ exercise: exerciseLog });
+};
