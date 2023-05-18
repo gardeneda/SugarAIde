@@ -29,7 +29,7 @@ const resetPasswordRouter = require(`${__dirname}/../routes/resetPasswordRouter`
 const checkCaloriesRouter = require(`${__dirname}/../routes/checkCaloriesRouter`);
 const calorieRequirmentRouter = require(`${__dirname}/../routes/calorieRequirmentRouter`);
 const foodHistoryRouter = require(`${__dirname}/../routes/foodHistoryRouter`);
-
+const additionalInfoRouter = require(`${__dirname}/../routes/additionalInfoRouter`);
 
 
 app.set('views', path.resolve(`${__dirname}/../views`));
@@ -130,6 +130,8 @@ app.use("/health", healthInfoRouter);
 
 app.use("/risk", riskAssessRouter);
 
+app.use("/additionalInfo", additionalInfoRouter);
+
 app.use("/exercisePage", exerciseRouter);
 
 app.use("/exerciseForm", exerciseFormRouter);
@@ -148,7 +150,7 @@ app.use("/logout", (req, res) => {
 app.get("*", (req, res) => {
   const html = `
 		<h2>Page Does Not Exist - 404 </h2>
-    <img src='./images/sadrobot.png'>
+    <img src='/img/sadrobot.png'>
 		</br>
 		<a href='/'>Go back to main</a>
 	`;
