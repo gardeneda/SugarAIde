@@ -1,0 +1,10 @@
+.tabcontent {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+#diet,
+#foodLogs {
+  border: none;
+  box-shadow: none;
+}

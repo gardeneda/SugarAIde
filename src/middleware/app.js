@@ -29,6 +29,7 @@ const resetPasswordRouter = require(`${__dirname}/../routes/resetPasswordRouter`
 const checkCaloriesRouter = require(`${__dirname}/../routes/checkCaloriesRouter`);
 const calorieRequirmentRouter = require(`${__dirname}/../routes/calorieRequirmentRouter`);
 const foodHistoryRouter = require(`${__dirname}/../routes/foodHistoryRouter`);
+const dietTrackRouter = require(`${__dirname}/../routes/dietTrackRouter`);
 
 
 
@@ -139,6 +140,8 @@ app.use("/checkCalories", checkCaloriesRouter);
 app.use("/calorieRequirement", calorieRequirmentRouter);
 
 app.use("/foodHistory", foodHistoryRouter);
+
+app.use("/dietTrack", dietTrackRouter);
 
 app.use("/logout", (req, res) => {
   req.session.destroy();
