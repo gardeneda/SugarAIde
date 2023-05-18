@@ -83,9 +83,8 @@ exports.checkJSONType = function (response) {
     Checks if the argument is for Exercise or Nutrition, and
     updates the user's database accordingly. 
 */
-exports.updateData = async function (data, type, account) {
-	const dateObject = new Date().toString();
-
+exports.updateData = async function (data, type, account, dateObject) {
+	
 	switch (type) {
 		case "food":
 			let nutritionModel = data;
@@ -152,9 +151,10 @@ exports.createHTML = (req, res, next) => {
     about their diet or exercise, update this to the user's database.
 */
 exports.processUserMessage = async (req, res, next) => {
+	const dateObject = new Date().toString();
 	const userMessage = req.body.userMessage;
     const [data, dataType] = await exports.modifyDataUseable(process.env.ASK_AI, userMessage);
-	exports.updateData(data.json, dataType, req.session.email);
+	exports.updateData(data.json, dataType, req.session.email, dateObject);
 	res.json(data);
 
 };
