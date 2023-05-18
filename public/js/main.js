@@ -1,10 +1,12 @@
-window.addEventListener("load", getExerciseData);
 
+//Exercise Feature Card data, fetches data from the database and displays it on the card
+window.addEventListener("load", getExerciseData);
 async function getExerciseData() {
     const response = await fetch("http://localhost:5050/main/exerciseData");
     const data = await response.json();
     const exerciseLog = data.exercise;
-  
+
+    //Get the current date for the day
     const today = new Date();
     const todaysLogs = exerciseLog.filter(log => {
       const logDate = new Date(log.date);
@@ -14,7 +16,7 @@ async function getExerciseData() {
         logDate.getFullYear() === today.getFullYear()
       );
     });
-  
+    //Display the data on the card 
     if (todaysLogs.length > 0) {
       let totalTime = 0;
       let totalCalories = 0;
@@ -32,3 +34,26 @@ async function getExerciseData() {
     }
   }
   
+var spinTimeout;
+
+function startSpin() {
+  spinTimeout = setTimeout(addSpinClass, 3000);
+}
+
+function stopSpin() {
+    clearTimeout(spinTimeout);
+    removeSpinClass();
+}
+
+function addSpinClass() {
+    document.getElementById("chatButton").classList.add("spin");
+}
+
+function removeSpinClass() {
+    document.getElementById("chatButton").classList.remove("spin");
+}
+
+function playSound() {
+    var audio = document.getElementById("audio");
+    audio.play();
+}

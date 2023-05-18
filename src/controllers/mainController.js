@@ -5,12 +5,11 @@ dotenv.config({ path: "./.env" });
 const express = require('express');
 const app = express();
 app.set('view engine', 'ejs');
-const database = require(`${__dirname}/../config/databaseConfig`);
 
+const database = require(`${__dirname}/../config/databaseConfig`);
 const userCollection = database
     .db(process.env.MONGODB_DATABASE)
     .collection("users");
-    
 
 /* End of Required Packages and Constant Declaration */
 /* ///////////////////////////////////////////////// */
@@ -19,9 +18,21 @@ const userCollection = database
     Send the user client the main landing page after you log-in.
     Attaches a random picture when signed in.
 */
-exports.createHTML = (req, res) => {
-  res.render('main')
-};
+exports.createHTML = async (req, res, next) => {
+  var email = req.session.email;
+
+  console.log("Email:", email);
+  const user = await userCollection.findOne({ email: email });
+  if (!user) {
+    res.send("User not found");
+    return;
+  }
+  // Render the profile view with the user data
+  console.log("Username:", user.username);
+  res.render('main',{
+    username: user.username
+  });
+}
 
 /* 
     Checks if the user has a valid session/cookie.
@@ -35,6 +46,7 @@ exports.checkCookie = (req, res, next) => {
   next();
 };
 
+//Gets exerciselog data from the user 
 exports.getExerciseData = async (req, res, next) => {
   const userEmail = req.session.email;
   const user = await userCollection.findOne({ email: userEmail });

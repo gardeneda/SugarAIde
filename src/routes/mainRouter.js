@@ -1,4 +1,5 @@
 const express = require("express");
+const validation = require(`${__dirname}/../utils/validation`);
 
 const mainController = require(`${__dirname}/../controllers/mainController`);
 
@@ -8,7 +9,8 @@ router
   .route("/")
   .get(mainController.checkCookie, mainController.createHTML);
   
-router.route('/exerciseData')
-  .get(mainController.getExerciseData);
+router
+  .route('/exerciseData')
+  .get(mainController.checkCookie, mainController.getExerciseData);
 
 module.exports = router;
