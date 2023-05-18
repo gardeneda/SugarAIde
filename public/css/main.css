@@ -47,7 +47,7 @@ body {
   align-items: center; 
   text-align: center; 
   font-family: 'Courier New', Courier, monospace;
-  font-size: 1rem;
+  font-size: .9rem;
 }
 
 .parent button:active {
@@ -71,10 +71,14 @@ body {
 }
 /*CSS for feature cards */
 .card-header {
-  background: linear-gradient(#F9858b, #F985B9);
-  color: white;
+  color: #F9858b;
+  border-color: #dc7277;
+  border-width: thin;
 }
-
+.card{
+  border-color: #dc7277;
+  border-width: thin;
+}
 .btn {
   background: linear-gradient(#F9858b, #F985B9);
 }
