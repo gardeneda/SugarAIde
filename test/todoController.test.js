@@ -47,12 +47,17 @@ describe("Check if list of strings is parsed correctly.", () => {
 });
 
 describe("Check if the list array is being converted to the Object model that is needed.", () => {
-	test("Checks if the array is being properly converted into a 2D-array.", () => {
-		const testArr = ["Wow", "How"];
+    const testArr = ["Huh", "No"];
+    const testArr2D = t.formatArrayWithCheck(testArr);
+    const desiredMap = new Map();
+    desiredMap.set(0, testArr2D[0]);
+    desiredMap.set(1, testArr2D[1]);
+    
+    test("Checks if the array is being properly converted into a 2D-array.", () => {
 
 		expect(t.formatArrayWithCheck(testArr)).toStrictEqual([
-			["Wow", 0],
-			["How", 0],
+			["Huh", 0],
+			["No", 0],
 		]);
     });
     
@@ -60,4 +65,16 @@ describe("Check if the list array is being converted to the Object model that is
 
         expect(t.formatArrayWithCheck([])).toStrictEqual([]);
     });
+
+    test("Checks if the 2D array is converted to the desired Map", () => {
+
+        expect(t.convertToObject(testArr2D)).toEqual(desiredMap);
+    })
+
+    test("Tests if the getter for the converted Map works as intended", () => {
+
+        expect(desiredMap.get(0)).toStrictEqual(["Huh", 0]);
+        expect(desiredMap.get(1)).toStrictEqual(["No", 0]);
+    } ) 
 });
+

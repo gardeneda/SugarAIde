@@ -111,6 +111,22 @@ exports.formatArrayWithCheck = (arr) => {
 	return formattedArr;
 }
 
+/**
+ * Accepts a 2D-Array and transforms it into a JSON object
+ * to insert into the database.
+ * 
+ * @param {Array} arr 2D Array
+ * @see {@link formatArrayWithCheck} for converting todo-list array to 2D array
+ */
+exports.convertToObject = (arr) => {
+	let map = new Map();
+	for (let i = 0; i < arr.length; i++) {
+		map.set(i, arr[i]);
+	}
+
+	return map;
+}
+
 /*
 	Updates the To-Do List in the user's data.
 	The List should be an array at this point.
@@ -123,12 +139,11 @@ exports.updateToDoList = async (arr, account) => {
 	console.log("Successfully updated To Do List to user's database.");
 }
 
-
 /*
 	Generates the checkbox template for each to-do list
 	onto the HTML page for the /todo
 */
-exports.generateCheckboxes = () => {
+exports.generateCheckboxes = (destination, ) => {
 
 }
 
