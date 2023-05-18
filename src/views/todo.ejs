@@ -26,6 +26,33 @@
     <link rel="stylesheet" href="/css/global.css" />
   </head>
   <body>
+    <%- include("templates/header") %>
+    <div class="main-container">
+      <h4>To-Do List</h4>
+      <div class="todo-container">
+        <div class="list-group" id="todo-list">
+          <label class="list-group-item d-flex gap-2">
+            <input class="form-check-input flex-shrink-0" type="checkbox" value="">
+            <span>
+              Second checkbox
+              <small class="d-block text-body-secondary">Some other text goes here</small>
+            </span>
+          </label>
+        </div>
+      </div>
+    </div>
 
+
+    <%- include("templates/footer") %>
+
+    <template class="todo-list-item">
+      <label class="list-group-item d-flex gap-2">
+        <input class="form-check-input flex-shrink-0" type="checkbox" value="" checked="">
+        <span>
+          First checkbox
+          <small class="d-block text-body-secondary">With support text underneath to add more detail</small>
+        </span>
+      </label>
+    </template>
   </body>
 </html>
