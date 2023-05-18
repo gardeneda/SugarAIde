@@ -20,11 +20,6 @@ exports.createHTML = async (req, res, next) => {
     const fats =  ((Number(tdee) * 0.20 ) / 9).toFixed(1);
     const proteins =  ((Number(tdee) * 0.10 ) / 4).toFixed(1);
 
-    console.log ("sugar: " + sugar)
-    console.log ("carbs: " + carbs)
-    console.log ("fats: " + fats)
-    console.log ("proteins: " + proteins)
-
     res.render("calorieRequirement", { 
         tdee: tdee, 
         sugar: sugar, 

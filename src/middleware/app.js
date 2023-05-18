@@ -14,6 +14,7 @@ const mongodb_session_secret = process.env.MONGODB_SESSION_SECRET;
 const node_session_secret = process.env.NODE_SESSION_SECRET;
 
 const navLinks = require(`${__dirname}/../utils/navLinkManager.js`);
+const { highlightCurrentLink } = require(`${__dirname}/../utils/navLinkManager.js`); 
 const chatRouter = require(`${__dirname}/../routes/chatRouter`);
 const healthInfoRouter = require(`${__dirname}/../routes/healthInfoRouter`);
 const signupRouter = require(`${__dirname}/../routes/signupRouter`);
@@ -29,7 +30,7 @@ const checkCaloriesRouter = require(`${__dirname}/../routes/checkCaloriesRouter`
 const calorieRequirmentRouter = require(`${__dirname}/../routes/calorieRequirmentRouter`);
 const foodHistoryRouter = require(`${__dirname}/../routes/foodHistoryRouter`);
 const todoRouter = require(`${__dirname}/../routes/todoRouter`);
-
+const dietTrackRouter = require(`${__dirname}/../routes/dietTrackRouter`);
 
 app.set('views', path.resolve(`${__dirname}/../views`));
 
@@ -81,9 +82,25 @@ app.use("/", (req, res, next) => {
 		app.locals.status = 1;
 	}
 
-  app.locals.navLinks = navLinks;
-  // app.locals.currentURL = req.path;
+
+  //app.locals.navLinks = navLinks;
+  //app.locals.currentURL = req.path;
+
+  const currentURL = req.path; 
+  const highlightedLinks = highlightCurrentLink(currentURL); 
+  app.locals.navLinks = highlightedLinks;
+
+
 	next();
+});
+
+app.get("/", (req, res) => {
+  if (req.session.authenticated) {
+    res.render('main');
+
+  } else {
+    res.render("home");
+  }
 });
 
 
@@ -127,19 +144,11 @@ app.use("/foodHistory", foodHistoryRouter);
 
 app.use("/todo", todoRouter);
 
+app.use("/dietTrack", dietTrackRouter);
 
 app.use("/logout", (req, res) => {
   req.session.destroy();
   res.redirect("/");
-});
-
-app.get("/", (req, res) => {
-  if (req.session.authenticated) {
-    res.render('main');
-
-  } else {
-    res.render("home");
-  }
 });
 
 app.get("*", (req, res) => {

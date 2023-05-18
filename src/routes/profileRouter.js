@@ -8,4 +8,7 @@ const router = express.Router();
 router.route('/')
     .get(validation.checkValidSession, profileController.createHTML);
 
+    router.route('/updateHealthInfo')
+    .post(profileController.updateHealthInfo);    
+
 module.exports = router;
