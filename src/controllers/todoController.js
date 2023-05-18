@@ -100,12 +100,14 @@ exports.parseListToArray = (listString) => {
  * should see the same items checked off on different pages.
  * <p>
  * @param {Array} arr array holding the to do list
+ * @param {Date} date date that the To-Do list is for.
+ * 
  * @returns 2D array
  */
-exports.formatArrayWithCheck = (arr) => {
+exports.formatArray = (arr, date) => {
 	let formattedArr = [];
 	for (let i = 0; i < arr.length; i++) {
-		formattedArr.push([arr[i], 0]);	
+		formattedArr.push([arr[i], 0, date]);	
 	}
 
 	return formattedArr;
@@ -131,10 +133,10 @@ exports.convertToObject = (arr) => {
 	Updates the To-Do List in the user's data.
 	The List should be an array at this point.
 */
-exports.updateToDoList = async (arr, account) => {
+exports.updateToDoList = async (obj, account) => {
 	await userCollection.updateOne(
 		{ email: account },
-		{ $push: { toDoList: arr } }
+		{ $push: { toDoList: obj } }
 	)
 	console.log("Successfully updated To Do List to user's database.");
 }
