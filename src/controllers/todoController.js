@@ -67,14 +67,18 @@ exports.generateToDoList = async (req, res, next) => {
 	const aiPrompt = process.env.TO_DO;
 
 	const message = await chatController.modifyMessage(aiPrompt, userPrompt, 1.0);
-	console.log(message);
 
 	const response = await bot.processMessage(message);
-	console.log(response);
+	const todoList = exports.parseListToArray(response);
+
+	// exports.updateToDoList(todoList, req.session.email);
 
 	next();
 }
 
+/*
+	Parses the given list into an array.
+*/
 exports.parseListToArray = (listString) => {
 	const itemsUntrimmed = listString.split(/\d+\.\s/).filter(item => item.trim() !== "");
 	const itemsTrimmed = [];
@@ -85,7 +89,46 @@ exports.parseListToArray = (listString) => {
 	return itemsTrimmed;
 }
 
-exports.updateToDoList = async (req, res, next) => {
+/**
+ * Takes in the array that holds the list of Strings
+ * and wraps it in another array, with an extra value of 0.
+ * <p>
+ * The 0 signifies that this item has not been checked off.
+ * <p>
+ * Required because the To Do List needs to be rendered
+ * on different pages other than /todo, and the user
+ * should see the same items checked off on different pages.
+ * <p>
+ * @param {Array} arr array holding the to do list
+ * @returns 2D array
+ */
+exports.formatArrayWithCheck = (arr) => {
+	let formattedArr = [];
+	for (let i = 0; i < arr.length; i++) {
+		formattedArr.push([arr[i], 0]);	
+	}
+
+	return formattedArr;
+}
+
+/*
+	Updates the To-Do List in the user's data.
+	The List should be an array at this point.
+*/
+exports.updateToDoList = async (arr, account) => {
+	await userCollection.updateOne(
+		{ email: account },
+		{ $push: { toDoList: arr } }
+	)
+	console.log("Successfully updated To Do List to user's database.");
+}
+
+
+/*
+	Generates the checkbox template for each to-do list
+	onto the HTML page for the /todo
+*/
+exports.generateCheckboxes = () => {
 
 }
 

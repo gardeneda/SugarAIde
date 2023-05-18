@@ -35,11 +35,7 @@ exports.modifyMessage = function (prompt, userMessage, temperature) {
 		},
 		request
 	);
-
-	console.log(`This is inside the modifyMessage function. 
-    The message you sent in the request body is: 
-    ${optimizedMessage}`);
-
+	
 	return embeddedRequest;
 };
 

@@ -22,14 +22,14 @@
       src="https://kit.fontawesome.com/36e5d26d04.js"
       crossorigin="anonymous"
     ></script>
-    
+    <link rel="stylesheet" href="/css/todo.css" />
     <link rel="stylesheet" href="/css/global.css" />
   </head>
   <body>
     <%- include("templates/header") %>
     <div class="main-container">
       <h4>To-Do List</h4>
-      <div class="todo-container">
+      <div class="todo-container card border-danger">
         <div class="list-group" id="todo-list">
           <label class="list-group-item d-flex gap-2">
             <input class="form-check-input flex-shrink-0" type="checkbox" value="">
@@ -38,6 +38,30 @@
               <small class="d-block text-body-secondary">Some other text goes here</small>
             </span>
           </label>
+          <div class="empty-div"></div>
+          <label class="list-group-item d-flex gap-2">
+            <input class="form-check-input flex-shrink-0" type="checkbox" value="" checked="">
+            <span>
+              First checkbox
+              <small class="d-block text-body-secondary">With support text underneath to add more detail</small>
+            </span>
+          </label>
+          <div class="empty-div"></div>
+          <label class="list-group-item d-flex gap-2">
+            <input class="form-check-input flex-shrink-0" type="checkbox" value="" checked="">
+            <span>
+              First checkbox
+            </span>
+          </label>
+          <div class="empty-div"></div>
+          <label class="list-group-item d-flex gap-2">
+            <input class="form-check-input flex-shrink-0" type="checkbox" value="" checked="">
+            <span>
+              First checkbox
+              <small class="d-block text-body-secondary">With support text underneath to add more detail</small>
+            </span>
+          </label>
+
         </div>
       </div>
     </div>

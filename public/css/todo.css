@@ -1,0 +1,37 @@
+.main-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: 100vw;
+	height: 100vh;
+}
+
+.todo-container {
+	width: 80%;
+	height: 80%;
+    margin-bottom: 5%;
+    background-color: #efefef;
+    /* border: 10px solid;
+	border-image-slice: 1;
+	border-width: 3px;
+	border-image-source: linear-gradient(to left, #f9858b, #f985b9) !important; */
+}
+
+input:checked ~ span {
+	text-decoration: line-through;
+}
+
+.list-group-item:hover {
+    background-color: #efefef;
+}
+
+.empty-div {
+    margin: 1%;
+    width: 100%;
+    background-color: lightgray;
+}
+
+label > input:checked {
+    background-color: #efefef;
+}
