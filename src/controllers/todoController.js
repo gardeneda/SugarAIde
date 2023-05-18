@@ -12,6 +12,7 @@ const userCollection = database
 
 const bot = require(`${__dirname}/../utils/botManager`);
 
+
 /* End of Required Packages and Constant Declaration */
 /* ///////////////////////////////////////////////// */
 
@@ -115,17 +116,40 @@ exports.convertToObject = (arr, date) => {
 exports.updateToDoList = async (obj, account) => {
 	await userCollection.updateOne(
 		{ email: account },
-		{ $push: { toDoList: obj } }
+		{ $set: { toDoList: obj } }
 	)
 	console.log("Successfully updated To Do List to user's database.");
 }
 
-/*
-	Generates the checkbox template for each to-do list
-	onto the HTML page for the /todo
-*/
-exports.generateCheckboxes = (destination, ) => {
+/**
+ * Fetches the user data from the database and then generatees
+ * checkboxes (displays them) with the to-do list that the user is given
+ * for the current date.
+ * 
+ * @param {Express.Request} req email account of the user
+ */
+exports.generateCheckboxes = async (account) => {
+	let html = ``;
+	const today = new Date().toString();
+	console.log(today);
+	const todoList = await userCollection.findOne(
+		{ email: account },
+		{ projection: { toDoList: 1 } });
+	
+	console.log(todoList.today);
+	
+	console.log(todoList.toDoList);
+	console.log(typeof todoList.toDoList);
 
+	const template = `
+	<label class="list-group-item d-flex gap-2">
+		<input class="form-check-input flex-shrink-0" type="checkbox" value="" checked="">
+		<span>
+		</span>
+ 	 </label>
+ 	 <div class="empty-div"></div>
+ 	 `
+	return html;
 }
 
 /*
@@ -133,7 +157,8 @@ exports.generateCheckboxes = (destination, ) => {
 	informaiton.
 */
 exports.generateToDoList = async (req, res, next) => {
-	const userData = await exports.fetchUserData(req, res, next);
+	const today = new Date().toString();
+	const userData = await exports.fetchUserData(req);
 	const userPrompt = exports.userCustomizedPrompt(userData);
 	const aiPrompt = process.env.TO_DO;
 
@@ -142,8 +167,9 @@ exports.generateToDoList = async (req, res, next) => {
 	const response = await bot.processMessage(message);
 	const todoList = exports.parseListToArray(response);
 	const todoArray = exports.formatArray(todoList);
+	const todoObj = exports.convertToObject(todoArray, today);
 
-	// exports.updateToDoList(todoList, req.session.email);
+	exports.updateToDoList(todoObj, req.session.email);
 
 	next();
 }
@@ -152,5 +178,6 @@ exports.generateToDoList = async (req, res, next) => {
 	Sends the HTML page when /todo is accessed.
 */
 exports.createHTML = async (req, res, next) => {
-	res.render("todo");
+	const checkboxes = await exports.generateCheckboxes(req.session.email);
+	res.render("todo", { template: checkboxes });
 }
