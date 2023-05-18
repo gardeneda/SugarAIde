@@ -17,9 +17,3 @@ exports.processMessage = async (msg) => {
 
     return answer;
 }
-
-// exports.processChat = async (msg) => {
-    
-//     const response = await openai.createChatCompletion(msg);
-//     return response.data.choices[0].message;
-// }

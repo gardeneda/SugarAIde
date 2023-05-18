@@ -29,9 +29,8 @@ const resetPasswordRouter = require(`${__dirname}/../routes/resetPasswordRouter`
 const checkCaloriesRouter = require(`${__dirname}/../routes/checkCaloriesRouter`);
 const calorieRequirmentRouter = require(`${__dirname}/../routes/calorieRequirmentRouter`);
 const foodHistoryRouter = require(`${__dirname}/../routes/foodHistoryRouter`);
+const todoRouter = require(`${__dirname}/../routes/todoRouter`);
 const dietTrackRouter = require(`${__dirname}/../routes/dietTrackRouter`);
-
-
 
 app.set('views', path.resolve(`${__dirname}/../views`));
 
@@ -83,8 +82,9 @@ app.use("/", (req, res, next) => {
 		app.locals.status = 1;
 	}
 
+
   //app.locals.navLinks = navLinks;
-  // app.locals.currentURL = req.path;
+  //app.locals.currentURL = req.path;
 
   const currentURL = req.path; 
   const highlightedLinks = highlightCurrentLink(currentURL); 
@@ -102,6 +102,7 @@ app.get("/", (req, res) => {
     res.render("home");
   }
 });
+
 
 app.use("/css", express.static(`${__dirname}/../../public/css`));
 
@@ -140,6 +141,8 @@ app.use("/checkCalories", checkCaloriesRouter);
 app.use("/calorieRequirement", calorieRequirmentRouter);
 
 app.use("/foodHistory", foodHistoryRouter);
+
+app.use("/todo", todoRouter);
 
 app.use("/dietTrack", dietTrackRouter);
 
