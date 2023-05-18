@@ -76,9 +76,13 @@ exports.generateToDoList = async (req, res, next) => {
 }
 
 exports.parseListToArray = (listString) => {
-	const items = listString.split(/\d+\.\s/).filter(item => item.trim() !== "");
+	const itemsUntrimmed = listString.split(/\d+\.\s/).filter(item => item.trim() !== "");
+	const itemsTrimmed = [];
+	for (let i = 0; i < itemsUntrimmed.length; i++) {
+		itemsTrimmed.push(itemsUntrimmed[i].trim());
+	}
 
-	return items;
+	return itemsTrimmed;
 }
 
 exports.updateToDoList = async (req, res, next) => {
