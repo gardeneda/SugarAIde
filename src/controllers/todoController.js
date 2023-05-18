@@ -58,25 +58,6 @@ exports.userCustomizedPrompt = (userData) => {
 }
 
 /*
-	Generates a To-Do list based on the user's specific health
-	informaiton.
-*/
-exports.generateToDoList = async (req, res, next) => {
-	const userData = await exports.fetchUserData(req, res, next);
-	const userPrompt = exports.userCustomizedPrompt(userData);
-	const aiPrompt = process.env.TO_DO;
-
-	const message = await chatController.modifyMessage(aiPrompt, userPrompt, 1.0);
-
-	const response = await bot.processMessage(message);
-	const todoList = exports.parseListToArray(response);
-
-	// exports.updateToDoList(todoList, req.session.email);
-
-	next();
-}
-
-/*
 	Parses the given list into an array.
 */
 exports.parseListToArray = (listString) => {
@@ -104,10 +85,10 @@ exports.parseListToArray = (listString) => {
  * 
  * @returns 2D array
  */
-exports.formatArray = (arr, date) => {
+exports.formatArray = (arr) => {
 	let formattedArr = [];
 	for (let i = 0; i < arr.length; i++) {
-		formattedArr.push([arr[i], 0, date]);	
+		formattedArr.push([arr[i], 0]);	
 	}
 
 	return formattedArr;
@@ -120,11 +101,9 @@ exports.formatArray = (arr, date) => {
  * @param {Array} arr 2D Array
  * @see {@link formatArrayWithCheck} for converting todo-list array to 2D array
  */
-exports.convertToObject = (arr) => {
+exports.convertToObject = (arr, date) => {
 	let map = new Map();
-	for (let i = 0; i < arr.length; i++) {
-		map.set(i, arr[i]);
-	}
+	map.set(date, arr);
 
 	return map;
 }
@@ -147,6 +126,26 @@ exports.updateToDoList = async (obj, account) => {
 */
 exports.generateCheckboxes = (destination, ) => {
 
+}
+
+/*
+	Generates a To-Do list based on the user's specific health
+	informaiton.
+*/
+exports.generateToDoList = async (req, res, next) => {
+	const userData = await exports.fetchUserData(req, res, next);
+	const userPrompt = exports.userCustomizedPrompt(userData);
+	const aiPrompt = process.env.TO_DO;
+
+	const message = await chatController.modifyMessage(aiPrompt, userPrompt, 1.0);
+
+	const response = await bot.processMessage(message);
+	const todoList = exports.parseListToArray(response);
+	const todoArray = exports.formatArray(todoList);
+
+	// exports.updateToDoList(todoList, req.session.email);
+
+	next();
 }
 
 /*

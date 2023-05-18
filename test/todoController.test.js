@@ -49,16 +49,16 @@ describe("Check if list of strings is parsed correctly.", () => {
 describe("Check if the list array is being converted to the Object model that is needed.", () => {
     const neededDate = new Date().toLocaleString("en-us");
     const testArr = ["Huh", "No"];
-    const testArr2D = t.formatArray(testArr, neededDate);
+    const testArr2D = t.formatArray(testArr);
     const desiredMap = new Map();
-    desiredMap.set(0, testArr2D[0]);
-    desiredMap.set(1, testArr2D[1]);
+    desiredMap.set(neededDate, testArr2D);
+
     
     test("Checks if the array is being properly converted into a 2D-array.", () => {
 
-		expect(t.formatArray(testArr, neededDate)).toStrictEqual([
-			["Huh", 0, neededDate],
-			["No", 0, neededDate],
+		expect(t.formatArray(testArr)).toStrictEqual([
+			["Huh", 0],
+			["No", 0],
 		]);
     });
     
@@ -69,13 +69,12 @@ describe("Check if the list array is being converted to the Object model that is
 
     test("Checks if the 2D array is converted to the desired Map", () => {
 
-        expect(t.convertToObject(testArr2D)).toEqual(desiredMap);
+        expect(t.convertToObject(testArr2D, neededDate)).toEqual(desiredMap);
     })
 
     test("Tests if the getter for the converted Map works as intended", () => {
 
-        expect(desiredMap.get(0)).toStrictEqual(["Huh", 0, neededDate]);
-        expect(desiredMap.get(1)).toStrictEqual(["No", 0, neededDate]);
+        expect(desiredMap.get(neededDate)).toStrictEqual([["Huh", 0], ["No", 0]]);
     } ) 
 });
 
