@@ -8,7 +8,7 @@ const router = express.Router();
 
 router
   .route("/")
-  .get(todoController.generateToDoList, mainController.createHTML);
+  .get(mainController.createHTML);
   
 router
   .route('/exerciseData')

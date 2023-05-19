@@ -13,6 +13,8 @@ const userCollection = database
 const bot = require(`${__dirname}/../utils/botManager`);
 const dateFormatter = require(`${__dirname}/../utils/dateFormatter`);
 
+const NO_TODO_MSG = "You do not have a to-do list. Click view to generate one.";
+
 /* End of Required Packages and Constant Declaration */
 /* ///////////////////////////////////////////////// */
 
@@ -151,7 +153,7 @@ exports.isFirstTimeLogInToday = async (account, specificDate) => {
 exports.updateToDoList = async (array, account, date) => {
 	await userCollection.updateOne(
 		{ email: account },
-		{ $set: { [`toDoList.${date}`]: obj } }
+		{ $set: { [`toDoList.${date}`]: array } }
 	)
 	console.log("Successfully updated To Do List to user's database.");
 }
@@ -169,10 +171,10 @@ exports.fetchCheckboxes = async (account, date) => {
 	const todoList = await userCollection.findOne(
 		{ email: account , toDoList: { $exists: true }},
 		{ projection: { toDoList: 1 } });
-	
+		
 	if (todoList == null) {
 
-		return [["You do not have a to-do list.", 0]];
+		return [[NO_TODO_MSG]]
 	} else {
 
 		return todoList.toDoList[date];
@@ -186,9 +188,9 @@ exports.fetchCheckboxes = async (account, date) => {
 exports.generateToDoList = async (req, res, next) => {
 	
 	const today = dateFormatter.getToday();
-	console.log(`generateToDoList() was run.`);
+	const status = await exports.isFirstTimeLogInToday(req.session.email, today)
 
-	if (exports.isFirstTimeLogInToday(req.session.email, today) == null) {
+	if (status == null) {
 		const userData = await exports.fetchUserData(req);
 		const userPrompt = exports.userCustomizedPrompt(userData);
 		const aiPrompt = process.env.TO_DO;
@@ -200,11 +202,8 @@ exports.generateToDoList = async (req, res, next) => {
 	
 		// Deprecated.
 		// const todoObj = exports.convertToObject(todoArray, today);
-		
-		console.log(message);
-		console.log(`generateToDoList() was run.`);
-
-		exports.updateToDoList(todoArray, req.session.email, today);
+	
+		await exports.updateToDoList(todoArray, req.session.email, today);
 	}
 
 	next();
@@ -240,13 +239,16 @@ exports.processCheckedItems = async (req, res, next) => {
 		// map.set(Number(checkedValues[j]), value);
 	}
 
-	userCollection.updateOne(
-		{ email: req.session.email },
-		{
-			$set: { [`toDoList.${today}`]: toDoList }
-		});
-		
-	console.log(`Successfuly updated user's progress.`);
+	if (toDoList[0][0] != NO_TODO_MSG) {
+
+		userCollection.updateOne(
+			{ email: req.session.email },
+			{
+				$set: { [`toDoList.${today}`]: toDoList }
+			});
+			
+		console.log(`Successfuly updated user's progress.`);
+	}
 }
 
 /*
