@@ -7,10 +7,10 @@ const router = express.Router();
 
 router
   .route("/")
-  .get(mainController.checkCookie, mainController.createHTML);
+  .get(mainController.createHTML);
   
 router
   .route('/exerciseData')
-  .get(mainController.checkCookie, mainController.getExerciseData);
+  .get(validation.checkValidSession, mainController.getExerciseData);
 
 module.exports = router;

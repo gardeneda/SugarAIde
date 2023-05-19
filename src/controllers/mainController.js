@@ -27,24 +27,13 @@ exports.createHTML = async (req, res, next) => {
     res.send("User not found");
     return;
   }
+  
   // Render the profile view with the user data
   console.log("Username:", user.username);
-  res.render('main',{
-    username: user.username
-  });
+
+  res.render('main',{ username: user.username});
 }
 
-/* 
-    Checks if the user has a valid session/cookie.
-    If not redirects them to the login page.
-*/
-exports.checkCookie = (req, res, next) => {
-  if (!req.session.authenticated) {
-    res.redirect("/");
-    return;
-  }
-  next();
-};
 
 //Gets exerciselog data from the user 
 exports.getExerciseData = async (req, res, next) => {

@@ -13,6 +13,9 @@ const mongodb_password = process.env.MONGODB_PASSWORD;
 const mongodb_session_secret = process.env.MONGODB_SESSION_SECRET;
 const node_session_secret = process.env.NODE_SESSION_SECRET;
 
+const todoController = require(`${__dirname}/../controllers/todoController`);
+const dateFormatter = require(`${__dirname}/../utils/dateFormatter`);
+
 const navLinks = require(`${__dirname}/../utils/navLinkManager.js`);
 const { highlightCurrentLink } = require(`${__dirname}/../utils/navLinkManager.js`); 
 const chatRouter = require(`${__dirname}/../routes/chatRouter`);
@@ -71,15 +74,19 @@ app.use(
 // EJS creates a "locals" parameter on app.
 // We can set this to create 'global' variables that
 // EJS scripts can refer to.
-app.use("/", (req, res, next) => {
+app.use("/", async (req, res, next) => {
   // const thisURL = new URL(req.url);
 	if (!req.session.authenticated) {
 
-
 		app.locals.status = 0;
 
-	} else {
+  } else {
 
+    // To insert template into main (Suggestions)
+    const today = dateFormatter.getToday();
+    const checkboxes = await todoController.fetchCheckboxes(req.session.email, today);
+
+    app.locals.checkboxes = checkboxes;
 		app.locals.status = 1;
 	}
 
