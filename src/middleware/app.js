@@ -133,6 +133,9 @@ app.use("/calorieRequirement", calorieRequirmentRouter);
 
 app.use("/foodHistory", foodHistoryRouter);
 
+app.use('/nutritionLog', foodHistoryRouter);
+
+
 app.use("/logout", (req, res) => {
   req.session.destroy();
   res.redirect("/");
