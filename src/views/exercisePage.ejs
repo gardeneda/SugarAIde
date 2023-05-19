@@ -17,11 +17,13 @@
 			src="https://kit.fontawesome.com/36e5d26d04.js"
 			crossorigin="anonymous"
 		></script>
+    <!-- Calendar Script -->
 		<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.6/index.global.min.js"></script>
-    <link rel="stylesheet" href="/css/exercisePage.css">
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.6/index.global.min.js"></script>
+    <!-- Chart.js Script -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/exercisePage.css">
+    <link rel="stylesheet" href="/css/global.css" />
   </head>
   <body>
     <%- include("templates/header") %>
@@ -29,7 +31,7 @@
     <h2>Your week so far:</h2>
     <!-- Tab links -->
     <div class="tab">
-      <button class="tablinks" onclick="openLog(event, 'activityChart')">Weekly Stats</button>
+      <button class="tablinks active" id="defaultOpen" onclick="openLog(event, 'activityChart')">Weekly Stats</button>
       <button class="tablinks" onclick="openLog(event, 'logs')">Daily Log</button>
     </div>
 
@@ -48,7 +50,8 @@
     <div class="center-content">
       <p>
         <a
-          class="btn bg-pink btn-lg px-4 me-md-2"
+				  class="btn btn-lg text-white btn-block"
+          style="background: linear-gradient(#F9858b, #F985B9);"
           onclick="window.location.href='exerciseForm'"
           role="button"
         >Add Activity &raquo;</a

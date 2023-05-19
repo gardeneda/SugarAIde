@@ -25,10 +25,10 @@
 		></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 		<title>My chart.js chart</title>
+		<link rel="stylesheet" href="/css/global.css" />
 	</head>
+	
 	<body>
-		<!--Navbar-->
-		<%- include('templates/header.ejs') %>
 		<!--temp css-->
 		<div class="container mx-auto" style="margin-top: 75px">
 			<select id="chart-type">
@@ -37,13 +37,19 @@
 			</select>
 			<canvas id="myChart"></canvas>
 		</div>
-		<script>
-			let myChart = document.getElementById("myChart").getContext("2d");
 
-			let foodChart = new Chart(myChart, {
-				type: "bar",
+		<script>
+
+			const days = <%- JSON.stringify(days) %>;
+
+			const ctx = document.getElementById('myChart').getContext('2d');
+
+			const caloriesData = days.map(dayInfo => dayInfo.calories);
+			const labels = days.map(dayInfo => dayInfo.day);
+
+			new Chart(ctx, {
+				type: 'bar',
 				data: {
-					//bar labels
 					labels: [
 						"Sunday",
 						"Monday",
@@ -52,53 +58,124 @@
 						"Thursday",
 						"Friday",
 						"Saturday",
-					],
-					datasets: [
-						{
-							label: "Calories",
-							//bars; values to be visually displayed
-							data: [2650, 2050, 2200, 1850, 1850, 2750, 2350],
-							//bar colour (array for individual bars)
-							backgroundColor: ["rgba(54, 162, 235, 0.8)"],
-						},
-					],
+					],  // Use days of the week as labels
+					datasets: [{
+						label: 'Calories',
+						data: caloriesData,
+						backgroundColor: 'rgba(255, 99, 132, 0.2)',
+						borderColor: 'rgba(255, 99, 132, 1)',
+						borderWidth: 1
+					}]
 				},
-			});
-			//resizes chart based on display size
-			window.addEventListener("resize", function () {
-				foodChart.resize();
-			});
-			// event listener for dropdown menu
-			document
-				.getElementById("chart-type")
-				.addEventListener("change", function () {
-					let selectedOption = document.getElementById("chart-type").value;
-					if (selectedOption === "calories") {
-						foodChart.data.datasets[0].label = "Calories";
-						foodChart.data.datasets[0].data = [
-							2650, 2050, 2200, 1850, 1850, 2750, 2350,
-						];
-						foodChart.data.datasets[0].backgroundColor = [
-							"rgba(54, 162, 235, 0.8)",
-						];
-					} else if (selectedOption === "sugar") {
-						foodChart.data.datasets[0].label = "Sugar";
-						foodChart.data.datasets[0].data = [50, 35, 20, 40, 30, 25, 60];
-						foodChart.data.datasets[0].backgroundColor = [
-							"rgba(255, 99, 132, 0.8)",
-						];
-					} else if (selectedOption === "protein") {
-						foodChart.data.datasets[0].label = "Protein";
-						foodChart.data.datasets[0].data = [33, 67, 45, 33, 87, 53, 39];
-						foodChart.data.datasets[0].backgroundColor = [
-							"rgba(255, 99, 132, 0.8)",
-						];
+				options: {
+					scales: {
+						y: {
+							beginAtZero: true
+						}
 					}
-					foodChart.update();
-				});
+				}
+			});
+			let myChart = document.getElementById("myChart").getContext("2d");
+			
+			// Placeholder Charts-------------------------------------------------------
+			
+			// let foodChart = new Chart(myChart, {
+			// 	type: "bar",
+			// 	data: {
+			// 		//bar labels
+			// 		labels: [
+			// 			"Sunday",
+			// 			"Monday",
+			// 			"Tuesday",
+			// 			"Wednesday",
+			// 			"Thursday",
+			// 			"Friday",
+			// 			"Saturday",
+			// 		],
+			// 		datasets: [
+			// 			{
+			// 				label: "Calories",
+			// 				//bars; values to be visually displayed
+			// 				data: [2650, 2050, 2200, 1850, 1850, 2750, 2350],
+			// 				//bar colour (array for individual bars)
+			// 				backgroundColor: ["rgba(54, 162, 235, 0.8)"],
+			// 			},
+			// 		],
+			// 	},
+			// });
+			// //resizes chart based on display size
+			// window.addEventListener("resize", function () {
+			// 	foodChart.resize();
+			// });
+			// // event listener for dropdown menu
+			// document
+			// 	.getElementById("chart-type")
+			// 	.addEventListener("change", function () {
+			// 		let selectedOption = document.getElementById("chart-type").value;
+			// 		if (selectedOption === "calories") {
+			// 			foodChart.data.datasets[0].label = "Calories";
+			// 			foodChart.data.datasets[0].data = [
+			// 				2650, 2050, 2200, 1850, 1850, 2750, 2350,
+			// 			];
+			// 			foodChart.data.datasets[0].backgroundColor = [
+			// 				"rgba(54, 162, 235, 0.8)",
+			// 			];
+			// 		} else if (selectedOption === "sugar") {
+			// 			foodChart.data.datasets[0].label = "Sugar";
+			// 			foodChart.data.datasets[0].data = [50, 35, 20, 40, 30, 25, 60];
+			// 			foodChart.data.datasets[0].backgroundColor = [
+			// 				"rgba(255, 99, 132, 0.8)",
+			// 			];
+			// 		} else if (selectedOption === "protein") {
+			// 			foodChart.data.datasets[0].label = "Protein";
+			// 			foodChart.data.datasets[0].data = [33, 67, 45, 33, 87, 53, 39];
+			// 			foodChart.data.datasets[0].backgroundColor = [
+			// 				"rgba(255, 99, 132, 0.8)",
+			// 			];
+			// 		}
+			// 		foodChart.update();
+			// 	});
+
+			// Fetch nutrition data from the server.-------------------------------------------------------
+			// fetch("/foodHistory/nutritionLog")
+			// .then(response => response.json())
+			// .then(nutritionData => {
+			// 	// Initialize chart with nutrition data.
+			// 	let foodChart = new Chart(myChart, {
+			// 	type: "bar",
+			// 	data: {
+			// 		labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+			// 		datasets: [
+			// 		{
+			// 			label: "Calories",
+			// 			data: nutritionData.calories, // calories is an array with values for each day of the week
+			// 			backgroundColor: ["rgba(54, 162, 235, 0.8)"],
+			// 		},
+			// 		],
+			// 	},
+			// 	});
+			
+			// 	// Update chart with new nutrition data when the dropdown changes.
+			// 	document
+			// 	.getElementById("chart-type")
+			// 	.addEventListener("change", function () {
+			// 		let selectedOption = document.getElementById("chart-type").value;
+			// 		if (selectedOption === "calories") {
+			// 		foodChart.data.datasets[0].label = "calories";
+			// 		foodChart.data.datasets[0].data = nutritionData.calories;
+			// 		foodChart.data.datasets[0].backgroundColor = ["rgba(54, 162, 235, 0.8)"];
+			// 		} else if (selectedOption === "sugar") {
+			// 		foodChart.data.datasets[0].label = "Sugar";
+			// 		foodChart.data.datasets[0].data = nutritionData.sugar;
+			// 		foodChart.data.datasets[0].backgroundColor = ["rgba(255, 99, 132, 0.8)"];
+			// 		} else if (selectedOption === "protein") {
+			// 		foodChart.data.datasets[0].label = "Protein";
+			// 		foodChart.data.datasets[0].data = nutritionData.protein;
+			// 		foodChart.data.datasets[0].backgroundColor = ["rgba(255, 206, 86, 0.8)"];
+			// 		}
+			// 		foodChart.update();
+			// 	});
+			// });
 		</script>
-		<!--footer-->
-		<%- include('templates/footer') %>
-		<!--/.footer-->
 	</body>
 </html>

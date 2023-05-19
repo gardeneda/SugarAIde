@@ -8,4 +8,10 @@ const router = express.Router();
 router.route('/')
     .get(validation.checkValidSession, profileController.createHTML);
 
+router.route('/updateHealthInfo')
+    .post(profileController.updateHealthInfo);    
+
+router.route('/profile/risk')
+    .get(profileController.getRisk); 
+
 module.exports = router;

@@ -10,26 +10,18 @@ const userCollection = database
 
 const bot = require(`${__dirname}/../utils/botManager`);
 
-// const userChatObject = {
-//   role: "user",
-// };
-
-// const chatRequest = {
-//     "model": "gpt-3.5-turbo"
-// }
-
 /* End of Required Packages and Constant Declaration */
 /* ///////////////////////////////////////////////// */
 
 /*
     Optimizes and fine-tunes the user message so that the AI
 */
-exports.modifyMessage = function (userMessage) {
-	const optimizePrompt = process.env.ASK_AI;
+exports.modifyMessage = function (prompt, userMessage, temperature) {
+	const optimizePrompt = prompt;
 
 	const request = {
 		model: "text-davinci-003",
-		temperature: 0.0,
+		temperature: temperature,
 		max_tokens: 256,
 		top_p: 1,
 		frequency_penalty: 0,
@@ -43,11 +35,7 @@ exports.modifyMessage = function (userMessage) {
 		},
 		request
 	);
-
-	console.log(`This is inside the modifyMessage function. 
-    The message you sent in the request body is: 
-    ${optimizedMessage}`);
-
+	
 	return embeddedRequest;
 };
 
@@ -91,9 +79,8 @@ exports.checkJSONType = function (response) {
     Checks if the argument is for Exercise or Nutrition, and
     updates the user's database accordingly. 
 */
-exports.updateData = async function (data, type, account) {
-	const dateObject = new Date().toString();
-
+exports.updateData = async function (data, type, account, dateObject) {
+	
 	switch (type) {
 		case "food":
 			let nutritionModel = data;
@@ -136,8 +123,8 @@ exports.sendMessage = function (message) {
     and then sends
 
 */
-exports.modifyDataUseable = async function (userMessage) {
-	const optimizedMessage = exports.modifyMessage(userMessage);
+exports.modifyDataUseable = async function (prompt, userMessage) {
+	const optimizedMessage = exports.modifyMessage(prompt, userMessage, 0.0);
 	const response = await bot.processMessage(optimizedMessage);
 	const formattedResponse = exports.stripJSON(response);
 	const dataType = exports.checkJSONType(formattedResponse);
@@ -160,12 +147,10 @@ exports.createHTML = (req, res, next) => {
     about their diet or exercise, update this to the user's database.
 */
 exports.processUserMessage = async (req, res, next) => {
+	const dateObject = new Date().toString();
 	const userMessage = req.body.userMessage;
-    const [data, dataType] = await exports.modifyDataUseable(userMessage);
-    console.log("\n\n This below is the data separated from the AI's response.");
-    console.log(data, dataType);
-    console.log("\n\n");
-	exports.updateData(data.json, dataType, req.session.email);
+    const [data, dataType] = await exports.modifyDataUseable(process.env.ASK_AI, userMessage);
+	exports.updateData(data.json, dataType, req.session.email, dateObject);
 	res.json(data);
 
 };
