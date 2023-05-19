@@ -1,4 +1,3 @@
-
 //Exercise Feature Card data, fetches data from the database and displays it on the card
 window.addEventListener("load", getExerciseData);
 async function getExerciseData() {
@@ -33,27 +32,54 @@ async function getExerciseData() {
       document.getElementById("calories").innerHTML = "No calories burned today";
     }
   }
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Button Animation and play Feature 
+  var spinTimeout;
+  var musicTimeout;
+  var audio = document.getElementById("audio");
+  var audioUnlocked = false;
   
-var spinTimeout;
-
-function startSpin() {
-  spinTimeout = setTimeout(addSpinClass, 3000);
-}
-
-function stopSpin() {
+  //Function to handle audio on mobile devices
+  function handleInteraction(isMobile) {
+    if (!audioUnlocked) {
+      // Unmute the audio for subsequent plays
+      audio.muted = false;
+      audioUnlocked = true;
+    }
+    startSpin(isMobile);
+  }
+  //Main function, spins and plays the audio after 3 second press
+  function startSpin(isMobile) {
+    spinTimeout = setTimeout(function() {
+      addSpinClass();
+      playSound();
+    }, 3000);
+  }
+  //Stops the spin and audio
+  function stopSpin() {
     clearTimeout(spinTimeout);
+    clearTimeout(musicTimeout);
     removeSpinClass();
-}
-
-function addSpinClass() {
+    stopSound();
+  }
+  //Adds spin class to button
+  function addSpinClass() {
     document.getElementById("chatButton").classList.add("spin");
-}
-
-function removeSpinClass() {
+  }
+  //Removes spin class from button
+  function removeSpinClass() {
     document.getElementById("chatButton").classList.remove("spin");
-}
-
-function playSound() {
-    var audio = document.getElementById("audio");
-    audio.play();
-}
+  }
+  //Plays the audio
+  function playSound() {
+    musicTimeout = setTimeout(function() {
+      audio.play();
+    }, 500); // Adjust this delay if needed
+  }
+  //Stops the audio
+  function stopSound() {
+    audio.pause();
+    audio.currentTime = 0;
+  }
+  ////////////////////////////////////////////////////////////////////////////////////////////////////
