@@ -11,7 +11,7 @@ const userCollection = database
 	.collection("users");
 
 const bot = require(`${__dirname}/../utils/botManager`);
-
+const dateFormatter = require(`${__dirname}/../utils/dateFormatter`);
 
 /* End of Required Packages and Constant Declaration */
 /* ///////////////////////////////////////////////// */
@@ -109,10 +109,13 @@ exports.convertToObject = (arr, date) => {
 	return map;
 }
 
-/*
-	Updates the To-Do List in the user's data.
-	The List should be an array at this point.
-*/
+/**
+ * Updates the To-Do List in the user's data.
+ * The List should be an array at this point.
+ *
+ * @param {JSON} obj To-Do List in object form
+ * @param {Express.Request} account the user's email in the request body.
+ */
 exports.updateToDoList = async (obj, account) => {
 	await userCollection.updateOne(
 		{ email: account },
@@ -129,27 +132,14 @@ exports.updateToDoList = async (obj, account) => {
  * @param {Express.Request} req email account of the user
  */
 exports.generateCheckboxes = async (account) => {
-	let html = ``;
-	const today = new Date().toString();
-	console.log(today);
+	const today = dateFormatter.getToday();
 	const todoList = await userCollection.findOne(
 		{ email: account },
 		{ projection: { toDoList: 1 } });
 	
-	console.log(todoList.today);
-	
-	console.log(todoList.toDoList);
-	console.log(typeof todoList.toDoList);
-
-	const template = `
-	<label class="list-group-item d-flex gap-2">
-		<input class="form-check-input flex-shrink-0" type="checkbox" value="" checked="">
-		<span>
-		</span>
- 	 </label>
- 	 <div class="empty-div"></div>
- 	 `
-	return html;
+	console.log(`This is prying into the array: ${todoList.toDoList[today][0][1]}`);
+	console.log(todoList.toDoList[today]);
+	return todoList.toDoList[today];
 }
 
 /*
@@ -157,7 +147,7 @@ exports.generateCheckboxes = async (account) => {
 	informaiton.
 */
 exports.generateToDoList = async (req, res, next) => {
-	const today = new Date().toString();
+	const today = dateFormatter.getToday();
 	const userData = await exports.fetchUserData(req);
 	const userPrompt = exports.userCustomizedPrompt(userData);
 	const aiPrompt = process.env.TO_DO;
@@ -179,5 +169,5 @@ exports.generateToDoList = async (req, res, next) => {
 */
 exports.createHTML = async (req, res, next) => {
 	const checkboxes = await exports.generateCheckboxes(req.session.email);
-	res.render("todo", { template: checkboxes });
+	res.render("todo", { checkboxes });
 }

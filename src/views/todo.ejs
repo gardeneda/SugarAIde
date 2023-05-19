@@ -31,12 +31,22 @@
       <h4>To-Do List</h4>
       <div class="todo-container card border-danger">
         <div class="list-group" id="todo-list">
-          <%= template %>
+          <% for (let i = 0; i < checkboxes.length; i++) { %>
+              <label class="list-group-item d-flex gap-2">
+                <input class="form-check-input flex-shrink-0" type="checkbox" value="" 
+                <% if (checkboxes[i][1] === 1) { %>  
+                  checked=""
+                <% } %>
+                >
+                <span>
+                  <%= checkboxes[i][0] %>
+                </span>
+              </label>
+          <% } %>
+
         </div>
       </div>
     </div>
-
-
     <%- include("templates/footer") %>
   </body>
 </html>
