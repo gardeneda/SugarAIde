@@ -18,7 +18,7 @@ let progressStartValue = 0,
 let progress = setInterval(() => {
     progressStartValue++;
     progressValue.textContent = `${progressStartValue} cal`;
-    circularProgress.style.background = `conic-gradient( #F9858b ${progressStartValue * 0.09}deg, #efefef 0deg)`
+    circularProgress.style.background = `conic-gradient( #F9858b ${progressStartValue * 0.18}deg, #efefef 0deg)`
 
     if (progressStartValue == Math.trunc(progressEndValue)) {
         clearInterval(progress);
