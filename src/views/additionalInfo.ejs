@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Additional Info</title>
+    <title>Resources</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8" />
     <script
     src="https://kit.fontawesome.com/36e5d26d04.js"
@@ -24,51 +24,64 @@
   </head>
   <body>
       <%- include("templates/header") %>
-      <h1>Additional Resources</h1>
+      <br>
+      <div class="card-container">
       <!--First Card-->
-      <div class="d-flex position-relative sources">
-        <img src="https://mma.prnewswire.com/media/156803/american_diabetes_association_logo.jpg?p=facebook" 
-        width="50%" 
-        height="50%" 
-        class="flex-shrink-0 me-3" 
-        alt="American diabetes association">
-        <div>
+      <div class="row no-gutters position-relative">
+        <div class="col-md-6 mb-md-0 p-md-4 img-div">
+          <img src="/img/ADA.jpg" class="w-100" alt="American diabetes association">
+        </div>
+        <div class="col-md-6 position-static p-4 pl-md-0">
           <h5 class="mt-0">American Diabetes Association</h5>
-          <p>This is some placeholder content for the custom component. It is intended to mimic what some real-world content would look like, and we're using it here to give the component a bit of body and size.</p>
-          <a href="https://diabetes.org/" class="stretched-link" target="new_blank"></a>
+          <p>The American Diabetes Association (ADA) is a nonprofit committed to enhancing the lives of those with diabetes through awareness campaigns, 
+            resources, research funding, advocacy, guidelines for healthcare professionals, and community events, all while striving to find a cure.</p>
+            <a href="https://diabetes.org/" class="btn bg-pink" target="_blank">Learn More</a>
         </div>
       </div>
       <br>
+      <hr class="gradient">
       <!--Second Card-->
-      <div class="d-flex position-relative sources">
-        <img 
-        src="https://upload.wikimedia.org/wikipedia/commons/8/83/United_States_Centers_for_Disease_Control_and_Prevention_logo.svg" 
-        class="flex-shrink-0 me-3" 
-        width="50%" 
-        height="50%" 
-        alt="cdc">
-        <div>
-          <h5 class="mt-0">Center of Disease Control</h5>
-          <p>This is some placeholder content for the custom component. It is intended to mimic what some real-world content would look like, and we're using it here to give the component a bit of body and size.</p>
-          <a href="https://www.cdc.gov/diabetes/prevention/index.html" class="stretched-link" target="new_blank"></a>
+      <div class="row no-gutters position-relative">
+        <div class="col-md-6 mb-md-0 p-md-4 img-div">
+          <img src="/img/NIHdiabetes.jpg" class="w-100" alt="NIH">
+        </div>
+        <div class="col-md-6 position-static p-4 pl-md-0">
+          <h5 class="mt-0">National Institute of Diabetes and Digestive and Kidney Diseases</h5>
+          <p>The National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK) within the NIH, focuses on improving health outcomes related to diabetes, digestive, kidney diseases, and obesity. It funds research, 
+            supports clinical trials, provides education, and promotes public health initiatives to enhance scientific understanding and patient care.</p>
+            <a href="https://www.niddk.nih.gov/" class="btn bg-pink" target="_blank">Learn More</a>
         </div>
       </div>
       <br>
+      <hr class="gradient">
       <!--Third Card-->
-      <div class="d-flex position-relative sources">
-        <img 
-        src="https://upload.wikimedia.org/wikipedia/commons/8/83/United_States_Centers_for_Disease_Control_and_Prevention_logo.svg" 
-        class="flex-shrink-0 me-3" 
-        width="50%" 
-        height="50%" 
-        alt="cdc">
-        <div>
-          <h5 class="mt-0">Custom component with stretched link</h5>
-          <p>This is some placeholder content for the custom component. It is intended to mimic what some real-world content would look like, and we're using it here to give the component a bit of body and size.</p>
-          <a href="https://www.cdc.gov/diabetes/prevention/index.html" class="stretched-link">Go somewhere</a>
+      <div class="row no-gutters position-relative">
+        <div class="col-md-6 mb-md-0 p-md-4 img-div">
+          <img src="/img/diabetesCanada.jpg" class="w-100" alt="American diabetes association">
         </div>
+        <div class="col-md-6 position-static p-4 pl-md-0">
+          <h5 class="mt-0">Diabetes Canada</h5>
+          <p>Diabetes Canada, a national nonprofit, works to improve the lives of Canadians with diabetes. 
+            It advocates for related policies, provides education, funds research, raises awareness, 
+            and supports healthcare professionals, aiming to improve prevention, access to care, and well-being of those affected.</p>
+          <a href="https://www.diabetes.ca/" class="btn bg-pink" target="_blank">Learn More</a>
       </div>
       <br>
+      <hr class="gradient">
+      <!--Fourth Card-->
+      <div class="row no-gutters position-relative">
+        <div class="col-md-6 mb-md-0 p-md-4 img-div">
+          <img src="/img/Mayo_clinic.jpg" class="w-100" alt="American diabetes association">
+        </div>
+        <div class="col-md-6 position-static p-4 pl-md-0">
+          <h5 class="mt-0">Mayo Clinic</h5>
+          <p>The Mayo Clinic provides comprehensive services for diabetes management.  
+            Their approach includes medical treatment, insulin management, dietary advice, and patient education.
+            Additionally, they engage in significant diabetes-related research, investigating disease causes, management methods, and new treatments.</p>
+          <a href="https://www.mayoclinic.org/diseases-conditions/diabetes/symptoms-causes/syc-20371444" class="btn bg-pink" target="_blank">Learn More</a>
+      </div>
+      <br>
+      </div>
 
       <%- include("templates/footer") %>
   </body>

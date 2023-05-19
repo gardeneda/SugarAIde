@@ -5,7 +5,7 @@ const navLinks = [
     { name: "FoodLog", link: "/foodHistory" },
     { name: "Risk", link: "/risk" },
     { name: "Chat", link: "/chat" },
-    { name: "Additional Resources", link: "/additionalInfo" }
+    { name: "Resources", link: "/additionalInfo" }
   ];
   
 function highlightCurrentLink(pathname) {
