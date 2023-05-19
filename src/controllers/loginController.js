@@ -14,7 +14,7 @@ const userCollection = database
     .db(process.env.MONGODB_DATABASE)
     .collection("users");
 
-const expireTime = 60 * 60 * 1000;
+const expireTime = 60 * 60 * 60 * 1000;
 
 exports.createHTML = (req, res) => {
     res.render('login')
