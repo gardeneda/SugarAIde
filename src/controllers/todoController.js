@@ -13,6 +13,8 @@ const userCollection = database
 const bot = require(`${__dirname}/../utils/botManager`);
 const dateFormatter = require(`${__dirname}/../utils/dateFormatter`);
 
+const NO_TODO_MSG = "You do not have a to-do list. Click view to generate one.";
+
 /* End of Required Packages and Constant Declaration */
 /* ///////////////////////////////////////////////// */
 
@@ -169,14 +171,12 @@ exports.fetchCheckboxes = async (account, date) => {
 	const todoList = await userCollection.findOne(
 		{ email: account , toDoList: { $exists: true }},
 		{ projection: { toDoList: 1 } });
-	
-	console.log(`This is inside the fetchCheckboxes(): `, todoList);
-	
+		
 	if (todoList == null) {
-		console.log(`Null condition was called.`);
-		return null;
+
+		return [[NO_TODO_MSG]]
 	} else {
-		console.log(`Non-null condition was called.`);
+
 		return todoList.toDoList[date];
 	}
 }
@@ -203,9 +203,7 @@ exports.generateToDoList = async (req, res, next) => {
 		// Deprecated.
 		// const todoObj = exports.convertToObject(todoArray, today);
 	
-		exports.updateToDoList(todoArray, req.session.email, today);
-
-		console.log("Inner scope is accessed.");
+		await exports.updateToDoList(todoArray, req.session.email, today);
 	}
 
 	next();
@@ -241,13 +239,16 @@ exports.processCheckedItems = async (req, res, next) => {
 		// map.set(Number(checkedValues[j]), value);
 	}
 
-	userCollection.updateOne(
-		{ email: req.session.email },
-		{
-			$set: { [`toDoList.${today}`]: toDoList }
-		});
-		
-	console.log(`Successfuly updated user's progress.`);
+	if (toDoList[0][0] != NO_TODO_MSG) {
+
+		userCollection.updateOne(
+			{ email: req.session.email },
+			{
+				$set: { [`toDoList.${today}`]: toDoList }
+			});
+			
+		console.log(`Successfuly updated user's progress.`);
+	}
 }
 
 /*
