@@ -48,7 +48,10 @@ exports.createHTML = (req, res, next) => {
 
     console.log ("tdee: " + tdee);
     userCollection.updateOne({ email: email }, {
-        $set: { "healthinfo.tdee": tdee }
+        $set: {
+            "healthinfo.tdee": tdee,
+            "healthinfo.activity": activity
+          }
     });
     
     res.status(200);
