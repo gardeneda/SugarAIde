@@ -1,5 +1,6 @@
 body{
     background:#f5f5f5;
+    font-weight: 600;
 }
 
 /**
@@ -44,10 +45,22 @@ body{
 }
 
 #weight-input, #age-input {
-  width: 52px; 
-  height: 28px;
+  width: 20%; 
+  height: 5%;
+  overflow: auto;
 }
 
+#activity-select{
+  width: 60%; 
+}
+
+button,
+#activity-select,
+#weight-input, 
+#age-input 
+ {
+  font-weight: 600;
+}
 
 button{
   align-items: center;
