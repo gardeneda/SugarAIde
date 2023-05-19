@@ -1,0 +1,30 @@
+.card-container {
+    margin-left: 1%;
+    margin-right: 1%;
+    width: 90%;
+}
+
+hr.gradient {
+    height: 3px;
+    border: none;
+    border-radius: 6px;
+    background: linear-gradient(
+      90deg,
+      white 0%,
+      #F9858b 21%,
+      #F985B9 51%,
+      white 100%
+    );
+  }
+  .bg-pink{
+    background: linear-gradient(#F9858b, #F985B9); 
+    color: white;
+  }
+
+  .img-div img {
+    height: 200px;    
+    width: 100%;
+    object-fit: contain; 
+    object-position: center;
+
+}
