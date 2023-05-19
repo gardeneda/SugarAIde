@@ -115,9 +115,8 @@ exports.convertToObject = (arr, date) => {
 /**
  * Checks if a To-Do list has been created for the user today.
  * 
- * @param {Express.Request} req 
- * @param {Express.Response} res 
- * @param {Express.next} next 
+ * @param {Email} account the email that the user signed up with.
+ * @param {Date} specificDate the date that we are searching for
  * @returns null if no entry
  */
 exports.isFirstTimeLogInToday = async (account, specificDate) => {
@@ -181,7 +180,7 @@ exports.fetchCheckboxes = async (account, date) => {
 exports.generateToDoList = async (req, res, next) => {
 	
 	const today = dateFormatter.getToday();
-	
+
 	if (exports.isFirstTimeLogInToday(req.session.email, today) == null) {
 		const userData = await exports.fetchUserData(req);
 		const userPrompt = exports.userCustomizedPrompt(userData);
