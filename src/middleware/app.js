@@ -149,9 +149,9 @@ app.use("/logout", (req, res) => {
 
 app.get("*", (req, res) => {
   const html = `
-		<h2>Page Does Not Exist - 404 </h2>
-    <img src='/img/sadrobot.png'>
-		</br>
+		<h1>Error 404 - Sorry this page Does Not Exist </h1>
+    <img width="500px" height="500px" src='/img/do-the-robot.gif'>
+		<br>
 		<a href='/'>Go back to main</a>
 	`;
 
