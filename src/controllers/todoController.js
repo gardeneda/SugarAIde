@@ -58,9 +58,12 @@ exports.userCustomizedPrompt = (userData) => {
 	return prompt;
 }
 
-/*
-	Parses the given list into an array.
-*/
+/**
+ * Converts the string containing the to do list to an array.
+ * 
+ * @param {String} listString A String containing the list of the to do list
+ * @returns array of each list as an item
+ */
 exports.parseListToArray = (listString) => {
 	const itemsUntrimmed = listString.split(/\d+\.\s/).filter(item => item.trim() !== "");
 	const itemsTrimmed = [];
@@ -130,15 +133,14 @@ exports.updateToDoList = async (obj, account) => {
  * for the current date.
  * 
  * @param {Express.Request} req email account of the user
+ * @returns array of to-do list stored in user's database
  */
 exports.generateCheckboxes = async (account) => {
 	const today = dateFormatter.getToday();
 	const todoList = await userCollection.findOne(
 		{ email: account },
 		{ projection: { toDoList: 1 } });
-	
-	console.log(`This is prying into the array: ${todoList.toDoList[today][0][1]}`);
-	console.log(todoList.toDoList[today]);
+
 	return todoList.toDoList[today];
 }
 

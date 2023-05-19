@@ -32,8 +32,10 @@
       <div class="todo-container card border-danger">
         <div class="list-group" id="todo-list">
           <% for (let i = 0; i < checkboxes.length; i++) { %>
-              <label class="list-group-item d-flex gap-2">
-                <input class="form-check-input flex-shrink-0" type="checkbox" value="" 
+              <label class="list-group-item d-flex gap-2" 
+              id=<%= `checkbox-${i}` %>
+              >
+                <input class="form-check-input flex-shrink-0" type="checkbox" value="<%= i %>" 
                 <% if (checkboxes[i][1] === 1) { %>  
                   checked=""
                 <% } %>
@@ -48,5 +50,6 @@
       </div>
     </div>
     <%- include("templates/footer") %>
+    <script src="/js/todo.js"></script>
   </body>
 </html>
