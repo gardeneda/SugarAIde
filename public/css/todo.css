@@ -35,12 +35,6 @@ input[type="checkbox"]:checked {
     background-color: lightgray !important;
 }
 
-.empty-div {
-    margin: 1%;
-    width: 100%;
-    background-color: lightgray;
-}
-
 label > input:checked {
     background-color: #efefef;
 }
