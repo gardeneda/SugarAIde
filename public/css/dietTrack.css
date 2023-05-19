@@ -1,10 +1,61 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  font-weight: 200;
+}
+
 .tabcontent {
   border: none !important;
   box-shadow: none !important;
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
 }
 
 #diet,
 #foodLogs {
   border: none;
   box-shadow: none;
+}
+
+.title{
+  color: #F9858b;
+}
+
+.tablinks {
+  color: white;
+  font-weight: 400 !important; 
+}
+
+.tab {
+  overflow: hidden;
+  background: linear-gradient(#f9858b, #f985b9);
+  display: flex;
+  justify-content: space-around;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  width: 50%;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+  color: white;
+  font-weight: 200;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #f9858b;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #e77076;
 }
