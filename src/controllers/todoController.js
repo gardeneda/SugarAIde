@@ -167,10 +167,16 @@ exports.updateToDoList = async (array, account, date) => {
  */
 exports.fetchCheckboxes = async (account, date) => {
 	const todoList = await userCollection.findOne(
-		{ email: account },
+		{ email: account , toDoList: { $exists: true }},
 		{ projection: { toDoList: 1 } });
 	
-	return todoList.toDoList[date];
+	if (todoList == null) {
+
+		return [["You do not have a to-do list.", 0]];
+	} else {
+
+		return todoList.toDoList[date];
+	}
 }
 
 /*
@@ -180,6 +186,7 @@ exports.fetchCheckboxes = async (account, date) => {
 exports.generateToDoList = async (req, res, next) => {
 	
 	const today = dateFormatter.getToday();
+	console.log(`generateToDoList() was run.`);
 
 	if (exports.isFirstTimeLogInToday(req.session.email, today) == null) {
 		const userData = await exports.fetchUserData(req);
@@ -193,6 +200,8 @@ exports.generateToDoList = async (req, res, next) => {
 	
 		// Deprecated.
 		// const todoObj = exports.convertToObject(todoArray, today);
+		
+		console.log(message);
 		console.log(`generateToDoList() was run.`);
 
 		exports.updateToDoList(todoArray, req.session.email, today);
