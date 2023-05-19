@@ -27,9 +27,12 @@ input[type="checkbox"]:checked {
     background-color: #F9858b !important;
   }
 
-.list-group-item:hover,
-.checked {
+.list-group-item:hover {
     background-color: lightgray;
+}
+
+.checkedBox {
+    background-color: lightgray !important;
 }
 
 .empty-div {

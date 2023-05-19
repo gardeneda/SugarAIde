@@ -1,6 +1,11 @@
+<link rel="stylesheet" href="/css/todo.css" />
 <div class="list-group" id="todo-list">
     <% for (let i = 0; i < checkboxes.length; i++) { %>
-        <label class="list-group-item d-flex gap-2" 
+        <label class="list-group-item d-flex gap-2
+        <% if (checkboxes[i][1] === 1) { %>
+            checkedBox
+        <% } %>
+        " 
         id=<%= `checkbox-${i}` %>
         >
         <input class="form-check-input flex-shrink-0" type="checkbox" value="<%= i %>" 
@@ -14,5 +19,4 @@
         </label>
     <% } %>
 </div>
-<link rel="stylesheet" href="/css/todo.css" />
 <script src="/js/todo.js"></script>

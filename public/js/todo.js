@@ -14,6 +14,9 @@ const getValues = () => {
 }
 
 
+
+
+
 /**
  * Sends a POST request to /todo to update the to-do list's
  * checkbox status in order to save the user's progress
@@ -31,9 +34,16 @@ const postCheckList = async () => {
         },
         body: JSON.stringify(request)
     });
-
+    highlightChecked();
 }
 
 document.querySelectorAll("input[type=checkbox]").forEach(box => {
     box.addEventListener('change', postCheckList);
 });
+
+document.querySelectorAll("label").forEach(label => {
+    label.addEventListener('change', () => {
+        label.classList.toggle("checkedBox");
+        console.log("this function ran");
+    })
+})
