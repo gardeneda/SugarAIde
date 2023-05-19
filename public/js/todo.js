@@ -33,6 +33,5 @@ const postCheckList = async () => {
 }
 
 document.querySelectorAll("input[type=checkbox]").forEach(box => {
-    console.log("This ran.");
     box.addEventListener('change', postCheckList);
 });
