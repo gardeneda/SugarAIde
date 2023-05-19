@@ -116,14 +116,15 @@ exports.convertToObject = (arr, date) => {
  * Updates the To-Do List in the user's data.
  * The List should be an array at this point.
  *
- * @param {JSON} obj To-Do List in object form
+ * @param {Array} array To-Do List in 2D-Array
  * @param {Express.Request} account the user's email in the request body.
  * @param {Date} date the date that the to do list is generated.
+ * @see {@link formatArray} for converting to-do list to 2D array
  */
-exports.updateToDoList = async (obj, account, date) => {
+exports.updateToDoList = async (array, account, date) => {
 	await userCollection.updateOne(
 		{ email: account },
-		{ $set: { 'toDoList.date': obj } }
+		{ $set: { [`toDoList.${date}`]: obj } }
 	)
 	console.log("Successfully updated To Do List to user's database.");
 }
@@ -159,9 +160,11 @@ exports.generateToDoList = async (req, res, next) => {
 
 	const todoList = exports.parseListToArray(response);
 	const todoArray = exports.formatArray(todoList);
-	const todoObj = exports.convertToObject(todoArray, today);
 
-	exports.updateToDoList(todoObj, req.session.email, today);
+	// Deprecated.
+	// const todoObj = exports.convertToObject(todoArray, today);
+
+	exports.updateToDoList(todoArray, req.session.email, today);
 
 	next();
 }
@@ -189,7 +192,7 @@ exports.processCheckedItems = async (req, res, next) => {
 	userCollection.updateOne(
 		{ email: req.session.email },
 		{
-			$set: { 'toDoList.today': map }
+			$set: { [`toDoList.${today}`]: toDoList }
 		});
 		
 	console.log(`Successfuly updated user's progress.`);
