@@ -18,17 +18,15 @@
 			crossorigin="anonymous"
 		></script>
 		<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.6/index.global.min.js"></script>
-    <link rel="stylesheet" href="/css/exercisePage.css">
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.6/index.global.min.js"></script>
     <link rel="stylesheet" href="/css/global.css" />
     <link rel="stylesheet" href="/css/dietTrack.css">
   </head>
   <body>
     <%- include("templates/header") %>
-    <div id="calendar"></div>
-    <h2>Calorie/Nutrition Tracker</h2>
+    <h2 class="title">Calorie/Nutrition Tracker</h2>
     <!-- Tab links -->
-    <div class="tab">
+    <div class="tab" id="tab">
       <button class="tablinks active" id="defaultOpen" onclick="openPage(event, 'diet')">Diet</button>
       <button class="tablinks" onclick="openPage(event, 'foodLogs')">Food Log</button>
     </div>

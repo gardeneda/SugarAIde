@@ -106,8 +106,7 @@ exports.createHTML = async (req, res, next) => {
             totalSugar: dailyValues.totalSugar || 0,
             totalProtein: dailyValues.totalProtein || 0,
             aggregateResult: aggregateResult || null
-        });
-        
+        }); 
       }
-      
 }
+

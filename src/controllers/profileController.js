@@ -46,6 +46,7 @@ const userCollection = database
   the coefficients of all of the variables linked to diabetes from
   the 'Diabetes Prediction' data set.
 
+
   NOTE: This is used for health conditions, such as hypertension,
   heart disease and blood glucose levels.
 
@@ -247,6 +248,7 @@ exports.updateHealthInfo = async (req, res, next) => {
   res.send("success");
 };
 
+
 exports.getRisk = async function (req, res, next) {
   const email = req.session.email;
 
@@ -261,5 +263,3 @@ exports.getRisk = async function (req, res, next) {
   const risk = user.healthinfo.risk;
   res.json({ risk: risk });
 };
-
-

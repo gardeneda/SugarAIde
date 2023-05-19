@@ -35,7 +35,6 @@ $(document).ready(function () {
   // Update Age Button Click Event
   $("#update-age-button").on("click", function () {
     var newAge = $("#age-input").val();
-
     $.post("/profile/updateHealthInfo", { age: newAge }, function (data) {
       handleResponse(data);
 
@@ -67,5 +66,4 @@ $(document).ready(function () {
   $.get('/profile/risk', { _t: new Date().getTime() }, function(data) {
     updateRiskValue(data.risk);
   });
-  
 });

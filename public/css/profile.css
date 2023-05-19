@@ -45,21 +45,22 @@ margin-bottom: 10px
 }
 
 #weight-input, #age-input {
-width: 20%; 
-height: 5%;
-overflow: auto;
+  width: 20%; 
+  height: 5%;
+  overflow: auto;
 }
 
 #activity-select{
-width: 60%; 
+  width: 60%; 
+  height: 5%;
+  overflow: auto;
 }
 
 button,
 #activity-select,
 #weight-input, 
-#age-input 
-{
-font-weight: 600;
+#age-input  {
+  font-weight: 600;
 }
 
 button{
