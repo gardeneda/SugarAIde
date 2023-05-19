@@ -31,65 +31,81 @@
   </head>
   <body>
     <%- include("templates/header") %>
-    <p class="hidden" id="calorie-require"><%= totalCalories %></p>
-    <p class="hidden" id="calorie-require">50</p>
-    <div class="main-container">
-      <!-- circle progress bar -->
-      <div class="container">
-        <div class="row justify-content-center align-content-center py-3">
-          <div class="justify-content-center align-content-center">
-            <h1 class="text-body-emphasis text-center py-4">
-              Daily Carlorie Requirement
-            </h1>
-			<div class="text-body text-center">
-				You have intaken <b><%= totalCalories %> cal </b>out of <b><%= tdee %> cal</b>
+	<% if (!aggregateResult) { %>
+		<div class="container">
+		  <div class="row justify-content-center align-content-center py-3">
+			<div class="justify-content-center align-content-center">
+			  <h1 class="text-body-emphasis text-center py-4">
+				Daily Calorie Requirement
+			  </h1>
+			  <div class="text-body text-center">
+				No nutrition information available for today.
+			  </div>
 			</div>
-            <div class="progress-container">
-              <div class="circular-progress">
-                <span class="progress-value"> 0 cal </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- nutrition table -->
-      <table class="table">
-		<thead>
-			<tr>
-				<th scope="col">Nutrition</th>
-				<th scope="col">Intake</th>
-				<th scope="col">Limit</th>
-				<th scope="col">Excess</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr class="spaced-row">
-				<td>Sugar</td>
-				<td style="<%= totalSugar > sugarLimit ? 'color: red;' : '' %>"><%= totalSugar %></td>
-				<td><%= sugarLimit %>g</td>
-				<td><%- totalSugar > sugarLimit ? '<ion-icon class="icon" name="warning-outline" aria-label="Sugar intake exceeded limit"></ion-icon>' : '' %></td>
-			</tr>
-			<tr class="spaced-row">
-				<td>Carbohydrates</td>
-				<td style="<%= totalCarbs > carbsLimit ? 'color: red;' : '' %>"><%= totalCarbs %></td>
-				<td><%= carbsLimit %>g</td>
-				<td><%- totalCarbs > carbsLimit ? '<ion-icon class="icon" name="warning-outline" aria-label="Carbohydrates intake exceeded limit"></ion-icon>' : '' %></td>
-			</tr>
-			<tr class="spaced-row">
-				<td>Fats</td>
-				<td style="<%= totalFat > fatsLimit ? 'color: red;' : '' %>"><%= totalFat %></td>
-				<td><%= fatsLimit %>g</td>
-				<td><%- totalFat > fatsLimit ? '<ion-icon class="icon" name="warning-outline" aria-label="Fat intake exceeded limit"></ion-icon>' : '' %></td>
-			</tr>
-			<tr class="spaced-row">
-				<td>Proteins</td>
-				<td style="<%= totalProtein > proteinsLimit ? 'color: red;' : '' %>"><%= totalProtein %></td>
-				<td><%= proteinsLimit %>g</td>
-				<td><%- totalProtein > proteinsLimit ? '<ion-icon class="icon" name="warning-outline" aria-label="Protein intake exceeded limit" ></ion-icon>' : '' %></td>
-			</tr>
-		</tbody>
-	</table>
-    </div>
+		  </div>
+		</div>
+	<% } else { %>
+
+		<p class="hidden" id="calorie-require"><%= totalCalories %></p>
+		<p class="hidden" id="calorie-require">50</p>
+		<div class="main-container">
+		<!-- circle progress bar -->
+		<div class="container">
+			<div class="row justify-content-center align-content-center py-3">
+			<div class="justify-content-center align-content-center">
+				<h1 class="text-body-emphasis text-center py-4">
+				Daily Carlorie Requirement
+				</h1>
+				<div class="text-body text-center">
+					You have intaken <b><%= totalCalories %> cal </b>out of <b><%= tdee %> cal</b>
+				</div>
+				<div class="progress-container">
+				<div class="circular-progress">
+					<span class="progress-value"> 0 cal </span>
+				</div>
+				</div>
+			</div>
+			</div>
+		</div>
+		<!-- nutrition table -->
+		<table class="table">
+			<thead>
+				<tr class="table-title">
+					<th scope="col">Nutrition</th>
+					<th scope="col">Intake</th>
+					<th scope="col">Limit</th>
+					<th scope="col">Excess</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="spaced-row">
+					<td>Sugar</td>
+					<td style="<%= totalSugar > sugarLimit ? 'color: red;' : '' %>"><%= totalSugar %></td>
+					<td><%= sugarLimit %>g</td>
+					<td><%- totalSugar > sugarLimit ? '<ion-icon class="icon" name="warning-outline" aria-label="Sugar intake exceeded limit"></ion-icon>' : '' %></td>
+				</tr>
+				<tr class="spaced-row">
+					<td>Carbohydrates</td>
+					<td style="<%= totalCarbs > carbsLimit ? 'color: red;' : '' %>"><%= totalCarbs %></td>
+					<td><%= carbsLimit %>g</td>
+					<td><%- totalCarbs > carbsLimit ? '<ion-icon class="icon" name="warning-outline" aria-label="Carbohydrates intake exceeded limit"></ion-icon>' : '' %></td>
+				</tr>
+				<tr class="spaced-row">
+					<td>Fats</td>
+					<td style="<%= totalFat > fatsLimit ? 'color: red;' : '' %>"><%= totalFat %></td>
+					<td><%= fatsLimit %>g</td>
+					<td><%- totalFat > fatsLimit ? '<ion-icon class="icon" name="warning-outline" aria-label="Fat intake exceeded limit"></ion-icon>' : '' %></td>
+				</tr>
+				<tr class="spaced-row">
+					<td>Proteins</td>
+					<td style="<%= totalProtein > proteinsLimit ? 'color: red;' : '' %>"><%= totalProtein %></td>
+					<td><%= proteinsLimit %>g</td>
+					<td><%- totalProtein > proteinsLimit ? '<ion-icon class="icon" name="warning-outline" aria-label="Protein intake exceeded limit" ></ion-icon>' : '' %></td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+		<% } %>
 
     <script src="/js/calorieRequirement.js"></script>
     <%- include("templates/footer") %>

@@ -67,36 +67,46 @@ exports.createHTML = async (req, res, next) => {
         }}
     ]).toArray();
     
-    const dailyValues = aggregateResult[0] || {};
-    const totalCalories = dailyValues.totalCalories || 0;
-    const totalFat = dailyValues.totalFat || 0;
-    const totalCarbs = dailyValues.totalCarbs || 0;
-    const totalSugar = dailyValues.totalSugar || 0;
-    const totalProtein = dailyValues.totalProtein || 0;
-
-    console.log("totalCalories: " + totalCalories);
-    console.log("totalFat: " + totalFat);
-    console.log("totalCarbs: " + totalCarbs);
-    console.log("totalSugar: " + totalSugar);
-    console.log("totalProtein: " + totalProtein);
-    console.log("aggregateResult:" + aggregateResult);
-
-    const tdee = user.healthinfo?.tdee;
-    const sugarLimit = ((Number(tdee) * 0.05 ) / 4).toFixed(1);
-    const carbsLimit =  ((Number(tdee) * 0.50 ) / 4).toFixed(1);
-    const fatsLimit =  ((Number(tdee) * 0.30 ) / 9).toFixed(1);
-    const proteinsLimit =  ((Number(tdee) * 0.20 ) / 4).toFixed(1);
-
-    res.render("calorieRequirement", { 
-        tdee: tdee.toFixed(0), 
-        sugarLimit: sugarLimit, 
-        carbsLimit : carbsLimit, 
-        fatsLimit: fatsLimit, 
-        proteinsLimit: proteinsLimit,
-        totalCalories: dailyValues.totalCalories || 0,
-        totalFat: dailyValues.totalFat || 0,
-        totalCarbs: dailyValues.totalCarbs || 0,
-        totalSugar: dailyValues.totalSugar || 0,
-        totalProtein: dailyValues.totalProtein || 0
-    });
+    if (!aggregateResult[0]) {
+        // If nutritionInfo is not available, render a message indicating the lack of information
+        res.render("calorieRequirement", {
+            message: "No nutrition information available for today.",
+            aggregateResult: null
+        });
+      } else {
+        const dailyValues = aggregateResult[0];
+        const totalCalories = dailyValues.totalCalories || 0;
+        const totalFat = dailyValues.totalFat || 0;
+        const totalCarbs = dailyValues.totalCarbs || 0;
+        const totalSugar = dailyValues.totalSugar || 0;
+        const totalProtein = dailyValues.totalProtein || 0;
+      
+        console.log("totalCalories: " + totalCalories);
+        console.log("totalFat: " + totalFat);
+        console.log("totalCarbs: " + totalCarbs);
+        console.log("totalSugar: " + totalSugar);
+        console.log("totalProtein: " + totalProtein);
+        console.log("aggregateResult:" + JSON.stringify(aggregateResult, null, 2));
+      
+        const tdee = user.healthinfo?.tdee;
+        const sugarLimit = ((Number(tdee) * 0.05 ) / 4).toFixed(1);
+        const carbsLimit =  ((Number(tdee) * 0.50 ) / 4).toFixed(1);
+        const fatsLimit =  ((Number(tdee) * 0.30 ) / 9).toFixed(1);
+        const proteinsLimit =  ((Number(tdee) * 0.20 ) / 4).toFixed(1);
+      
+        res.render("calorieRequirement", { 
+            tdee: tdee.toFixed(0), 
+            sugarLimit: sugarLimit, 
+            carbsLimit : carbsLimit, 
+            fatsLimit: fatsLimit, 
+            proteinsLimit: proteinsLimit,
+            totalCalories: dailyValues.totalCalories || 0,
+            totalFat: dailyValues.totalFat || 0,
+            totalCarbs: dailyValues.totalCarbs || 0,
+            totalSugar: dailyValues.totalSugar || 0,
+            totalProtein: dailyValues.totalProtein || 0,
+            aggregateResult: aggregateResult || null
+        }); 
+      }
 }
+
