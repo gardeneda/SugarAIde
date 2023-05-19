@@ -118,11 +118,12 @@ exports.convertToObject = (arr, date) => {
  *
  * @param {JSON} obj To-Do List in object form
  * @param {Express.Request} account the user's email in the request body.
+ * @param {Date} date the date that the to do list is generated.
  */
-exports.updateToDoList = async (obj, account) => {
+exports.updateToDoList = async (obj, account, date) => {
 	await userCollection.updateOne(
 		{ email: account },
-		{ $set: { toDoList: obj } }
+		{ $set: { 'toDoList.date': obj } }
 	)
 	console.log("Successfully updated To Do List to user's database.");
 }
@@ -135,12 +136,12 @@ exports.updateToDoList = async (obj, account) => {
  * @param {Express.Request} req email account of the user
  * @returns array of to-do list stored in user's database
  */
-exports.generateCheckboxes = async (account) => {
+exports.fetchCheckboxes = async (account) => {
 	const today = dateFormatter.getToday();
 	const todoList = await userCollection.findOne(
 		{ email: account },
 		{ projection: { toDoList: 1 } });
-
+	
 	return todoList.toDoList[today];
 }
 
@@ -153,23 +154,51 @@ exports.generateToDoList = async (req, res, next) => {
 	const userData = await exports.fetchUserData(req);
 	const userPrompt = exports.userCustomizedPrompt(userData);
 	const aiPrompt = process.env.TO_DO;
-
 	const message = await chatController.modifyMessage(aiPrompt, userPrompt, 1.0);
-
 	const response = await bot.processMessage(message);
+
 	const todoList = exports.parseListToArray(response);
 	const todoArray = exports.formatArray(todoList);
 	const todoObj = exports.convertToObject(todoArray, today);
 
-	exports.updateToDoList(todoObj, req.session.email);
+	exports.updateToDoList(todoObj, req.session.email, today);
 
 	next();
+}
+
+exports.processCheckedItems = async (req, res, next) => {
+	const today = dateFormatter.getToday();
+	const toDoList = await exports.fetchCheckboxes(req.session.email);
+	const checkedValues = req.body.checkedValues;
+
+	// Instead of using a nested for loop, doing this.
+	// This is to minimize this function to O(n), instead of
+	// O(n^2).
+
+	console.log(`Before updating: \n`, toDoList);
+
+	for (let j = 0; j < checkedValues.length; j++) {
+		const value = toDoList[Number(checkedValues[j])];
+		value[1] = 1;
+
+		// map.set(Number(checkedValues[j]), value);
+	}
+
+	console.log(`After updating \n`, toDoList);
+
+	userCollection.updateOne(
+		{ email: req.session.email },
+		{
+			$set: { 'toDoList.today': map }
+		});
+		
+	console.log(`Successfuly updated user's progress.`);
 }
 
 /*
 	Sends the HTML page when /todo is accessed.
 */
 exports.createHTML = async (req, res, next) => {
-	const checkboxes = await exports.generateCheckboxes(req.session.email);
+	const checkboxes = await exports.fetchCheckboxes(req.session.email);
 	res.render("todo", { checkboxes });
 }

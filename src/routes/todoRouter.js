@@ -7,7 +7,8 @@ const router = express.Router();
 
 router.route('/')
     .get(validation.checkValidSession,
-        // todoController.generateToDoList,
-        todoController.createHTML);
+        todoController.generateToDoList,
+        todoController.createHTML)
+    .post(todoController.processCheckedItems);
 
 module.exports = router;

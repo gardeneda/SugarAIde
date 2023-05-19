@@ -90,7 +90,6 @@ app.use("/", (req, res, next) => {
   const highlightedLinks = highlightCurrentLink(currentURL); 
   app.locals.navLinks = highlightedLinks;
 
-
 	next();
 });
 
