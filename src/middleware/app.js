@@ -84,9 +84,16 @@ app.use("/", async (req, res, next) => {
 
     // To insert template into main (Suggestions)
     const today = dateFormatter.getToday();
-    const checkboxes = await todoController.fetchCheckboxes(req.session.email, today);
+    let checkboxes = await todoController.fetchCheckboxes(req.session.email, today);
 
-    app.locals.checkboxes = checkboxes;
+    if (checkboxes != null) {
+      app.locals.todo = 1;
+      app.locals.checkboxes = checkboxes;
+
+    } else {
+      app.locals.todo = 0;
+    }
+
 		app.locals.status = 1;
 	}
 

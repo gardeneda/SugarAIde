@@ -151,7 +151,7 @@ exports.isFirstTimeLogInToday = async (account, specificDate) => {
 exports.updateToDoList = async (array, account, date) => {
 	await userCollection.updateOne(
 		{ email: account },
-		{ $set: { [`toDoList.${date}`]: obj } }
+		{ $set: { [`toDoList.${date}`]: array } }
 	)
 	console.log("Successfully updated To Do List to user's database.");
 }
@@ -170,11 +170,13 @@ exports.fetchCheckboxes = async (account, date) => {
 		{ email: account , toDoList: { $exists: true }},
 		{ projection: { toDoList: 1 } });
 	
+	console.log(`This is inside the fetchCheckboxes(): `, todoList);
+	
 	if (todoList == null) {
-
-		return [["You do not have a to-do list.", 0]];
+		console.log(`Null condition was called.`);
+		return null;
 	} else {
-
+		console.log(`Non-null condition was called.`);
 		return todoList.toDoList[date];
 	}
 }
@@ -186,9 +188,9 @@ exports.fetchCheckboxes = async (account, date) => {
 exports.generateToDoList = async (req, res, next) => {
 	
 	const today = dateFormatter.getToday();
-	console.log(`generateToDoList() was run.`);
+	const status = await exports.isFirstTimeLogInToday(req.session.email, today)
 
-	if (exports.isFirstTimeLogInToday(req.session.email, today) == null) {
+	if (status == null) {
 		const userData = await exports.fetchUserData(req);
 		const userPrompt = exports.userCustomizedPrompt(userData);
 		const aiPrompt = process.env.TO_DO;
@@ -200,11 +202,10 @@ exports.generateToDoList = async (req, res, next) => {
 	
 		// Deprecated.
 		// const todoObj = exports.convertToObject(todoArray, today);
-		
-		console.log(message);
-		console.log(`generateToDoList() was run.`);
-
+	
 		exports.updateToDoList(todoArray, req.session.email, today);
+
+		console.log("Inner scope is accessed.");
 	}
 
 	next();
