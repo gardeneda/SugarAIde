@@ -170,6 +170,16 @@ exports.generateToDoList = async (req, res, next) => {
 	next();
 }
 
+/**
+ * Handles the post request from the client when the user clicks on a
+ * checkbox (of the To-Do List) to confirm they finished the task.
+ * Updates the entry on the user's database with the items of the to-do
+ * that the user has clicked.
+ * 
+ * @param {Express.Request} req 
+ * @param {Express.Response} res 
+ * @param {Express.next} next 
+ */
 exports.processCheckedItems = async (req, res, next) => {
 	const today = dateFormatter.getToday();
 	const toDoList = await exports.fetchCheckboxes(req.session.email, today);
