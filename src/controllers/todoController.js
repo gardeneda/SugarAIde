@@ -135,9 +135,10 @@ exports.updateToDoList = async (array, account, date) => {
  * for the current date.
  * 
  * @param {Express.Request} req email account of the user
+ * @param {Date} date the date the to-do list should be retrieved from
  * @returns array of to-do list stored in user's database
  */
-exports.fetchCheckboxes = async (account) => {
+exports.fetchCheckboxes = async (account, date) => {
 	const today = dateFormatter.getToday();
 	const todoList = await userCollection.findOne(
 		{ email: account },
@@ -171,7 +172,7 @@ exports.generateToDoList = async (req, res, next) => {
 
 exports.processCheckedItems = async (req, res, next) => {
 	const today = dateFormatter.getToday();
-	const toDoList = await exports.fetchCheckboxes(req.session.email);
+	const toDoList = await exports.fetchCheckboxes(req.session.email, today);
 	const checkedValues = req.body.checkedValues;
 
 	// Instead of using a nested for loop, doing this.
@@ -202,6 +203,7 @@ exports.processCheckedItems = async (req, res, next) => {
 	Sends the HTML page when /todo is accessed.
 */
 exports.createHTML = async (req, res, next) => {
-	const checkboxes = await exports.fetchCheckboxes(req.session.email);
+	const today = dateFormatter.getToday();
+	const checkboxes = await exports.fetchCheckboxes(req.session.email, today);
 	res.render("todo", { checkboxes });
 }
