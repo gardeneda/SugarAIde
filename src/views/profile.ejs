@@ -71,7 +71,7 @@
                   <tr>
                       <td class="text-right">Weight</td>
                       <td>
-                          <div class="d-flex align-items-center">
+                          <div class="d-flex justify-content-center">
                               <input id="weight-input" type="number" value="<%= weight %>" class="form-control input-sm">kg
                               <button id="update-weight-button" style="margin-left: auto;">Update</button> 
                           </div>
@@ -80,12 +80,33 @@
                   <tr>
                       <td class="text-right">Age</td>
                       <td>
-                          <div class="d-flex align-items-center">
-                              <input id="age-input" type="number" value="<%= age %>" class="form-control input-sm">
-                              <button id="update-age-button" style="margin-left: auto;">Update</button> 
+                          <div class="d-flex justify-content-center">
+                              <input id="age-input" type="number" value="<%= age %>"  class="form-control input-sm">
+                              <button id="update-age-button" style="margin-left: auto;" >Update</button> 
                           </div>
                       </td>
                   </tr>
+                  <tr>
+                    <td class="text-right">Activity</td>
+                    <!--td>
+                        <div class="d-flex justify-content-center">
+                            <input id="activity-input" type="text" value="<%= activity %>"  class="form-control input-sm">
+                            <button id="update-activity-button" style="margin-left: auto;" >Update</button> 
+                        </div>
+                    </td-->
+                    <td>
+                      <div class="d-flex justify-content-center">
+                          <select id="activity-select" class="form-select">
+                              <option value="sedentary" <%= activity === 'sedentary' ? 'selected' : '' %>>Sedentary</option>
+                              <option value="lightly-active" <%= activity === 'lightly-active' ? 'selected' : '' %>>Lightly Active</option>
+                              <option value="moderately-active" <%= activity === 'moderately-active' ? 'selected' : '' %>>Moderately Active</option>
+                              <option value="very-active" <%= activity === 'very-active' ? 'selected' : '' %>>Very Active</option>
+                              <option value="super-active" <%= activity === 'super-active' ? 'selected' : '' %>>Super Active</option>
+                          </select>
+                          <button id="update-activity-button"  style="margin-left: auto;">Update</button>
+                      </div>
+                  </td>
+                </tr>
               </table>
               <div class="form-group text-center">
                   <label class="col-sm-4 control-label">Diabetes risk level&nbsp;&nbsp;</label><B><%= risk %>%</B>

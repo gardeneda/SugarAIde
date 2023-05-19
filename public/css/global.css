@@ -4,3 +4,8 @@
     display: flex !important;
     justify-content:flex-end !important;
 }
+
+.navbar-nav {
+    width: 90% !important;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+}

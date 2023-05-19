@@ -1,0 +1,40 @@
+.main-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: 100vw;
+}
+h4 {
+    margin-top: 5%;
+}
+.todo-container {
+	width: 80%;
+	height: 80%;
+    margin-bottom: 5%;
+    background-color: #efefef;
+    /* border: 10px solid;
+	border-image-slice: 1;
+	border-width: 3px;
+	border-image-source: linear-gradient(to left, #f9858b, #f985b9) !important; */
+}
+
+input:checked ~ span {
+	text-decoration: line-through;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #F9858b !important;
+  }
+
+.list-group-item:hover {
+    background-color: lightgray;
+}
+
+.checkedBox {
+    background-color: lightgray !important;
+}
+
+label > input:checked {
+    background-color: #efefef;
+}

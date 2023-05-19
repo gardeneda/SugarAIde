@@ -1,27 +1,195 @@
-  html, body {
-    height: 100%;
-    margin: 0;
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+/*------------Easter Egg Animation CSS------------- */
+.spin {
+  animation: spin 2s infinite linear;
+}
+
+@keyframes spin {
+  0% {
+      transform: rotate(0deg);
   }
-  .grid2x2 {
-    min-height: 60%;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
+  100% {
+      transform: rotate(360deg);
   }
-  .grid2x2 > div {
-    display: flex; 
-    flex-basis: calc(50% - 40px);  
-    justify-content: center;
-    flex-direction: column;
-  }
-  .grid2x2 > div > div {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-  }
-  
-  .box { margin: 20px; }
-  .box1 { background-color: red; }
-  .box2 { background-color: orange; }
-  .box3 { background-color: purple; }
-  .box4 { background-color: grey; }
+}
+/*------------Chat Button CSS------------- */
+.parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
+
+.parent button {
+  background: linear-gradient(#F9858b, #F985B9);
+  color: white;
+  border: none;
+  padding: 5px;
+  font-size: 31px;
+  box-shadow: 0 2px 4px darkslategray;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 auto;  
+  width: min(50vw, 50vh);  
+  height: min(50vw, 50vh); 
+  flex-direction: column; 
+  align-items: center; 
+  text-align: center; 
+  font-family: 'Courier New', Courier, monospace;
+  font-size: .9rem;
+}
+
+.parent button:active {
+  background-color: #dc7277;
+  box-shadow: 0 0 2px darkslategray;
+  transform: translateY(2px);
+}
+
+.parent .text {
+  margin-bottom: 10px; 
+}
+
+.parent .svg-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.round-6 {
+  border-radius: 50%;
+}
+
+
+/*------------Feature Card CSS------------- */
+.card-body{
+  font-size: (1rem, 3vw);
+}
+.card-header {
+  color: #F9858b;
+  border-color: #dc7277;
+  border-width: thin;
+}
+.card{
+  border-color: #dc7277;
+  border-width: thin;
+}
+.btn {
+  background: linear-gradient(#F9858b, #F985B9);
+}
+/*------------Feature full Cards CSS------------- */
+.full-card{
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+/*------------Feature half Cards CSS------------- */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  align-items: stretch;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.half-card{
+  flex: 1 1 calc(50% - 20px);
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+/*------------Calories Card CSS------------- */
+#caloriesCardBody{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+#caloriesCard-text{
+  width:50%;
+  height: 100%;
+  justify-content: space-around;
+  display: block;
+  font-size: min(2rem, 2.5vw);
+}
+
+#caloriesCard-text p{
+  padding-left: 30px;
+  font-size: inherit;
+}
+#caloriesCard-text h5{
+  padding-left: 10px;
+}
+.progress-container {
+  width: 50%; 
+  height: 0;  
+  padding-bottom: 50%; 
+  display: flex;
+  border-radius: 8px;
+  background: #fff;
+  flex-direction: column;
+  align-items: center;
+  position: relative;  
+}
+
+.circular-progress {
+  position: absolute;  
+  height: 100%;
+  width: 100%;
+  max-height: 100%;  
+  max-width: 100%;   
+  border-radius: 50%;
+  background-color: #f0ff !important;
+  background: conic-gradient(#F9858b 3.6deg, #efefef 0deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0%;  
+  left: 0%;  
+}
+
+.circular-progress::before {
+  content: "";
+  position: absolute;
+  height: 88%;  
+  width: 88%; 
+  top: 6%;  
+  left: 6%;  
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.progress-value {
+  position: relative;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 80% !important;
+  font-weight: 700;
+  padding-left: 0%;
+}
+
+/*------------Exercise Card CSS------------- */
+#exerciseHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#exerciseFormLink {
+  text-decoration: none;
+  color: #F9858b;
+}

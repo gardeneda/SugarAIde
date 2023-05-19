@@ -13,17 +13,19 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <ul class="navbar-nav">
           <% for (let i = 0; i < locals.navLinks.length; i++) { %>
-          <li class="nav-item">
-            <a class="nav-link text-white
-            <% if (locals.navLinks[i].link == locals.currentURL) { %>
-            active <% } %>" 
-             aria-current="page" 
-             href=<%= locals.navLinks[i].link %>
-             > <%= locals.navLinks[i].name %>
-            </a>
-          </li>
+              <li class="nav-item">
+                  <a class="nav-link text-white 
+                      <% if (locals.navLinks[i].isActive) { %>
+                          fw-bold
+                      <% } %>" 
+                      aria-current="page" 
+                      href=<%= locals.navLinks[i].link %>
+                  > 
+                      <%= locals.navLinks[i].name %>
+                  </a>
+              </li>
           <% } %>
-        </ul>
+      </ul>
 
           <% if (locals.status == 0) { %>
             <div id="isLoggedOut-Container">
