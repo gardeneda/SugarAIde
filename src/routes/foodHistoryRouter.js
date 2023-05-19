@@ -10,3 +10,12 @@ router
   .get(validation.checkValidSession, foodHistoryController.createHTML);
 
 module.exports = router;
+
+//TEST--------------------------------------------------------------------------
+// router
+//   .route("/nutritionLog")
+//   .get(validation.checkValidSession, foodHistoryController.getUserNutritionData);
+router
+  .route('/nutritionLog')
+  .get(validation.checkValidSession, foodHistoryController.getUserNutritionData);
+
