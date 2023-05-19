@@ -113,6 +113,34 @@ exports.convertToObject = (arr, date) => {
 }
 
 /**
+ * Checks if a To-Do list has been created for the user today.
+ * 
+ * @param {Express.Request} req 
+ * @param {Express.Response} res 
+ * @param {Express.next} next 
+ * @returns null if no entry
+ */
+exports.isFirstTimeLogInToday = async (account, specificDate) => {
+	// const result = await userCollection.findOne(
+	// 	{ [`toDoList.${specificDate}`]: { $exists: true } },
+	// 	{ projection: { [`toDoList.${specificDate}`]: 1 } }
+	// );
+
+	const user = await userCollection.findOne(
+	  { email: account, [`toDoList.${specificDate}`]: { $exists: true } }
+	);
+
+	if (user && user.toDoList[specificDate]) {
+		const value = user.toDoList[specificDate];
+		return value;
+
+	} else {
+		return null;
+	}
+}
+
+
+/**
  * Updates the To-Do List in the user's data.
  * The List should be an array at this point.
  *
@@ -139,12 +167,11 @@ exports.updateToDoList = async (array, account, date) => {
  * @returns array of to-do list stored in user's database
  */
 exports.fetchCheckboxes = async (account, date) => {
-	const today = dateFormatter.getToday();
 	const todoList = await userCollection.findOne(
 		{ email: account },
 		{ projection: { toDoList: 1 } });
 	
-	return todoList.toDoList[today];
+	return todoList.toDoList[date];
 }
 
 /*
@@ -152,20 +179,25 @@ exports.fetchCheckboxes = async (account, date) => {
 	informaiton.
 */
 exports.generateToDoList = async (req, res, next) => {
+	
 	const today = dateFormatter.getToday();
-	const userData = await exports.fetchUserData(req);
-	const userPrompt = exports.userCustomizedPrompt(userData);
-	const aiPrompt = process.env.TO_DO;
-	const message = await chatController.modifyMessage(aiPrompt, userPrompt, 1.0);
-	const response = await bot.processMessage(message);
+	
+	if (exports.isFirstTimeLogInToday(req.session.email, today) == null) {
+		const userData = await exports.fetchUserData(req);
+		const userPrompt = exports.userCustomizedPrompt(userData);
+		const aiPrompt = process.env.TO_DO;
+		const message = await chatController.modifyMessage(aiPrompt, userPrompt, 1.0);
+		const response = await bot.processMessage(message);
+	
+		const todoList = exports.parseListToArray(response);
+		const todoArray = exports.formatArray(todoList);
+	
+		// Deprecated.
+		// const todoObj = exports.convertToObject(todoArray, today);
+		console.log(`generateToDoList() was run.`);
 
-	const todoList = exports.parseListToArray(response);
-	const todoArray = exports.formatArray(todoList);
-
-	// Deprecated.
-	// const todoObj = exports.convertToObject(todoArray, today);
-
-	exports.updateToDoList(todoArray, req.session.email, today);
+		exports.updateToDoList(todoArray, req.session.email, today);
+	}
 
 	next();
 }
@@ -188,8 +220,6 @@ exports.processCheckedItems = async (req, res, next) => {
 	// Instead of using a nested for loop, doing this.
 	// This is to minimize this function to O(n), instead of
 	// O(n^2).
-	console.log(`This is the checkedValues: `, checkedValues);
-	console.log(`Before updating: \n`, toDoList);
 
 	for (let i = 0; i < toDoList.length; i++) {
 		toDoList[i][1] = 0;
@@ -201,8 +231,6 @@ exports.processCheckedItems = async (req, res, next) => {
 
 		// map.set(Number(checkedValues[j]), value);
 	}
-
-	console.log(`After updating \n`, toDoList);
 
 	userCollection.updateOne(
 		{ email: req.session.email },
