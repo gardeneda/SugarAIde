@@ -4,10 +4,12 @@
  */
 const getValues = () => {
     const arr = [];
+    console.log('################################');
     const checked = document.querySelectorAll("input[type=checkbox]:checked").forEach(value => {
+        console.log(value);
         arr.push(value.value);
     });
-
+    console.log('################################');
     return arr;
 }
 

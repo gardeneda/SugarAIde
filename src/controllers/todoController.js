@@ -188,8 +188,12 @@ exports.processCheckedItems = async (req, res, next) => {
 	// Instead of using a nested for loop, doing this.
 	// This is to minimize this function to O(n), instead of
 	// O(n^2).
-
+	console.log(`This is the checkedValues: `, checkedValues);
 	console.log(`Before updating: \n`, toDoList);
+
+	for (let i = 0; i < toDoList.length; i++) {
+		toDoList[i][1] = 0;
+	}
 
 	for (let j = 0; j < checkedValues.length; j++) {
 		const value = toDoList[Number(checkedValues[j])];
