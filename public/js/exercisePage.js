@@ -124,7 +124,7 @@ function displayDailyLogs(dailyLogs) {
     content += `<tr>
                 <td>${log.exercise}</td>
                 <td>${log.duration}</td>
-                <td>${log.calories_burned}</td>
+                <td>${log.caloriesBurned}</td>
                 <td><button class="delete-btn" data-id="${log.id}">X</button></td>
                 </tr>`;
   });

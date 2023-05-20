@@ -34,7 +34,7 @@ exports.processForm = async (req, res, next) => {
 
   if (formId === 'cardiovascularForm') {
     const duration = Number(req.body.duration);
-    const calories_burned = Number(req.body.calories_burned);
+    const caloriesBurned = Number(req.body.caloriesBurned);
 
     updateData = {
       $push: {
@@ -44,7 +44,7 @@ exports.processForm = async (req, res, next) => {
           end_date: new Date().toString(),
           exercise: exercise,
           duration: duration,
-          calories_burned: calories_burned,
+          caloriesBurned: caloriesBurned,
           notes: notes
         }
       }
