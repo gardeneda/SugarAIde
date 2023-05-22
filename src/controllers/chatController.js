@@ -9,6 +9,7 @@ const userCollection = database
 	.collection("users");
 
 const bot = require(`${__dirname}/../utils/botManager`);
+const crypto = require("crypto");
 
 /* End of Required Packages and Constant Declaration */
 /* ///////////////////////////////////////////////// */
@@ -80,11 +81,12 @@ exports.checkJSONType = function (response) {
     updates the user's database accordingly. 
 */
 exports.updateData = async function (data, type, account, dateObject) {
-	
+	const id = crypto.randomBytes(16).toString("hex");
 	switch (type) {
 		case "food":
 			let nutritionModel = data;
 			nutritionModel.date = dateObject;
+			nutritionModel.id = id;
 
 			await userCollection.updateOne(
 				{ email: account },
@@ -98,6 +100,8 @@ exports.updateData = async function (data, type, account, dateObject) {
 		case "exercise":
 			let exerciseModel = data;
 			exerciseModel.date = dateObject;
+			exerciseModel.id = id;
+
 			await userCollection.updateOne(
 				{ email: account },
 				{ $push: { exerciseLog: exerciseModel } }
@@ -124,7 +128,7 @@ exports.sendMessage = function (message) {
 
 */
 exports.modifyDataUseable = async function (prompt, userMessage) {
-	const optimizedMessage = exports.modifyMessage(prompt, userMessage, 0.0);
+	const optimizedMessage = exports.modifyMessage(prompt, userMessage, 0.7);
 	const response = await bot.processMessage(optimizedMessage);
 	const formattedResponse = exports.stripJSON(response);
 	const dataType = exports.checkJSONType(formattedResponse);
