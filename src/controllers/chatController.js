@@ -128,7 +128,7 @@ exports.sendMessage = function (message) {
 
 */
 exports.modifyDataUseable = async function (prompt, userMessage) {
-	const optimizedMessage = exports.modifyMessage(prompt, userMessage, 0.7);
+	const optimizedMessage = exports.modifyMessage(prompt, userMessage, 0.0);
 	const response = await bot.processMessage(optimizedMessage);
 	const formattedResponse = exports.stripJSON(response);
 	const dataType = exports.checkJSONType(formattedResponse);
