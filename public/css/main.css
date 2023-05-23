@@ -7,6 +7,17 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+
+
+@media screen and (min-width: 768px) {
+  .bodyContainer{
+    width: 40%;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+  }
+}
 /*------------Easter Egg Animation CSS------------- */
 .spin {
   animation: spin 2s infinite linear;
@@ -123,7 +134,7 @@ body {
   height: 100%;
   justify-content: space-around;
   display: block;
-  font-size: min(2rem, 2.5vw);
+  margin-left: 20px;
 }
 
 #caloriesCard-text p{

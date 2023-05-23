@@ -54,7 +54,7 @@ exports.processForm = async (req, res, next) => {
     const sets = Number(req.body.sets);
     const reps = Number(req.body.reps);
     let duration = Number(req.body.duration);
-    const calories_burned = Number(req.body.calories_burned);
+    const caloriesBurned = Number(req.body.caloriesBurned);
 
     if (isNaN(duration)) {
       duration = 0;
@@ -67,7 +67,7 @@ exports.processForm = async (req, res, next) => {
           end_date: new Date().toString(),
           exercise: exercise,
           duration: duration,
-          calories_burned: calories_burned,
+          caloriesBurned: caloriesBurned,
           weight: weight,
           set: sets,
           reps: reps,
@@ -89,3 +89,4 @@ exports.processForm = async (req, res, next) => {
     res.status(500).send('Error processing form');
   }
 };
+
