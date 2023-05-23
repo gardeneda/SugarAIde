@@ -67,7 +67,7 @@ exports.processForm = async (req, res, next) => {
           end_date: new Date().toString(),
           exercise: exercise,
           duration: duration,
-          calories_burned: calories_burned,
+          caloriesBurned: caloriesBurned,
           weight: weight,
           set: sets,
           reps: reps,
@@ -89,3 +89,4 @@ exports.processForm = async (req, res, next) => {
     res.status(500).send('Error processing form');
   }
 };
+
