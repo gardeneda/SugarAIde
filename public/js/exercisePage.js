@@ -147,10 +147,13 @@ function attachButtonListeners() {
         const newLog = {
           id: id,
           exercise: cells[0].textContent,
-          duration: cells[1].textContent,
-          caloriesBurned: cells[2].textContent,
+          duration: parseInt(cells[1].textContent, 10),
+          caloriesBurned: parseInt(cells[2].textContent, 10),
         };
-        console.log(id);
+        if (isNaN(newLog.duration) || isNaN(newLog.caloriesBurned)) {
+          alert('Invalid input: Duration and calories burned must be numbers');
+          return;
+        }
         // Send a PUT request to the server with the new data
         fetch(`http://localhost:5050/exercisePage/calendarData/${id}`, {
           method: "PUT",
