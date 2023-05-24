@@ -204,6 +204,7 @@ function displayDailyLogs(dailyLogs) {
 ///////////////////////Function to delete entries from table and database//////////////////////
 async function deleteExerciseEntry(id) {
   // Select the button and the row
+  confirm("Are you sure you want to delete this entry?");
   const button = document.querySelector(`button[data-id="${id}"]`);
   const row = button.closest("tr");
 

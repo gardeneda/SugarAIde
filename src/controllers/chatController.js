@@ -107,7 +107,7 @@ exports.updateData = async function (data, type, account, dateObject) {
 				{ $push: { exerciseLog: exerciseModel } }
 			);
 			console.log(
-				`Successfully entered the food into the exerciseLog in the db!`
+				`Successfully entered the exercise into the exerciseLog in the db!`
 			);
 			break;
 	}
