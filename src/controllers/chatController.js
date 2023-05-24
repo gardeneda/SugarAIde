@@ -43,6 +43,7 @@ exports.modifyMessage = function (prompt, userMessage, temperature) {
 };
 
 exports.stripJSON = function (message) {
+	console.log(message);
 	try {
         const pureJSON = { json: JSON.parse(message), leftover: undefined };
         return pureJSON;
