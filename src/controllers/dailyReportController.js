@@ -11,6 +11,8 @@ const userCollection = database
 	.db(process.env.MONGODB_DATABASE)
 	.collection("users");
 
+const dateFormatter = require(`${__dirname}/../utils/dateFormatter`);
+
 /* End of Required Packages and Constant Declaration */
 /* ///////////////////////////////////////////////// */
 
@@ -34,5 +36,6 @@ exports.getExercisesByDate = async (account, date) => {
     return result.length > 0 ? result[0].exerciseLog : [];
 };
 
-
-  
+exports.test = async (req, res, next) => {
+  exports.getExercisesByDate(req.session.email, dateFormatter.getYesterday());
+}

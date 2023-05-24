@@ -35,6 +35,7 @@ const foodHistoryRouter = require(`${__dirname}/../routes/foodHistoryRouter`);
 const additionalInfoRouter = require(`${__dirname}/../routes/additionalInfoRouter`);
 const todoRouter = require(`${__dirname}/../routes/todoRouter`);
 const dietTrackRouter = require(`${__dirname}/../routes/dietTrackRouter`);
+const dailyReportRouter = require(`${__dirname}/../routes/dailyReportRouter`);
 
 app.set('views', path.resolve(`${__dirname}/../views`));
 
@@ -155,6 +156,7 @@ app.use("/todo", todoRouter);
 
 app.use("/dietTrack", dietTrackRouter);
 
+app.use("/dailyReport", dailyReportRouter);
 
 app.use("/logout", (req, res) => {
   req.session.destroy();

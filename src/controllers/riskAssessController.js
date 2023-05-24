@@ -120,7 +120,7 @@ exports.diabProbability = function (
         bloodglucose
     );
 
-    return a * b;
+    return (a > b) ? a : b;
 }
 
 /*
