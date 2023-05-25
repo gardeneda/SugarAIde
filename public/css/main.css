@@ -34,7 +34,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50vh;
 }
 
 .parent button {
@@ -42,7 +41,6 @@ body {
   color: white;
   border: none;
   padding: 5px;
-  font-size: 31px;
   box-shadow: 0 2px 4px darkslategray;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -56,7 +54,7 @@ body {
   align-items: center; 
   text-align: center; 
   font-family: 'Courier New', Courier, monospace;
-  font-size: .9rem;
+  font-size: 1.25rem;
 }
 
 .parent button:active {
@@ -79,6 +77,9 @@ body {
   border-radius: 50%;
 }
 
+#bot-msg {
+  margin-bottom: 5%;
+}
 
 /*------------Feature Card CSS------------- */
 .card-body{
@@ -135,27 +136,42 @@ body {
 }
 
 /*------------Calories Card CSS------------- */
+#caloriesCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.card-header {
+  width: 100%;
+  align-self: flex-start;
+}
+
 #caloriesCardBody{
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   width: 100%;
   height: 100%;
 }
 #caloriesCard-text{
-  width:50%;
-  height: 100%;
   justify-content: space-around;
   display: block;
-  margin-left: 20px;
+  font-size: 1rem;
 }
 
-#caloriesCard-text p{
-  padding-left: 30px;
-  font-size: inherit;
+.caloriesCard-container {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-#caloriesCard-text h5{
-  padding-left: 10px;
+
+#caloriesCard-text p {
+  padding-left: 16px;
 }
+
 .progress-container {
   width: 50%; 
   height: 0;  
@@ -238,4 +254,10 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+
+.title-exercise {
+  padding: 0;
+  margin: 0;
+
 }

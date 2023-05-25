@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8"/>
-		<title>Enter Health Information</title>
+		<title>Health Consent</title>
 		<link rel="icon" type="image/x-icon" href="/img/sugaraide-favicon.png">
 
 		<!-- Bootstrap Link -->
@@ -72,19 +72,20 @@
 			</p>
 			<div class="d-inline-flex gap-2 mb-5 text-center">
 				<a
+					href="/main"
+					class="btn btn-outline-dark btn-lg px-4 rounded-pill"
+				>
+					Disagree
+				</a>
+				<a
 					href="/health/form"
-					class="d-inline-flex align-items-center btn btn-primary btn-lg px-4 rounded-pill"
+					class="d-inline-flex align-items-center btn btn-sugar text-white btn-lg px-4 rounded-pill"
 				>
 					Agree &nbsp;
 					<i class="fa-solid fa-arrow-right"></i>
 				</a>
 
-				<a
-					href="/main"
-					class="btn btn-outline-secondary btn-lg px-4 rounded-pill"
-				>
-					Disagree
-				</a>
+
 			</div>
 		</div>
 		<%- include("templates/footer") %>

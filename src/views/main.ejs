@@ -30,7 +30,7 @@
     <br />
     <div class="bodyContainer">
       <!--ChatBot Button-->
-      <div class="parent">
+      <div class="parent text-white">
         <audio id="audio" src="/img/sounds.ogg" muted></audio>
         <button
           id="chatButton"
@@ -41,8 +41,7 @@
           onmouseup="stopSpin()"
           onclick="location.href='chat'; return false;"
         >
-          Tap to chat with SugarAIde
-          <br /><br />
+        <span id="bot-msg">Tap to chat with SugarAIde</span>  
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="50"
@@ -80,6 +79,7 @@
                 </span>
               </div>
             </div>
+            <div class="caloriesCard-container">
             <div id="caloriesCard-text">
               <h6>
                 <svg
@@ -168,6 +168,7 @@
                 Exercise
               </h6>
               <p><span id="exerciseCalories"></span>cal</p>
+            </div>
             </div>
           </div>
         </div>
@@ -284,7 +285,7 @@
                     </h6>
                   </div>
                   <div class="title-exercise">
-                    <h6 class="card-text">
+                    <h6 class="card-title">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
