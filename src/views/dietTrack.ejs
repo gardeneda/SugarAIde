@@ -28,9 +28,18 @@
     <h2 class="title">Calorie/Nutrition Tracker</h2>
     <!-- Tab links -->
     <div class="tab" id="tab">
-      <button class="tablinks active" id="defaultOpen" onclick="openPage(event, 'diet')">Diet</button>
-      <button class="tablinks" onclick="openPage(event, 'foodLogs')">Food Log</button>
+      <!-- <button class="tablinks active" id="defaultOpen" onclick="openPage(event, 'diet')">Diet</button> -->
+		  <button class="tablinks active" id="defaultOpen">Diet</button>
+      <button class="tablinks" onclick="window.location.href='/foodHistory/foodHistory'">Food Log</button>
     </div>
+
+    <!--test-->
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        openPage(null, 'diet');
+      });
+    </script>
+    <!--test-->
 
     <!-- Tab content -->
     <div id="diet" class="tabcontent">
