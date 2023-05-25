@@ -1,3 +1,9 @@
+//Sets the default tab to be the weekly chart
+window.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("defaultOpen").click();
+});
+
+
 function openPage(evt, tabName) {
   var i, tabcontent, tablinks;
 

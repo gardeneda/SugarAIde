@@ -1,6 +1,6 @@
 const navLinks = [
     { name: "Chat", link: "/chat" },
-    { name: "Diet", link: "/dietTrack" },
+    { name: "Diet", link: "/foodHistory/FoodHistory" },
     { name: "Exercise", link: "/exercisePage" },
     { name: "To-Do", link: "/todo" },
     { name: "Profile", link: "/profile" },
