@@ -8,4 +8,5 @@ const router = express.Router();
 router.route('/')
     .get(validation.checkValidSession, dietTrackController.createHTML)
 
+    
 module.exports = router;
