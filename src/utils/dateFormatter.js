@@ -35,5 +35,5 @@ exports.getYesterday = () => {
     const formatDate = `${month}-${day}-${year}`;
   
     return formatDate;
-  };
+};
   

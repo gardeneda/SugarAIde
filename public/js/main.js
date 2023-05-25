@@ -56,7 +56,7 @@ console.log("progressEndValue:", progressEndValue);
 let progress = setInterval(() => {
   progressStartValue++;
   progressValue.textContent = `${remainingCal} Remaining`;
-  circularProgress.style.background = `conic-gradient(#F9858b ${progressStartValue * 0.18 / progressEndValue}deg, #efefef ${progressStartValue * 360 / progressEndValue}deg)`;
+  circularProgress.style.background = `conic-gradient(#F9858b ${progressStartValue * 0.18 / progressEndValue}deg, #efefef ${0}deg)`;
 
   if (progressStartValue >= Math.ceil(progressEndValue)) {
     clearInterval(progress);
