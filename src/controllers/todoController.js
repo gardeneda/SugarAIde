@@ -169,8 +169,8 @@ exports.updateToDoList = async (array, account, date) => {
  */
 exports.fetchCheckboxes = async (account, date) => {
 	const todoList = await userCollection.findOne(
-		{ email: account , toDoList: { $exists: true }},
-		{ projection: { toDoList: 1 } });
+		{ email: account , [`toDoList.${date}`]: { $exists: true }},
+		{ projection: { [`toDoList.${date}`]: 1 } });
 		
 	if (todoList == null) {
 

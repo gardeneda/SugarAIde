@@ -172,55 +172,94 @@ exports.createHTML = async (req, res, next) => {
     return;
   }
 
-        if (!user.healthinfo) {
-            res.render('profile', {
-                username: user.username,
-                email: user.email,
-                message: "No health info found."
-            });
-        } else {
-            // Render the profile view with the user data
-            res.render('profile', {
-            username: user.username,
-            email: user.email,
-            height: user.healthinfo?.height,
-            weight: user.healthinfo?.weight,
-            gender: user.healthinfo?.gender,
-            age: user.healthinfo?.age,
-            risk: (user.healthinfo?.risk).toFixed(1) * 100
-        });
-        }
-        
-}
+  if (!user.healthinfo) {
+    res.render("profile", {
+      username: user.username,
+      email: user.email,
+      message: "No health info found.",
+    });
+  } else {
+    let risk = 0;
+    if (user.healthinfo.risk && typeof user.healthinfo.risk === 'number') {
+      risk = (user.healthinfo.risk * 100).toFixed(1);
+    }
+
+    // Set cache-control headers to disable caching
+    res.set('Cache-Control', 'no-store');
+    console.log("risk: " + risk)
+    // Render the profile view with the user data
+    res.render("profile", {
+      username: user.username,
+      email: user.email,
+      height: user.healthinfo?.height,
+      weight: user.healthinfo?.weight,
+      activity: user.healthinfo?.activity,
+      gender: user.healthinfo?.gender,
+      age: user.healthinfo?.age,
+      risk: risk,
+    });
+  }
+};
 
 
 exports.updateHealthInfo = async (req, res, next) => {
-    var email = req.session.email;
-  
-    // Extract new weight and age from request body
-    var newWeight = req.body.weight;
-    var newAge = req.body.age;
-  
-    // Update fields only if they have new values
-    var updateFields = {};
-    if (newWeight !== undefined) {
-      updateFields["healthinfo.weight"] = newWeight;
-    }
-    if (newAge !== undefined) {
-      updateFields["healthinfo.age"] = newAge;
-    }
-  
-    // Find the user and update the weight and age
-    const result = await userCollection.updateOne(
-      { email: email },
-      { $set: updateFields }
-    );
-  
-    if (result.modifiedCount === 0) {
-      res.send("Failed to update health info");
-      return;
-    }
-  
-    // Send success response
-    res.send("success");
+  var email = req.session.email;
+
+  // Extract new weight, age, and activity from request body
+  var newWeight = req.body.weight;
+  var newAge = req.body.age;
+  var newActivity = req.body.activity;
+
+  // Find the user with the given email
+  const user = await userCollection.findOne({ email: email });
+
+  if (!user) {
+    res.send("User not found");
+    return;
   }
+
+  // Update fields only if they have new values
+  var updateFields = {};
+  if (newWeight !== undefined) {
+    updateFields["healthinfo.weight"] = newWeight;
+  }
+  if (newAge !== undefined) {
+    updateFields["healthinfo.age"] = newAge;
+  }
+  if (newActivity !== undefined) {
+    updateFields["healthinfo.activity"] = newActivity;
+  }
+
+  // Recalculate and update risk
+  await recalculateRisk(email);
+
+  // Update the user document with the new fields
+  const result = await userCollection.updateOne(
+    { email: email },
+    { $set: updateFields }
+  );
+
+  if (result.modifiedCount === 0) {
+    res.send("Failed to update health info");
+    return;
+  }
+
+  // Send success response
+  res.send("success");
+};
+
+
+exports.getRisk = async function (req, res, next) {
+  const email = req.session.email;
+
+  // Retrieve the user from the database
+  const user = await userCollection.findOne({ email: email });
+
+  if (!user || !user.healthinfo || !user.healthinfo.risk) {
+    res.status(404).json({ error: 'Risk value not found' });
+    return;
+  }
+
+  const risk = user.healthinfo.risk;
+  res.json({ risk: risk });
+};

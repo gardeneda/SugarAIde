@@ -1,7 +1,7 @@
 //Exercise Feature Card data, fetches data from the database and displays it on the card
 window.addEventListener("load", getExerciseData);
 async function getExerciseData() {
-    const response = await fetch("https://drab-rose-indri-sari.cyclic.app/main/exerciseData");
+    const response = await fetch("http://localhost:5050/main/exerciseData");
     const data = await response.json();
     const exerciseLog = data.exercise;
 
@@ -22,12 +22,13 @@ async function getExerciseData() {
   
       todaysLogs.forEach(log => {
         totalTime += log.duration;
-        totalCalories += log.calories_burned;
+        totalCalories += log.caloriesBurned;
       });
-  
+      document.getElementById("exerciseCalories").innerHTML = totalCalories;
       document.getElementById("time").innerHTML = totalTime + (totalTime === 1 ? " hour" : " hours");
       document.getElementById("calories").innerHTML = totalCalories;
     } else {
+      document.getElementById("exerciseCalories").innerHTML = 0;
       document.getElementById("time").innerHTML = "No exercise logged today";
       document.getElementById("calories").innerHTML = "No calories burned today";
     }

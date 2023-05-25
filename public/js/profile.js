@@ -21,20 +21,27 @@ $(document).ready(function () {
   // Update Weight Button Click Event
   $("#update-weight-button").on("click", function () {
     var newWeight = $("#weight-input").val();
-    $.post("/profile/updateHealthInfo", {weight: newWeight}, function(data){
-      if(data=='success'){
-        alert("Weight updated successfully!");
-      }
+
+    $.post("/profile/updateHealthInfo", { weight: newWeight }, function (data) {
+      handleResponse(data);
+
+      // Retrieve the updated risk value from the server
+      $.get("/profile/risk", { _t: new Date().getTime() }, function (data) {
+        updateRiskValue(data.risk);
+      });
     });
   });
 
   // Update Age Button Click Event
   $("#update-age-button").on("click", function () {
     var newAge = $("#age-input").val();
-    $.post("/profile/updateHealthInfo", {age: newAge}, function(data){
-      if(data=='success'){
-        alert("Age updated successfully!");
-      }
+    $.post("/profile/updateHealthInfo", { age: newAge }, function (data) {
+      handleResponse(data);
+
+      // Retrieve the updated risk value from the server
+      $.get("/profile/risk", { _t: new Date().getTime() }, function (data) {
+        updateRiskValue(data.risk);
+      });
     });
   });
 
@@ -60,4 +67,3 @@ $(document).ready(function () {
     updateRiskValue(data.risk);
   });
 });
-
