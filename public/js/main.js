@@ -2,7 +2,7 @@ let totalCalories;
 //Exercise Feature Card data, fetches data from the database and displays it on the card
 window.addEventListener("load", getExerciseData);
 async function getExerciseData() {
-    const response = await fetch("http://127.0.0.1:8000/main/exerciseData");
+    const response = await fetch("http://localhost:5050/main/exerciseData");
     const data = await response.json();
     const exerciseLog = data.exercise;
 
@@ -30,8 +30,8 @@ async function getExerciseData() {
       document.getElementById("calories").innerHTML = totalCalories;
     } else {
       document.getElementById("exerciseCalories").innerHTML = 0;
-      document.getElementById("time").innerHTML = "No exercise logged today";
-      document.getElementById("calories").innerHTML = "No calories burned today";
+      document.getElementById("time").innerHTML = "0";
+      document.getElementById("calories").innerHTML = "0 hours";
     }
   }
 
