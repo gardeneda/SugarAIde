@@ -117,7 +117,7 @@ exports.diabProbability = function (
         bloodglucose
     );
 
-    return (a > b) ? a : b;
+    return a * b;
 }
 
 const recalculateRisk = async function (email) {
