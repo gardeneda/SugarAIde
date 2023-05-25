@@ -119,12 +119,19 @@ table {
     border-collapse: collapse;
 }
 
+#exercise-table,
+#nutrition-table {
+	width: 100%;
+	text-align: center;
+}
+
 #consumed,
 #burned,
 #total-calories,
 #sugar,
 #risk-before,
 #risk-after,
-#change {
+#change,
+th {
 	padding-right: 20px;
 }

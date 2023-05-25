@@ -215,7 +215,6 @@ exports.updateRiskAssessment = async (bloodglucose, account, healthinfo) => {
   return { before: riskBefore, after: riskAfter };
 };
 
-
 /**
  * Renders the daily report page
  */
@@ -225,24 +224,29 @@ exports.createHTML = async (req, res, next) => {
 	const nutrientList = await exports.getNutrientsByDate(req.session.email, date);
 	const health = await exports.getHealthInfo(req.session.email);
 
-  const { consumed, burned, total } = exports.totalCalories(nutrientList, exerciseList, health?.metabolism);
-  const sugar = exports.bloodGlucoseCalculator(nutrientList, health?.bloodglucose);
-  const { before, after } = await exports.updateRiskAssessment(sugar, req.session.email, health);
-  const change = before - after;
+	console.log(exerciseList);
+	console.log(nutrientList);
 
-  burnedFormatted = burned.toFixed(2);
-  totalFormatted = total.toFixed(2);
-  beforeFormatted = before.toFixed(4) * 100;
-  afterFormatted = after.toFixed(4) * 100;
-  changeFormatted = change.toFixed(4) * 100;
+  	const { consumed, burned, total } = exports.totalCalories(nutrientList, exerciseList, health?.metabolism);
+  	const sugar = exports.bloodGlucoseCalculator(nutrientList, health?.bloodglucose);
+  	const { before, after } = await exports.updateRiskAssessment(sugar, req.session.email, health);
+  	const change = before - after;
+
+  	burnedFormatted = burned.toFixed(2);
+  	totalFormatted = total.toFixed(2);
+  	beforeFormatted = before.toFixed(4) * 100;
+  	afterFormatted = after.toFixed(4) * 100;
+  	changeFormatted = change.toFixed(4) * 100;
 
 	res.render("dailyReport", {
 		consumed: consumed,
 		burned: burnedFormatted,
 		sugar: sugar,
-    riskBefore: beforeFormatted,
-    riskAfter: afterFormatted,
-    riskChange: changeFormatted,
-		total: totalFormatted
+   		riskBefore: beforeFormatted,
+    	riskAfter: afterFormatted,
+    	riskChange: changeFormatted,
+		total: totalFormatted,
+		exerciseList: exerciseList,
+		nutritionList: nutrientList
 	});
 };
