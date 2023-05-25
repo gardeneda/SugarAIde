@@ -20,7 +20,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       datasets: [{
         label: 'Time (Hours)',
         data: weeklyLogs[weeklyLogs.length - 1].durations,
-        backgroundColor: 'rgba(0,119,182, 0.7)',
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1,
       }]
     },
@@ -63,7 +64,7 @@ function openLog(evt, view) {
 
 //Retrieves the exercise data from the database and formats it for the calendar and chart
 async function getExerciseData() {
-  const response = await fetch("http://127.0.0.1:8000/exercisePage/calendarData");
+  const response = await fetch("http://localhost:5050/exercisePage/calendarData");
   
   const data = await response.json();
 
@@ -169,7 +170,7 @@ function attachButtonListeners() {
         }
         // Send a PUT request to the server with the new data
 
-        fetch(`http://127.0.0.1:8000/exercisePage/calendarData/${id}`, {
+        fetch(`http://localhost:5050/exercisePage/calendarData/${id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -232,7 +233,7 @@ async function deleteExerciseEntry(id) {
     }
 
   try {
-    await fetch(`http://127.0.0.1:8000/exercisePage/calendarData/${id}`, {
+    await fetch(`http://localhost:5050/exercisePage/calendarData/${id}`, {
       method: "DELETE",
     });
 
