@@ -14,6 +14,8 @@ const mongodb_session_secret = process.env.MONGODB_SESSION_SECRET;
 const node_session_secret = process.env.NODE_SESSION_SECRET;
 
 const todoController = require(`${__dirname}/../controllers/todoController`);
+const mainController = require(`${__dirname}/../controllers/mainController`);
+
 const dateFormatter = require(`${__dirname}/../utils/dateFormatter`);
 
 const navLinks = require(`${__dirname}/../utils/navLinkManager.js`);
@@ -32,9 +34,10 @@ const resetPasswordRouter = require(`${__dirname}/../routes/resetPasswordRouter`
 const checkCaloriesRouter = require(`${__dirname}/../routes/checkCaloriesRouter`);
 const calorieRequirmentRouter = require(`${__dirname}/../routes/calorieRequirmentRouter`);
 const foodHistoryRouter = require(`${__dirname}/../routes/foodHistoryRouter`);
-const additionalInfoRouter = require(`${__dirname}/../routes/additionalInfoRouter`);
+const resourcesRouter = require(`${__dirname}/../routes/resourcesRouter`);
 const todoRouter = require(`${__dirname}/../routes/todoRouter`);
 const dietTrackRouter = require(`${__dirname}/../routes/dietTrackRouter`);
+const dailyReportRouter = require(`${__dirname}/../routes/dailyReportRouter`);
 
 app.set('views', path.resolve(`${__dirname}/../views`));
 
@@ -103,12 +106,13 @@ app.use("/", async (req, res, next) => {
 
 app.get("/", (req, res) => {
   if (req.session.authenticated) {
-    res.render('main');
+    res.redirect('main');
 
   } else {
     res.render("home");
   }
 });
+
 
 
 app.use("/css", express.static(`${__dirname}/../../public/css`));
@@ -139,7 +143,7 @@ app.use("/health", healthInfoRouter);
 
 app.use("/risk", riskAssessRouter);
 
-app.use("/additionalInfo", additionalInfoRouter);
+app.use("/resources", resourcesRouter);
 
 app.use("/exercisePage", exerciseRouter);
 
@@ -155,6 +159,7 @@ app.use("/todo", todoRouter);
 
 app.use("/dietTrack", dietTrackRouter);
 
+app.use("/dailyReport", dailyReportRouter);
 
 app.use("/logout", (req, res) => {
   req.session.destroy();

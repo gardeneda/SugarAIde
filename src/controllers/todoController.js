@@ -188,7 +188,7 @@ exports.fetchCheckboxes = async (account, date) => {
 exports.generateToDoList = async (req, res, next) => {
 	
 	const today = dateFormatter.getToday();
-	const status = await exports.isFirstTimeLogInToday(req.session.email, today)
+	const status = await exports.isFirstTimeLogInToday(req.session.email, today);
 
 	if (status == null) {
 		const userData = await exports.fetchUserData(req);
@@ -207,6 +207,31 @@ exports.generateToDoList = async (req, res, next) => {
 	}
 
 	next();
+}
+
+/*
+	Generates a To-Do list based on the user's specific health
+	informaiton.
+*/
+exports.generateToDoListScript = async (account, user) => {
+	
+	const today = dateFormatter.getToday();
+	const status = await exports.isFirstTimeLogInToday(account, today);
+
+	if (status == null) {
+		const userPrompt = exports.userCustomizedPrompt(user);
+		const aiPrompt = process.env.TO_DO;
+		const message = await chatController.modifyMessage(aiPrompt, userPrompt, 1.0);
+		const response = await bot.processMessage(message);
+	
+		const todoList = exports.parseListToArray(response);
+		const todoArray = exports.formatArray(todoList);
+	
+		// Deprecated.
+		// const todoObj = exports.convertToObject(todoArray, today);
+	
+		await exports.updateToDoList(todoArray, account, today);
+	}
 }
 
 /**

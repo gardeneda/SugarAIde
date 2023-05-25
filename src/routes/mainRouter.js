@@ -2,16 +2,16 @@ const express = require("express");
 const validation = require(`${__dirname}/../utils/validation`);
 
 const mainController = require(`${__dirname}/../controllers/mainController`);
-const todoController = require(`${__dirname}/../controllers/todoController`);
+const dailyReportController = require(`${__dirname}/../controllers/dailyReportController`);
 
 const router = express.Router();
 
-router
-  .route("/")
-  .get(mainController.createHTML);
+router.route("/")
+  .get(dailyReportController.checkFirstLoginOnMain,
+    mainController.createHTML);
   
-router
-  .route('/exerciseData')
-  .get(validation.checkValidSession, mainController.getExerciseData);
+router.route('/exerciseData')
+  .get(validation.checkValidSession,
+    mainController.getExerciseData);
 
 module.exports = router;

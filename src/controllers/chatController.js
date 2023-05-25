@@ -10,6 +10,7 @@ const userCollection = database
 
 const bot = require(`${__dirname}/../utils/botManager`);
 const crypto = require("crypto");
+const dateFormatter = require(`${__dirname}/../utils/dateFormatter`);
 
 /* End of Required Packages and Constant Declaration */
 /* ///////////////////////////////////////////////// */
@@ -41,6 +42,7 @@ exports.modifyMessage = function (prompt, userMessage, temperature) {
 };
 
 exports.stripJSON = function (message) {
+	console.log(message);
 	try {
         const pureJSON = { json: JSON.parse(message), leftover: undefined };
         return pureJSON;
@@ -82,10 +84,13 @@ exports.checkJSONType = function (response) {
 */
 exports.updateData = async function (data, type, account, dateObject) {
 	const id = crypto.randomBytes(16).toString("hex");
+	const dateFormatted = dateFormatter.getToday();
+
 	switch (type) {
 		case "food":
 			let nutritionModel = data;
 			nutritionModel.date = dateObject;
+			nutritionModel.date_real = dateFormatted;
 			nutritionModel.id = id;
 
 			await userCollection.updateOne(
@@ -100,6 +105,7 @@ exports.updateData = async function (data, type, account, dateObject) {
 		case "exercise":
 			let exerciseModel = data;
 			exerciseModel.date = dateObject;
+			exerciseModel.date_real = dateFormatted;
 			exerciseModel.id = id;
 
 			await userCollection.updateOne(
@@ -107,7 +113,7 @@ exports.updateData = async function (data, type, account, dateObject) {
 				{ $push: { exerciseLog: exerciseModel } }
 			);
 			console.log(
-				`Successfully entered the food into the exerciseLog in the db!`
+				`Successfully entered the exercise into the exerciseLog in the db!`
 			);
 			break;
 	}

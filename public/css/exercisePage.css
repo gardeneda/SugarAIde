@@ -1,103 +1,109 @@
 .bg-pink{
-    background-color: #F9858b;
-  }
-
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-    font-size: 14px;
-  }
-  @media only screen and (min-width: 600px) {
-    #dailyLogs th, #dailyLogs td {
-      font-size: 16px;
-      padding: 6px;
-    }
-  }
-
-  @media only screen and (min-width:1279px){
-    .tab{
-      border-top-left-radius:10px;
-      border-top-right-radius:10px;
-    }
-    .tabcontent{
-      border-bottom-left-radius:10px;
-      border-bottom-right-radius:10px;
-    }
-    #dailyLogs th, #dailyLogs td {
-      font-size: 18px;
-      padding: 8px;
-    }
-  }
-
-  .diagrams{
-    max-width: 1100px;
-    margin:40px auto;
-  }
-  #calendar {
-    max-width: 1100px;
-    margin: 40px auto;
-  }
-  .center-content {
-    display: flex;
-    justify-content: center;
-    }
-.fc-toolbar-title{
-    font-weight: 200;
-    margin-left: 10px;
+  background-color: #F9858b;
 }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+  font-size: 14px;
+}
+@media only screen and (min-width: 600px) {
+  #dailyLogs th, #dailyLogs td {
+    font-size: 16px;
+    padding: 6px;
+  }
+}
+
+@media only screen and (min-width:1279px){
+  .tab{
+    border-top-left-radius:10px;
+    border-top-right-radius:10px;
+  }
+  .tabcontent{
+    border-bottom-left-radius:10px;
+    border-bottom-right-radius:10px;
+  }
+  #dailyLogs th, #dailyLogs td {
+    font-size: 18px;
+    padding: 8px;
+  }
+}
+
+.diagrams{
+  max-width: 1100px;
+  margin:40px auto;
+}
+
+#calendar {
+  max-width: 1100px;
+  margin: 40px auto;
+}
+
+.center-content {
+  display: flex;
+  justify-content: center;
+  }
+
+.fc-toolbar-title{
+  font-weight: 200;
+  margin-left: 10px;
+}
+
 .fc-button {
-  background: linear-gradient(#F9858b, #F985B9) !important;
-  }
-  h2{
-     font-weight: 200;
-  }
 
-  .tab {
-    overflow: hidden;
-    background: linear-gradient(#F9858b, #F985B9);
-    display: flex;
-    justify-content: space-around;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-  }
-  
-  /* Style the buttons that are used to open the tab content */
-  .tab button {
-    background-color: inherit;
-    width: 50%;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
-    font-size: 17px;
-  }
-  .tablinks{
-    color: white;
+background: linear-gradient(#F9858b, #F985B9) !important;
+}
+
+h2{
     font-weight: 200;
-  }
+}
+
+.tab {
+  overflow: hidden;
+  background: linear-gradient(#F9858b, #F985B9);
+  display: flex;
+  justify-content: space-around;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  width: 50%;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+.tablinks{
+  color: white;
+  font-weight: 200;
+}
 
 
-  /* Change background color of buttons on hover */
-  .tab button:hover {
-    background-color: #F9858b;
-  }
-  
-  /* Create an active/current tablink class */
-  .tab button.active {
-    background-color: #e77076;
-  }
-  /* Style the tab content */
-  .tabcontent {
-    display: none;
-    padding: 6px 12px;
-    border: 1px solid #ccc;
-    border-top: none;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-  }
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #F9858b;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #e77076;
+}
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
 
   /*  table */
 #dailyLogs table {
@@ -122,6 +128,7 @@
   text-align: center;
   vertical-align: middle;
   border: none;
+  text-transform: capitalize;
 }
 
 

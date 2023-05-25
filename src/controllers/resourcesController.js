@@ -13,5 +13,5 @@ const userCollection = database
   .collection("users");
 
 exports.createHTML = (req, res) => {
-res.render('additionalInfo')
+res.render('resources')
 };

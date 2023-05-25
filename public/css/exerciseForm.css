@@ -3,8 +3,26 @@ body {
 }
 
 
+@media only screen and (max-width: 767px) {
+  .containerForm{
+    width: 90%;
+  }
+  textarea{
+    width: 100%;
+  }
+  .tabcontent{
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  .tab{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+}
+  
 
-@media only screen and (min-width: 1159px) {
+@media only screen and (min-width: 768px) {
+
   .containerForm{
     width: 50%;
   }
