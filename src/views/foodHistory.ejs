@@ -19,164 +19,137 @@
 			integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
 			crossorigin="anonymous"
 		></script>
-		<!-- Font Awesome Script Connected to Isaiah's Account -->
+		<!-- Font Awesome Script Connected to .Isaiah's Account -->
 		<script
 			src="https://kit.fontawesome.com/36e5d26d04.js"
 			crossorigin="anonymous"
 		></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 		<title>My chart.js chart</title>
+
+		<!--CSS-->
+		<link rel="stylesheet" href="/css/foodHistory.css">
 		<link rel="stylesheet" href="/css/global.css" />
 	</head>
 	
 	<body>
+		<%- include("templates/header") %>
 		<!--temp css-->
 		<div class="container mx-auto" style="margin-top: 75px">
-			<select id="chart-type">
-				<option value="calories">Calories (kcal)</option>
-				<option value="sugar">Sugar (g)</option>
-			</select>
-			<canvas id="myChart"></canvas>
+		  <!-- <select id="chart-type">
+			<option value="calories">Calories (kcal)</option>
+			<option value="sugar">Sugar (g)</option>
+		  </select> -->
+		  <canvas id="myChart"></canvas>
+		  <!--TEST-->
+		  <table id="summaryTable" class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col" id="tableTitle">Food</th>
+					<th scope="col" id="tableTitle">Calories</th>
+					<th scope="col" id="tableTitle">Sugar</th>
+					<th scope="col" id="tableTitle">Carbs</th>
+					<th scope="col" id="tableTitle">Protein</th>
+					<th scope="col" id="tableTitle">Delete</th>
+
+				</tr>
+			</thead>
+			<tbody id="tableEntries">
+			<!-- Food data will be inserted here -->
+			</tbody>
+		</table>		
+		  <!--TEST-->
 		</div>
-
+	  
 		<script>
-
-			const days = <%- JSON.stringify(days) %>;
-
-			const ctx = document.getElementById('myChart').getContext('2d');
-
-			const caloriesData = days.map(dayInfo => dayInfo.calories);
-			const labels = days.map(dayInfo => dayInfo.day);
-
-			new Chart(ctx, {
-				type: 'bar',
-				data: {
-					labels: [
-						"Sunday",
-						"Monday",
-						"Tuesday",
-						"Wednesday",
-						"Thursday",
-						"Friday",
-						"Saturday",
-					],  // Use days of the week as labels
-					datasets: [{
-						label: 'Calories',
-						data: caloriesData,
-						backgroundColor: 'rgba(255, 99, 132, 0.2)',
-						borderColor: 'rgba(255, 99, 132, 1)',
-						borderWidth: 1
-					}]
+			let days = <%- JSON.stringify(days) %>;
+		  
+			let labels = Object.keys(days);
+			let data = labels.map(day => days[day].totalCalories);
+		  
+			let ctx = document.getElementById('myChart').getContext('2d');
+			let chart = new Chart(ctx, {
+			  type: 'bar',
+			  data: {
+				labels: labels,
+				datasets: [{
+				  label: 'Total Calories',
+				  data: data,
+				  backgroundColor: 'rgba(75, 192, 192, 0.2)',
+				  borderColor: 'rgba(75, 192, 192, 1)',
+				//   backgroundColor: 'rgba(255, 99, 132, 0.2)',
+				//   borderColor: 'rgba(255, 99, 132, 1)',
+				  borderWidth: 1
+				}]
+			  },
+			  options: {
+				scales: {
+				  y: {
+					beginAtZero: true
+				  }
 				},
-				options: {
-					scales: {
-						y: {
-							beginAtZero: true
-						}
+				//TEST-------
+				onClick: handleClick
+			  }
+			});
+
+			async function handleClick(evt) {
+				var activePoints = chart.getElementsAtEventForMode(evt, 'nearest', { intersect: true }, true);
+				var firstPoint = activePoints[0];
+				if (firstPoint) {
+					var label = chart.data.labels[firstPoint.index];
+
+					let foodData = await fetch(`/foodHistory/foodData?day=${label}`, {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json'
+					}
+					})
+					.then(res => res.json())
+					.then(data => data.foodData); 
+					// Make sure to extract foodData from the response
+
+					// Create the table with this data
+					createSummaryTable(foodData);
+				}
+				}
+
+				function createSummaryTable(foodData) {
+					let tableBody = document.getElementById('summaryTable').getElementsByTagName('tbody')[0];
+					// Clear existing data
+					tableBody.innerHTML = '';
+					// Add new rows for each food item
+					for (let food of foodData) {
+					let newRow = tableBody.insertRow();
+
+					newRow.innerHTML = `<td>${food.food}</td><td>${food.calories}</td>
+					<td>${food.sugar}</td><td>${food.carbohydrates}</td>
+					<td>${food.protein}</td>
+					<td><button class="delete-btn" data-food-name="${food.food}" data-food-date="${food.date}">X</button></td>`;
+					let deleteBtn = newRow.querySelector('.delete-btn');
+					deleteBtn.addEventListener('click', handleDelete);
 					}
 				}
-			});
-			let myChart = document.getElementById("myChart").getContext("2d");
-			
-			// Placeholder Charts-------------------------------------------------------
-			
-			// let foodChart = new Chart(myChart, {
-			// 	type: "bar",
-			// 	data: {
-			// 		//bar labels
-			// 		labels: [
-			// 			"Sunday",
-			// 			"Monday",
-			// 			"Tuesday",
-			// 			"Wednesday",
-			// 			"Thursday",
-			// 			"Friday",
-			// 			"Saturday",
-			// 		],
-			// 		datasets: [
-			// 			{
-			// 				label: "Calories",
-			// 				//bars; values to be visually displayed
-			// 				data: [2650, 2050, 2200, 1850, 1850, 2750, 2350],
-			// 				//bar colour (array for individual bars)
-			// 				backgroundColor: ["rgba(54, 162, 235, 0.8)"],
-			// 			},
-			// 		],
-			// 	},
-			// });
-			// //resizes chart based on display size
-			// window.addEventListener("resize", function () {
-			// 	foodChart.resize();
-			// });
-			// // event listener for dropdown menu
-			// document
-			// 	.getElementById("chart-type")
-			// 	.addEventListener("change", function () {
-			// 		let selectedOption = document.getElementById("chart-type").value;
-			// 		if (selectedOption === "calories") {
-			// 			foodChart.data.datasets[0].label = "Calories";
-			// 			foodChart.data.datasets[0].data = [
-			// 				2650, 2050, 2200, 1850, 1850, 2750, 2350,
-			// 			];
-			// 			foodChart.data.datasets[0].backgroundColor = [
-			// 				"rgba(54, 162, 235, 0.8)",
-			// 			];
-			// 		} else if (selectedOption === "sugar") {
-			// 			foodChart.data.datasets[0].label = "Sugar";
-			// 			foodChart.data.datasets[0].data = [50, 35, 20, 40, 30, 25, 60];
-			// 			foodChart.data.datasets[0].backgroundColor = [
-			// 				"rgba(255, 99, 132, 0.8)",
-			// 			];
-			// 		} else if (selectedOption === "protein") {
-			// 			foodChart.data.datasets[0].label = "Protein";
-			// 			foodChart.data.datasets[0].data = [33, 67, 45, 33, 87, 53, 39];
-			// 			foodChart.data.datasets[0].backgroundColor = [
-			// 				"rgba(255, 99, 132, 0.8)",
-			// 			];
-			// 		}
-			// 		foodChart.update();
-			// 	});
+				//TEST-------
 
-			// Fetch nutrition data from the server.-------------------------------------------------------
-			// fetch("/foodHistory/nutritionLog")
-			// .then(response => response.json())
-			// .then(nutritionData => {
-			// 	// Initialize chart with nutrition data.
-			// 	let foodChart = new Chart(myChart, {
-			// 	type: "bar",
-			// 	data: {
-			// 		labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-			// 		datasets: [
-			// 		{
-			// 			label: "Calories",
-			// 			data: nutritionData.calories, // calories is an array with values for each day of the week
-			// 			backgroundColor: ["rgba(54, 162, 235, 0.8)"],
-			// 		},
-			// 		],
-			// 	},
-			// 	});
-			
-			// 	// Update chart with new nutrition data when the dropdown changes.
-			// 	document
-			// 	.getElementById("chart-type")
-			// 	.addEventListener("change", function () {
-			// 		let selectedOption = document.getElementById("chart-type").value;
-			// 		if (selectedOption === "calories") {
-			// 		foodChart.data.datasets[0].label = "calories";
-			// 		foodChart.data.datasets[0].data = nutritionData.calories;
-			// 		foodChart.data.datasets[0].backgroundColor = ["rgba(54, 162, 235, 0.8)"];
-			// 		} else if (selectedOption === "sugar") {
-			// 		foodChart.data.datasets[0].label = "Sugar";
-			// 		foodChart.data.datasets[0].data = nutritionData.sugar;
-			// 		foodChart.data.datasets[0].backgroundColor = ["rgba(255, 99, 132, 0.8)"];
-			// 		} else if (selectedOption === "protein") {
-			// 		foodChart.data.datasets[0].label = "Protein";
-			// 		foodChart.data.datasets[0].data = nutritionData.protein;
-			// 		foodChart.data.datasets[0].backgroundColor = ["rgba(255, 206, 86, 0.8)"];
-			// 		}
-			// 		foodChart.update();
-			// 	});
-			// });
-		</script>
-	</body>
+				async function handleDelete(evt) {
+					let foodName = evt.target.getAttribute('data-food-name');
+					let foodDate = evt.target.getAttribute('data-food-date');
+
+					await fetch(`/foodHistory/foodDataByNameAndDate?food=${foodName}&date=${foodDate}`, {
+						method: 'DELETE',
+					});
+
+					// // After successful deletion, re-fetch data or otherwise update your table
+					
+					window.location.reload();
+				}
+
+				//TEST-------
+		  </script>
+		  
+		<%- include("templates/footer") %>
+	  </body>
+	  
 </html>
+

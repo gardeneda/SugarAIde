@@ -153,7 +153,7 @@ app.use("/checkCalories", checkCaloriesRouter);
 
 app.use("/calorieRequirement", calorieRequirmentRouter);
 
-app.use('/nutritionLog', foodHistoryRouter);
+app.use('/foodHistory', foodHistoryRouter);
 
 app.use("/todo", todoRouter);
 

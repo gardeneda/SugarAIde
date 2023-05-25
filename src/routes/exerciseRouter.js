@@ -19,4 +19,3 @@ router.put('/calendarData/:id', exerciseController.updateExerciseData);
 module.exports = router;
 
    
-

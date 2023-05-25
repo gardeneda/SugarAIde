@@ -8,8 +8,6 @@ body {
   flex-direction: column;
 }
 
-
-
 @media screen and (min-width: 1280px) {
   .bodyContainer{
     width: 40%;

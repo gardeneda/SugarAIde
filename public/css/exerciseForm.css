@@ -2,6 +2,7 @@ body {
     font-family: Arial;
 }
 
+
 @media only screen and (max-width: 767px) {
   .containerForm{
     width: 90%;
@@ -20,8 +21,8 @@ body {
 }
   
 
-
 @media only screen and (min-width: 768px) {
+
   .containerForm{
     width: 50%;
   }

@@ -10,7 +10,6 @@ const userCollection = database
 
 const bot = require(`${__dirname}/../utils/botManager`);
 const crypto = require("crypto");
-
 const dateFormatter = require(`${__dirname}/../utils/dateFormatter`);
 
 /* End of Required Packages and Constant Declaration */
