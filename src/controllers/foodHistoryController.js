@@ -25,20 +25,20 @@ exports.getUserNutritionData = async (req, res, next) => {
     }
 
     let days = {
-      'Sunday': { totalCalories: 0 },
-      'Monday': { totalCalories: 0 },
-      'Tuesday': { totalCalories: 0 },
-      'Wednesday': { totalCalories: 0 },
-      'Thursday': { totalCalories: 0 },
-      'Friday': { totalCalories: 0 },
-      'Saturday': { totalCalories: 0 },
+      'Sun': { totalCalories: 0 },
+      'Mon': { totalCalories: 0 },
+      'Tue': { totalCalories: 0 },
+      'Wed': { totalCalories: 0 },
+      'Thu': { totalCalories: 0 },
+      'Fri': { totalCalories: 0 },
+      'Sat': { totalCalories: 0 },
     };
     
     // Iterate over each key in nutritionLog
     for (let key in user.nutritionLog) {
       // Get the day of the week from the log's date
       let date = new Date(user.nutritionLog[key].date);
-      let dayOfWeek = date.toLocaleString('en-us', { weekday: 'long' });
+      let dayOfWeek = date.toLocaleString('en-us', { weekday: 'short' });
 
       // Add the calories to the total for the day of the week
       days[dayOfWeek].totalCalories += Number(user.nutritionLog[key].calories);
@@ -89,7 +89,7 @@ exports.getFoodData = async (req, res) => {
     const foodData = user.nutritionLog.filter(entry => {
       console.log('Entry:', entry); // Debug line
       const entryDate = new Date(entry.date);
-      const entryDay = entryDate.toLocaleString('en-us', { weekday: 'long' });
+      const entryDay = entryDate.toLocaleString('en-us', { weekday: 'short' });
       console.log('Entry day:', entryDay); // Debug line
 
       // Compare the parsed day with the day from the query
