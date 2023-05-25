@@ -297,14 +297,6 @@ exports.checkFirstLoginOnMain = async (req, res, next) => {
 }
 
 /**
- * Sets all user's report field to 1.
- * Signifies a new day, and the need for a reset.
- */
-exports.resetReport = async () => {
-	userCollection.updateMany({}, { $set: { report: 1 } });
-}
-
-/**
  * Renders the daily report page
  */
 exports.createHTML = async (req, res, next) => {
