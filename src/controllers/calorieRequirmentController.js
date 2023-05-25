@@ -12,7 +12,7 @@ const userCollection = database
 const dateFormatter = require(`${__dirname}/../utils/dateFormatter`);
 const dailyReportController = require(`${__dirname}/dailyReportController`);
 
-async function getDailyValues(email) {
+exports.getDailyValues = async (email) => {
     const user = await userCollection.findOne({ email: email });
     const date = dateFormatter.getToday();
     const nutritions = await dailyReportController.getNutrientsByDate(email, date);
@@ -105,14 +105,15 @@ async function getDailyValues(email) {
             totalCarbs: totalCarbs,
             totalSugar: totalSugar,
             totalProtein: totalProtein,
-            aggregateResult: nutritions
+            aggregateResult: nutritions,
+            remainingCal: tdee - totalCalories
         };
     }
 }
 
 exports.createHTML = async (req, res, next) => {
     const email = req.session.email;
-    const dailyValues = await getDailyValues(email);
+    const dailyValues = await exports.getDailyValues(email);
     
     if (!dailyValues) {
         res.render("calorieRequirement", {
@@ -128,9 +129,4 @@ exports.calculateDailyValues = async (req, res, next) => {
     const email = req.session.email;
     const dailyValues = await getDailyValues(email);
     return dailyValues;
-}
-
-module.exports = {
-    createHTML: exports.createHTML,
-    calculateDailyValues: exports.calculateDailyValues,
 }

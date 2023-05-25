@@ -11,6 +11,8 @@ const userCollection = database
     .db(process.env.MONGODB_DATABASE)
     .collection("users");
 
+const calorieRequirmentController = require(`${__dirname}/calorieRequirmentController`);
+
 /* End of Required Packages and Constant Declaration */
 /* ///////////////////////////////////////////////// */
 /*
@@ -26,7 +28,7 @@ exports.createHTML = async (req, res, next) => {
     return res.send("User not found");
   }
 
-  const dailyValues = user.dailyValues;
+  const dailyValues = await calorieRequirmentController.getDailyValues(email);
   if (!dailyValues) {
     res.render('main', {
       message: "No daily values inputted for today",

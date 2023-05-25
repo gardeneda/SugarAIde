@@ -2,7 +2,7 @@ let totalCalories;
 //Exercise Feature Card data, fetches data from the database and displays it on the card
 window.addEventListener("load", getExerciseData);
 async function getExerciseData() {
-    const response = await fetch("http://localhost:5050/main/exerciseData");
+    const response = await fetch("http://127.0.0.1:8000/main/exerciseData");
     const data = await response.json();
     const exerciseLog = data.exercise;
 
@@ -22,7 +22,7 @@ async function getExerciseData() {
       totalCalories = 0;
   
       todaysLogs.forEach(log => {
-        totalTime += log.duration;
+        totalTime += Number(log.duration);
         totalCalories += parseInt(log.caloriesBurned);
       });
       document.getElementById("exerciseCalories").innerHTML = totalCalories;
@@ -43,25 +43,15 @@ let remainingCal = document.querySelector(".remainingCalories").textContent;
 
 let progressStartValue = 0;
 let progressEndValue = 0; // 초기값 설정
-let speed = 1;
 
 // Step 1: Get calorieRequire value and check if it's valid
 let calorieRequire = calorieRequireElement.textContent;
-console.log("calorieRequire:", calorieRequire);
 
 // Step 2: Convert calorieRequire to a valid number format
 progressEndValue = parseFloat(calorieRequire);
-console.log("progressEndValue:", progressEndValue);
+progressValue.textContent = `${remainingCal} Remaining`;
+circularProgress.style.background = `conic-gradient(#F9858b ${progressEndValue*0.18}deg, #efefef 0deg)`;
 
-let progress = setInterval(() => {
-  progressStartValue++;
-  progressValue.textContent = `${remainingCal} Remaining`;
-  circularProgress.style.background = `conic-gradient(#F9858b ${progressStartValue * 0.18 / progressEndValue}deg, #efefef ${0}deg)`;
-
-  if (progressStartValue >= Math.ceil(progressEndValue)) {
-    clearInterval(progress);
-  }
-}, speed);
 
 
 

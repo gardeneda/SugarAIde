@@ -9,3 +9,7 @@
     width: 90% !important;
     font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
 }
+
+.btn-sugar {
+	background: linear-gradient(#F9858b, #F985B9);
+}
