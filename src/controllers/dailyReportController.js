@@ -18,7 +18,7 @@ const riskAssessController = require(`${__dirname}/riskAssessController`);
 /* ///////////////////////////////////////////////// */
 
 /**
- * Gets all of the exercise that the user at on the specific date
+ * Gets all of the exercise that the user at on the specific date.
  *
  * @async
  * @param {Express.Request} account user's email
@@ -59,7 +59,7 @@ exports.getExercisesByDate = async (account, date) => {
 };
 
 /**
- * Gets all of the food that the user at on the specific date
+ * Gets all of the food that the user at on the specific date.
  *
  * @async
  * @param {Express.Request} account the user's email
@@ -103,7 +103,7 @@ exports.getNutrientsByDate = async (account, date) => {
  * Retrieves the health information of the user.
  *
  * @param {Express.Request} account the user's email
- * @returns the user's health information
+ * @returns {Object} the user's health information
  */
 exports.getHealthInfo = async (account) => {
 	const user = await userCollection.findOne({ email: account });
@@ -111,8 +111,13 @@ exports.getHealthInfo = async (account) => {
 	return user.healthinfo;
 };
 
+/**
+ * Adds up all of the calories that the user ate.
+ * 
+ * @param {Array} nutrientList array consisting of diets
+ * @returns {Number} calories consumed
+ */
 exports.getCaloriesConsumed = (nutrientList) => {
-	const date = dateFormatter.getToday();
 	let consumed = 0;
 
 	for (const nutrients of nutrientList) {
@@ -123,11 +128,12 @@ exports.getCaloriesConsumed = (nutrientList) => {
 };
 
 /**
- *
+ * Calculates the total calories burnt from performing exercises
+ * and the user's daily metabolism.
  *
  * @param {Express.Request} account the user's email
  * @param {Number} metabolism
- * @returns the total calories burnt from exercise and daily metabolism
+ * @returns {Number} the total calories burnt from exercise and daily metabolism
  */
 exports.getCaloriesBurned = (exerciseList, metabolism) => {
 	const date = dateFormatter.getToday();
@@ -140,6 +146,14 @@ exports.getCaloriesBurned = (exerciseList, metabolism) => {
 	return burned;
 };
 
+/**
+ * Calculates the calories consumed, burnt and the total net calorie.
+ * 
+ * @param {Array} nurientList array consisting of diets
+ * @param {Array} exerciseList array consisting of exercises
+ * @param {Number} metabolism user's metabolism stored in their healthinfo field
+ * @returns {Object} calories consumed, calories burnt and total net calorie
+ */
 exports.totalCalories = (nurientList, exerciseList, metabolism) => {
 
   const consumed = exports.getCaloriesConsumed(nurientList);
@@ -152,9 +166,23 @@ exports.totalCalories = (nurientList, exerciseList, metabolism) => {
 	};
 };
 
+/**
+ * Calculates the increased blood glucose level with the sugar consumed,
+ * and returns it. Based on researches:
+ * 
+ * Research shows that each 1 gram of sugar increases the blood glucose level by 5 mg/dl
+ * Research also shows that the average blood glucose level is 70 ~ 100 mg/dl
+ * 
+ * Maximized the blood glucose level as it makes sense that we intentionally give the
+ * biggest probability to create sufficient room for prevention of diabetes
+ * if the user does not know their own blood glucose level.
+ *  
+ * @param {Array} nutrientList arrays consisting of diets.
+ * @param {Number} bloodglucose blood glucose levels in mg/dl
+ * @returns {Number} calculated sugar level
+ */
 exports.bloodGlucoseCalculator = (nutrientList, bloodglucose) => {
-	// Research shows that each 1 gram of sugar increases the blood glucose level by 5 mg/dl
-	// Research also shows that the average blood glucose level is 70 ~ 100 mg/dl
+
 	let bloodglucoseLevel = 0;
 
 	if (bloodglucose > 0) {
@@ -183,6 +211,15 @@ exports.bloodGlucoseCalculator = (nutrientList, bloodglucose) => {
 	return bloodglucoseLevel;
 };
 
+/**
+ * Renews the risk assessment by inputting the new blood glucose into the
+ * risk assessment formula. 
+ * 
+ * @param {Number} bloodglucose blood glucose in mg /dl
+ * @param {Express.Request} account the user's email
+ * @param {Object} healthinfo health information of the user
+ * @returns {Object} risk level before and after modification
+ */
 exports.updateRiskAssessment = async (bloodglucose, account, healthinfo) => {
   const riskBefore = healthinfo?.risk;
 
@@ -214,6 +251,13 @@ exports.updateRiskAssessment = async (bloodglucose, account, healthinfo) => {
   return { before: riskBefore, after: riskAfter };
 };
 
+/**
+ * Checks if it is the user's first time logging in.
+ * 
+ * @param {Express.Request} req 
+ * @param {Express.Response} res 
+ * @param {Express.next} next 
+ */
 exports.checkFirstLoginDay = async (req, res, next) => {
 	const response = await userCollection.findOne({ email: req.session.email, }, { projection: { report: 1 } });
 	const report = response.report;
@@ -229,6 +273,14 @@ exports.checkFirstLoginDay = async (req, res, next) => {
 	}
 }
 
+/**
+ * Checks if it's the user's first time logging in and landing on the main page.
+ * 
+ * @see {@link checkFirstLoginDay} 
+ * @param {Express.Request} req 
+ * @param {Express.Response} res 
+ * @param {Express.next} next 
+ */
 exports.checkFirstLoginOnMain = async (req, res, next) => {
 	const response = await userCollection.findOne({ email: req.session.email, }, { projection: { report: 1 } });
 	const report = response.report;
