@@ -56,4 +56,8 @@ exports.createHTML = (req, res, next) => {
     
     res.status(200);
     res.redirect('/calorieRequirement');  
+ }
+
+exports.getTDEE = async (BMR) => {
+    return BMR * 1.2;
 }
