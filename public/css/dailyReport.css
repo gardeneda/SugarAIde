@@ -117,6 +117,7 @@ body {
 
 table {
     border-collapse: collapse;
+	text-transform: capitalize;
 }
 
 #exercise-table,
