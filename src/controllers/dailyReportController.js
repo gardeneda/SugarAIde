@@ -12,7 +12,6 @@ const userCollection = database
 	.collection("users");
 
 const dateFormatter = require(`${__dirname}/../utils/dateFormatter`);
-const healthInfoController = require(`${__dirname}/healthInfoController`);
 const riskAssessController = require(`${__dirname}/riskAssessController`);
 
 /* End of Required Packages and Constant Declaration */

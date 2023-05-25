@@ -1,7 +1,7 @@
 //Exercise Feature Card data, fetches data from the database and displays it on the card
 window.addEventListener("load", getExerciseData);
 async function getExerciseData() {
-    const response = await fetch("http://localhost:5050/main/exerciseData");
+    const response = await fetch("https://drab-rose-indri-sari.cyclic.app/main/exerciseData");
     const data = await response.json();
     const exerciseLog = data.exercise;
 
