@@ -247,6 +247,7 @@ exports.createHTML = async (req, res, next) => {
     	riskChange: changeFormatted,
 		total: totalFormatted,
 		exerciseList: exerciseList,
-		nutritionList: nutrientList
+		nutritionList: nutrientList,
+		username: req.session.username
 	});
 };
