@@ -135,13 +135,13 @@
 										>
 											<div class="accordion-body">
 												<table id="exercise-table">
+													<% if (exerciseList.length > 0) { %>
 													<thead>
 														<th>Date</th>
 														<th>Exercise</th>
 														<th>Duration</th>
 														<th>Cal Burned</th>
 													</thead>
-													<% if (exerciseList.length > 0) { %>
 													<tbody>
 														<% for (exercise of exerciseList) { %>
 														<tr>
@@ -150,7 +150,7 @@
 															<td><%= exercise.duration%> hours</td>
 															<td><%= exercise.caloriesBurned %> Cal</td>
 														</tr>
-														<% } %> <% } else { %> You didn't log any exercises. <%
+														<% } %> <% } else { %> You didn't log any exercises yesterday. <%
 														} %>
 													</tbody>
 												</table>
@@ -177,13 +177,13 @@
 										>
 											<div class="accordion-body">
 												<table id="nutrition-table">
+													<% if (nutritionList.length > 0) { %>
 													<thead>
 														<th>Date</th>
 														<th>Food</th>
 														<th>Sugar</th>
 														<th>Calories</th>
 													</thead>
-													<% if (nutritionList.length > 0) { %>
 													<tbody>
 														<% for (nutrition of nutritionList) { %>
 														<tr>
@@ -192,7 +192,7 @@
 															<td><%= nutrition.sugar %></td>
 															<td><%= nutrition.calories %> Cal</td>
 														</tr>
-														<% } %> <% } else { %> You didn't log any exercises. <%
+														<% } %> <% } else { %> You didn't log any diet entries yesterday. <%
 														} %>
 													</tbody>
 												</table>
