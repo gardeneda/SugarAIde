@@ -33,7 +33,7 @@ Files
 ```├───public
 |
 │   ├───css
-│   │       resources.css      CSS for resources page
+│   │       resources.css     
 │   │       calorieRequirment.css   
 │   │       chat.css
 │   │       dietTrack.css
@@ -179,10 +179,13 @@ Nutrition Log:
 Calories Tracker:
 
 Exercise Log:
+- SugarAIde's exercise log feature allows users to visualize their data and keep track of their daily and weekly activities. A bar graph displays the total amount of time spent exercizing for that week and a table shows the daily exercize. 
+By using the chat option, the AI will automatically log the user's activity with an estimate of how many calories they burned. User's are also able to manually record their information using the exercise form. Where they can specify how many calories they burned. If the user completed weightlifting activities, they can also specify the amount of repitions, sets. 
 
 Risk Assessment:
  
 Resources Page:
+- This page contains additional links to non-profit organizations and research institutes that provide more detail for the user to access if they are seeking more information and additional tools to help manage their diabetes and their health. 
 
 Credits:
 -------------------------------------------------------------------
