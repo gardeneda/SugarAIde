@@ -149,13 +149,12 @@ app.use("/checkCalories", checkCaloriesRouter);
 
 app.use("/calorieRequirement", calorieRequirmentRouter);
 
-app.use("/foodHistory", foodHistoryRouter);
-
-app.use('/nutritionLog', foodHistoryRouter);
+app.use('/foodHistory', foodHistoryRouter);
 
 app.use("/todo", todoRouter);
 
 app.use("/dietTrack", dietTrackRouter);
+
 
 app.use("/logout", (req, res) => {
   req.session.destroy();
