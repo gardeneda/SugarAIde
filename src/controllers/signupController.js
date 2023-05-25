@@ -99,7 +99,9 @@ exports.createUser = async (req, res) => {
     exerciseLog: [],
     // Checks if it's the user's first time.
     // If it is, we'll be sending them a health-information survey.
-    init: 1
+    init: 1,
+    // Checks if it's the user's first time logging in for the day.
+    report: 1
   });
 
   console.log("Inserted User");

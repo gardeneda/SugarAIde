@@ -6,6 +6,8 @@ const dailyReportController = require(`${__dirname}/../controllers/dailyReportCo
 const router = express.Router();
 
 router.route('/')
-    .get(validation.checkValidSession, dailyReportController.createHTML);
+    .get(validation.checkValidSession,
+        dailyReportController.checkFirstLoginDay,
+        dailyReportController.createHTML);
 
 module.exports = router;

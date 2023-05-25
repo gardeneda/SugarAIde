@@ -215,23 +215,47 @@ exports.updateRiskAssessment = async (bloodglucose, account, healthinfo) => {
   return { before: riskBefore, after: riskAfter };
 };
 
+exports.checkFirstLoginDay = async (req, res, next) => {
+	const response = await userCollection.findOne({ email: req.session.email, }, { projection: { report: 1 } });
+	const report = response.report;
+
+	if (report === 1) {
+		await userCollection.updateOne({ email: req.session.email }, { $set: { report: 0 } });
+
+		next();
+		
+	} else {
+
+		res.render("main");
+	}
+
+}
+
 /**
  * Renders the daily report page
  */
 exports.createHTML = async (req, res, next) => {
-	const date = dateFormatter.getToday();
+	const date = dateFormatter.getYesterday();
 	const exerciseList = await exports.getExercisesByDate(req.session.email, date);
 	const nutrientList = await exports.getNutrientsByDate(req.session.email, date);
 	const health = await exports.getHealthInfo(req.session.email);
 
-	console.log(exerciseList);
-	console.log(nutrientList);
+	// console.log(exerciseList);
+	// console.log(nutrientList);
 
-  	const { consumed, burned, total } = exports.totalCalories(nutrientList, exerciseList, health?.metabolism);
-  	const sugar = exports.bloodGlucoseCalculator(nutrientList, health?.bloodglucose);
-  	const { before, after } = await exports.updateRiskAssessment(sugar, req.session.email, health);
-  	const change = before - after;
+  	let { consumed, burned, total } = exports.totalCalories(nutrientList, exerciseList, health?.metabolism);
+  	let sugar = exports.bloodGlucoseCalculator(nutrientList, health?.bloodglucose);
+  	let { before, after } = await exports.updateRiskAssessment(sugar, req.session.email, health);
+  	let change = before - after;
 
+	consumed = consumed ?? 0;
+	burned = burned ?? 0;
+	total = total ?? 0;
+	sugar = sugar ?? 0;
+	before = before ?? 0;
+	after = after ?? 0;
+	change = change ?? 0;
+	
   	burnedFormatted = burned.toFixed(2);
   	totalFormatted = total.toFixed(2);
   	beforeFormatted = before.toFixed(4) * 100;
