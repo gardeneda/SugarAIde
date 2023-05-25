@@ -323,9 +323,11 @@ exports.createHTML = async (req, res, next) => {
 	
   	burnedFormatted = burned.toFixed(2);
   	totalFormatted = total.toFixed(2);
-  	beforeFormatted = before.toFixed(4) * 100;
-  	afterFormatted = after.toFixed(4) * 100;
+  	beforeFormatted = (before * 100).toFixed(2);
+  	afterFormatted = (after * 100).toFixed(2);
+	console.log(afterFormatted);
   	changeFormatted = change.toFixed(4) * 100;
+	console.log(changeFormatted);
 
 	res.render("dailyReport", {
 		consumed: consumed,
