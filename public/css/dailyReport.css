@@ -5,30 +5,6 @@
          url(/fonts/Poppins-Thin.ttf);
 } */
 
-.bd-placeholder-img {
-	font-size: 1.125rem;
-	text-anchor: middle;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-}
-@media (min-width: 768px) {
-	.bd-placeholder-img-lg {
-		font-size: 3.5rem;
-	}
-}
-.form-signin {
-	width: 100%;
-	max-width: 330px;
-	padding: 15px;
-	margin: auto;
-}
-
-.hidden {
-	display: none;
-}
-
 /* 
       CSS and JS reagarding how to implement the Circular Progress Bar has been attained from: 
         https://www.youtube.com/watch?v=SKU2gExpkPI&ab_channel=CodingLab
@@ -40,11 +16,8 @@ body {
 }
 
 .row {
-	height: 100%;
-	width: 100%;
 	display: flex;
 	align-items: center;
-	overflow: scroll;
 }
 
 .container {
@@ -58,7 +31,6 @@ body {
 .progress-container {
 	display: flex;
 	/* width: 520px; */
-	width: 100%;
 	/* height: 100%; */
 	padding: 50px 0;
 	/* padding: 10% 0; */
@@ -139,7 +111,7 @@ th {
 }
 
 .sub-container {
-	overflow: scroll;
+	overflow: hidden;
 }
 
 .welcome-container {
@@ -163,7 +135,6 @@ th {
 .carousel-item {
 	width: 100%;
 	height: 100%;
-	overflow: scroll;
 }
 
 .btn-sugar {
