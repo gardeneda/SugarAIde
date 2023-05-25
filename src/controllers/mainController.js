@@ -48,7 +48,7 @@ exports.createHTML = async (req, res, next) => {
     return;
   }
 
-  const tdee = (user.healthinfo?.tdee ?? 0 ).toFixed(0);
+  const tdee = Math.trunc(Number(user.healthinfo?.tdee ?? 0));
 
   // Extract values from the dailyValues object
   const {

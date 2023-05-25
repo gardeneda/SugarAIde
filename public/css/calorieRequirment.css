@@ -15,5 +15,5 @@
 }
 
 .table-responsive { 
-    overflow-x: auto;
+    width: 80%;
 }

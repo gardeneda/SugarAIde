@@ -11,13 +11,12 @@ const userCollection = database
 
 const dateFormatter = require(`${__dirname}/../utils/dateFormatter`);
 const dailyReportController = require(`${__dirname}/dailyReportController`);
+const checkCaloriesController = require(`${__dirname}/checkCaloriesController`);
 
 exports.getDailyValues = async (email) => {
     const user = await userCollection.findOne({ email: email });
     const date = dateFormatter.getToday();
     const nutritions = await dailyReportController.getNutrientsByDate(email, date);
-
-    console.log(nutritions);
 
     if (!nutritions) {
         return null;
@@ -69,13 +68,22 @@ exports.getDailyValues = async (email) => {
             }
         }
 
-        const tdee = user.healthinfo?.tdee;
+
+
+        let tdee = user.healthinfo?.tdee;
+
+        if (user.healthinfo?.tdee == undefined ||user.healthinfo?.tdee == null) {
+            await userCollection.updateOne({ email: email }, { $set: { 'healthinfo.tdee': (user.healthinfo?.metabolism * 1.2) } });
+            tdee = user.healthinfo?.metabolism * 1.2;
+        }
+
         const sugarLimit = ((Number(tdee) * 0.05) / 4).toFixed(1);
         const carbsLimit = ((Number(tdee) * 0.50) / 4).toFixed(1);
         const fatsLimit = ((Number(tdee) * 0.30) / 9).toFixed(1);
         const proteinsLimit = ((Number(tdee) * 0.20) / 4).toFixed(1);
 
         const dailyValuesObject = {
+            tdee: Math.trunc(tdee),
             totalCalories: totalCalories,
             totalFat: totalFat,
             totalCarbs: totalCarbs,
@@ -95,7 +103,7 @@ exports.getDailyValues = async (email) => {
         );
 
         return {
-            tdee: tdee.toFixed(0),
+            tdee: Math.trunc(tdee),
             sugarLimit: sugarLimit,
             carbsLimit: carbsLimit,
             fatsLimit: fatsLimit,

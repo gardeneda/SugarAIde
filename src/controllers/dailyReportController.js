@@ -297,14 +297,6 @@ exports.checkFirstLoginOnMain = async (req, res, next) => {
 }
 
 /**
- * Sets all user's report field to 1.
- * Signifies a new day, and the need for a reset.
- */
-exports.resetReport = async () => {
-	userCollection.updateMany({}, { $set: { report: 1 } });
-}
-
-/**
  * Renders the daily report page
  */
 exports.createHTML = async (req, res, next) => {
@@ -331,9 +323,11 @@ exports.createHTML = async (req, res, next) => {
 	
   	burnedFormatted = burned.toFixed(2);
   	totalFormatted = total.toFixed(2);
-  	beforeFormatted = before.toFixed(4) * 100;
-  	afterFormatted = after.toFixed(4) * 100;
+  	beforeFormatted = (before * 100).toFixed(2);
+  	afterFormatted = (after * 100).toFixed(2);
+	console.log(afterFormatted);
   	changeFormatted = change.toFixed(4) * 100;
+	console.log(changeFormatted);
 
 	res.render("dailyReport", {
 		consumed: consumed,
