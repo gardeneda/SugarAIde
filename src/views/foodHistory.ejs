@@ -36,7 +36,9 @@
 	
 	<body>
 		<%- include("templates/header") %>
-		<br><br>
+		<br>
+		<div class="container">
+		<div id="dietContainer" class="card">
 		<!-- Tab links -->
 		<div class="tab" id="tab">
 			<button class="tablinks" onclick="window.location.href='/dietTrack'">Diet</button>
@@ -46,6 +48,7 @@
 		<div class="container mx-auto" style="margin-top: 75px">
 		  <canvas id="myChart">
 		  </canvas>
+		  <div class="table-responsive-sm">
 		  <table id="summaryTable" class="table">
 			<thead>
 				<tr>
@@ -62,7 +65,8 @@
 			</tbody>
 		</table>		
 		</div>
-	  
+	</div>
+
 		<script>
 			let days = <%- JSON.stringify(days) %>;
 			let labels = Object.keys(days);
@@ -129,15 +133,29 @@
 			}
 
 			async function handleDelete(evt) {
-				let foodName = evt.target.getAttribute('data-food-name');
-				let foodDate = evt.target.getAttribute('data-food-date');
-				await fetch(`/foodHistory/foodDataByNameAndDate?food=${foodName}&date=${foodDate}`, {
-					method: 'DELETE',
-				});
-				// // After successful deletion, update table
-				window.location.reload();
+				let foodName = evt.currentTarget.getAttribute('data-food-name');
+				let foodDate = evt.currentTarget.getAttribute('data-food-date');
+				
+				const confirmed = confirm("Are you sure you want to delete this entry?");
+				if (confirmed) {
+					const response = await fetch(`/foodHistory/foodDataByNameAndDate?food=${foodName}&date=${foodDate}`, {
+						method: 'DELETE',
+					});
+
+					const responseData = await response.json();
+
+					if (response.ok) {
+						// After successful deletion, update table
+						window.location.reload();
+					} else {
+						console.error('Delete operation failed: ', responseData.message);
+					}
+				}
 			}
+
 	  </script>
+	  	</div>
+	</div>
 	<%- include("templates/footer") %>
   </body>
 </html>

@@ -33,7 +33,7 @@ exports.getUserNutritionData = async (req, res, next) => {
       'Friday': { totalCalories: 0 },
       'Saturday': { totalCalories: 0 },
     };
-
+    
     // Iterate over each key in nutritionLog
     for (let key in user.nutritionLog) {
       // Get the day of the week from the log's date
