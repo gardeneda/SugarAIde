@@ -8,7 +8,7 @@ const router = express.Router();
 
 router
   .route("/")
-  .get(mainController.createHTML);
+  .get(validation.checkValidSession, mainController.createHTML);
   
 router
   .route('/exerciseData')

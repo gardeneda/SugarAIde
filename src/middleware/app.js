@@ -14,6 +14,8 @@ const mongodb_session_secret = process.env.MONGODB_SESSION_SECRET;
 const node_session_secret = process.env.NODE_SESSION_SECRET;
 
 const todoController = require(`${__dirname}/../controllers/todoController`);
+const mainController = require(`${__dirname}/../controllers/mainController`);
+
 const dateFormatter = require(`${__dirname}/../utils/dateFormatter`);
 
 const navLinks = require(`${__dirname}/../utils/navLinkManager.js`);
@@ -103,12 +105,12 @@ app.use("/", async (req, res, next) => {
 
 app.get("/", (req, res) => {
   if (req.session.authenticated) {
-    res.render('main');
-
+    mainController.createHTML(req, res);
   } else {
     res.render("home");
   }
 });
+
 
 
 app.use("/css", express.static(`${__dirname}/../../public/css`));
