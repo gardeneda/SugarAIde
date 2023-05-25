@@ -1,7 +1,7 @@
 window.addEventListener("DOMContentLoaded", function () {
   document.getElementById("defaultOpen").click();
 });
-
+//This function is used to set up the tabs for the exercise form  
 function openExercise(evt, exercise) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");

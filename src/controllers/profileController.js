@@ -248,7 +248,6 @@ exports.updateHealthInfo = async (req, res, next) => {
   res.send("success");
 };
 
-
 exports.getRisk = async function (req, res, next) {
   const email = req.session.email;
 
@@ -263,3 +262,4 @@ exports.getRisk = async function (req, res, next) {
   const risk = user.healthinfo.risk;
   res.json({ risk: risk });
 };
+

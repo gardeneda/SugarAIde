@@ -83,10 +83,17 @@ exports.processForm = async (req, res, next) => {
   try {
     await userCollection.updateOne({ email: req.session.email }, updateData);
     res.status(200);
-    res.redirect('/exercisePage');
+    const script = `
+    <script>
+      window.alert('Form submitted successfully!');
+      window.location.href = '/exercisePage';
+    </script>
+  `;
+    res.send(script);
   } catch (error) {
     console.error('Error processing form: ', error);
     res.status(500).send('Error processing form');
+    
   }
 };
 

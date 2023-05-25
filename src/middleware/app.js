@@ -14,6 +14,8 @@ const mongodb_session_secret = process.env.MONGODB_SESSION_SECRET;
 const node_session_secret = process.env.NODE_SESSION_SECRET;
 
 const todoController = require(`${__dirname}/../controllers/todoController`);
+const mainController = require(`${__dirname}/../controllers/mainController`);
+
 const dateFormatter = require(`${__dirname}/../utils/dateFormatter`);
 
 const navLinks = require(`${__dirname}/../utils/navLinkManager.js`);
@@ -32,7 +34,7 @@ const resetPasswordRouter = require(`${__dirname}/../routes/resetPasswordRouter`
 const checkCaloriesRouter = require(`${__dirname}/../routes/checkCaloriesRouter`);
 const calorieRequirmentRouter = require(`${__dirname}/../routes/calorieRequirmentRouter`);
 const foodHistoryRouter = require(`${__dirname}/../routes/foodHistoryRouter`);
-const additionalInfoRouter = require(`${__dirname}/../routes/additionalInfoRouter`);
+const resourcesRouter = require(`${__dirname}/../routes/resourcesRouter`);
 const todoRouter = require(`${__dirname}/../routes/todoRouter`);
 const dietTrackRouter = require(`${__dirname}/../routes/dietTrackRouter`);
 const dailyReportRouter = require(`${__dirname}/../routes/dailyReportRouter`);
@@ -112,6 +114,7 @@ app.get("/", (req, res) => {
 });
 
 
+
 app.use("/css", express.static(`${__dirname}/../../public/css`));
 
 app.use("/font", express.static(`${__dirname}/../../public/font`));
@@ -140,7 +143,7 @@ app.use("/health", healthInfoRouter);
 
 app.use("/risk", riskAssessRouter);
 
-app.use("/additionalInfo", additionalInfoRouter);
+app.use("/resources", resourcesRouter);
 
 app.use("/exercisePage", exerciseRouter);
 
