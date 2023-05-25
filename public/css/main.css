@@ -84,6 +84,15 @@ body {
 .card-body{
   font-size: (1rem, 3vw);
 }
+
+#nutrientsCard {
+  width: 100% !important;
+}
+
+.row {
+  width: 100%;
+}
+
 .card-header {
   color: #F9858b;
   border-color: #dc7277;
@@ -92,9 +101,14 @@ body {
 .card{
   border-color: #dc7277;
   border-width: thin;
+  overflow: none !important;
 }
 .btn {
   background: linear-gradient(#F9858b, #F985B9);
+}
+
+.table {
+  width: 100%;
 }
 /*------------Feature full Cards CSS------------- */
 .full-card{
@@ -204,4 +218,24 @@ body {
 #exerciseFormLink {
   text-decoration: none;
   color: #F9858b;
+}
+
+#exerciseCard {
+  width: 100%;
+}
+
+.exercise-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title-container,
+.body-container {
+  width: 100% !important;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
