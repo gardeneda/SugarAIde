@@ -64,7 +64,7 @@ function openLog(evt, view) {
 
 //Retrieves the exercise data from the database and formats it for the calendar and chart
 async function getExerciseData() {
-  const response = await fetch("http://localhost:5050/exercisePage/calendarData");
+  const response = await fetch("https://drab-rose-indri-sari.cyclic.app/exercisePage/calendarData");
   
   const data = await response.json();
 
@@ -170,7 +170,7 @@ function attachButtonListeners() {
         }
         // Send a PUT request to the server with the new data
 
-        fetch(`http://localhost:5050/exercisePage/calendarData/${id}`, {
+        fetch(`https://drab-rose-indri-sari.cyclic.app/exercisePage/calendarData/${id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -233,7 +233,7 @@ async function deleteExerciseEntry(id) {
     }
 
   try {
-    await fetch(`http://localhost:5050/exercisePage/calendarData/${id}`, {
+    await fetch(`https://drab-rose-indri-sari.cyclic.app/exercisePage/calendarData/${id}`, {
       method: "DELETE",
     });
 
