@@ -1,17 +1,17 @@
 
 #tableTitle {
-    background-color: rgba(255, 114, 145, 0.377);
-    border-color: rgba(255, 99, 133, 0.822);
-    border-width: 1px;
+    background-color: rgba(245, 245, 245, 0.637);
+    color:#F9858b;
     width: 1%;
     text-align: center;
-    font-weight: 400;
+    font-weight: 600;
 }
 
 #tableEntries {
     font-weight:250;
     text-align: center;
 }
+
 
 /* test */
 html, body {
@@ -76,3 +76,14 @@ html, body {
     background-color: #e77076;
   }
   
+  .delete-btn {
+    background-color: #e45c63;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 200;
+  }
