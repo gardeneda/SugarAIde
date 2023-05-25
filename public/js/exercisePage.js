@@ -1,11 +1,13 @@
+let calendar;
 ////////////////////Load the calendar and chart using the user exerciseLog data//////////////////
 document.addEventListener("DOMContentLoaded", async function () {
   var calendarEl = document.getElementById("calendar");
   var {eventArray, weeklyLogs} = await getExerciseData();
-  var calendar = new FullCalendar.Calendar(calendarEl, {
+  calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: "dayGridMonth",
     events: eventArray,
   });
+
   calendar.render();
 //////////////////Render the Chart using the user exerciseLog data///////////////
   let myChart = document.getElementById('chart').getContext('2d');
@@ -17,7 +19,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       datasets: [{
         label: 'Time (Hours)',
         data: weeklyLogs[weeklyLogs.length - 1].durations,
-        backgroundColor: '#0077b6',
+        backgroundColor: 'rgba(0,119,182, 0.7)',
         borderWidth: 1,
       }]
     },
@@ -27,6 +29,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   });
 });
+
 //Sets the default tab to be the weekly chart
 window.addEventListener("DOMContentLoaded", function () {
   document.getElementById("defaultOpen").click();
@@ -55,13 +58,15 @@ function openLog(evt, view) {
   document.getElementById(view).style.display = "block";
   evt.currentTarget.className += " active";
 }
+
+
 //Retrieves the exercise data from the database and formats it for the calendar and chart
 async function getExerciseData() {
   const response = await fetch("http://localhost:5050/exercisePage/calendarData");
   const data = await response.json();
 
   const exerciseLog = data.exercise;
-//Get the current date for the day
+  //Get the current date for the day
   const today = new Date();
   const todaysLogs = exerciseLog.filter(log => {
   const logDate = new Date(log.date);
@@ -69,13 +74,13 @@ async function getExerciseData() {
     logDate.getMonth() === today.getMonth() &&
     logDate.getFullYear() === today.getFullYear();
   });
-//Display the exercise data for the day
+  //Display the exercise data for the day
   displayDailyLogs(todaysLogs);
 
 
   const eventArray = [];
   let weeklyLogs = [];
-//Format the date from string to YYYY-MM-DD
+  //Format the date from string to YYYY-MM-DD
   for (const key in exerciseLog) {
     if (Object.prototype.hasOwnProperty.call(exerciseLog, key)) {
       const entry = exerciseLog[key];
@@ -83,13 +88,14 @@ async function getExerciseData() {
       const formattedDate = formatDate(date);
 
       const event = {
+        id: entry.id,
         title: entry.exercise,
         start: formattedDate,
         end: formattedDate,
       };
 
       eventArray.push(event);
-//Function to display the weekly hours of exercise in the chart
+      //Function to display the weekly hours of exercise in the chart
       let week = weeklyLogs.find(w => date >= new Date(w.start) && date <= new Date(w.end));
 
       if (!week) {
@@ -111,6 +117,8 @@ async function getExerciseData() {
   return { eventArray, weeklyLogs };
 }
 
+
+//////////////////////////SVG icons for the edit, save, and delete buttons//////////////////////////
 const saveIcon= `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
 <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
 </svg>`;
@@ -121,6 +129,8 @@ const updateIcon=`<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 const deleteIcon= `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
 <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
 </svg>`;
+
+
 ///////////////////////Function to add update and delete buttons to the table///////////////////////
 function attachButtonListeners() {
   document.querySelectorAll(".delete-btn").forEach(button => {
@@ -201,24 +211,34 @@ function displayDailyLogs(dailyLogs) {
   attachButtonListeners();
 }
 
+
 ///////////////////////Function to delete entries from table and database//////////////////////
 async function deleteExerciseEntry(id) {
   // Select the button and the row
-  confirm("Are you sure you want to delete this entry?");
-  const button = document.querySelector(`button[data-id="${id}"]`);
-  const row = button.closest("tr");
+  const confirmed = confirm("Are you sure you want to delete this entry?");
+// Only proceed if the user confirmed
+  if (confirmed) {
+  // Select the button and the row
+    const button = document.querySelector(`button[data-id="${id}"]`);
+    const row = button ? button.closest("tr") : null;
 
-  if (button && row) {
-    row.remove();
-  }
+    if (button && row) {
+      row.remove();
+    }
 
-  try {
-    await fetch(`http://localhost:5050/exercisePage/calendarData/${id}`, {
-      method: "DELETE",
-    });
+    try {
+      await fetch(`http://localhost:5050/exercisePage/calendarData/${id}`, {
+        method: "DELETE",
+      });
 
-  } catch (error) {
-    console.error("Failed to delete exercise entry", error);
+      let event = calendar.getEventById(id);
+      if (event) {
+        event.remove();
+      }
+  
+    } catch (error) {
+      console.error("Failed to delete exercise entry", error);
+    }
   }
 }
 
@@ -248,6 +268,7 @@ setInterval(async () => {
   }
 }, 60 * 60000); 
 
+
 //////////////////////Function to get the week number///////////////////////
 function getWeekNumber(d) {
   d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
@@ -255,6 +276,7 @@ function getWeekNumber(d) {
   const yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
   return Math.ceil((((d - yearStart) / 86400000) + 1)/7);
 }
+
 /////////////////////Function to format the date//////////////////////////
 function formatDate(date) {
   const year = date.getFullYear();

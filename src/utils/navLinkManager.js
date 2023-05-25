@@ -5,7 +5,7 @@ const navLinks = [
     { name: "To-Do", link: "/todo" },
     { name: "Profile", link: "/profile" },
     { name: "Risk", link: "/risk" },
-    { name: "Resources", link: "/additionalInfo" }
+    { name: "Resources", link: "/resources" }
   ];
   
 function highlightCurrentLink(pathname) {

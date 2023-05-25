@@ -35,6 +35,7 @@ exports.forgotPassword = async (req, res, next) => {
 
     // Check email
     const user = await userCollection.findOne({ email: email });
+    const username = user.username;
 
     console.log("user:" +user);
 
@@ -60,6 +61,8 @@ exports.forgotPassword = async (req, res, next) => {
     border-top-right-radius: 10px">
     <br><br>
 
+    Hello ${username},
+    <br><br>
     You are receiving this email because you (or someone else) have requested the reset of the password for your account.<br><br>
     Please click on the following link, or paste this into your browser to complete the process within one hour of receiving it:<br><br>
     <a href=${resetURL}>${resetURL}</a><br><br>

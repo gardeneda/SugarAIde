@@ -32,7 +32,7 @@ const resetPasswordRouter = require(`${__dirname}/../routes/resetPasswordRouter`
 const checkCaloriesRouter = require(`${__dirname}/../routes/checkCaloriesRouter`);
 const calorieRequirmentRouter = require(`${__dirname}/../routes/calorieRequirmentRouter`);
 const foodHistoryRouter = require(`${__dirname}/../routes/foodHistoryRouter`);
-const additionalInfoRouter = require(`${__dirname}/../routes/additionalInfoRouter`);
+const resourcesRouter = require(`${__dirname}/../routes/resourcesRouter`);
 const todoRouter = require(`${__dirname}/../routes/todoRouter`);
 const dietTrackRouter = require(`${__dirname}/../routes/dietTrackRouter`);
 
@@ -139,7 +139,7 @@ app.use("/health", healthInfoRouter);
 
 app.use("/risk", riskAssessRouter);
 
-app.use("/additionalInfo", additionalInfoRouter);
+app.use("/resources", resourcesRouter);
 
 app.use("/exercisePage", exerciseRouter);
 

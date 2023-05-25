@@ -1,11 +1,11 @@
 const express = require("express");
 
-const additionalInfoController = require(`${__dirname}/../controllers/additionalInfoController`);
+const resourcesController = require(`${__dirname}/../controllers/resourcesController`);
 const validation = require(`${__dirname}/../utils/validation`);
 const router = express.Router();
 
 router
   .route("/")
-  .get(validation.checkValidSession, additionalInfoController.createHTML);
+  .get(validation.checkValidSession, resourcesController.createHTML);
 
 module.exports = router;

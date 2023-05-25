@@ -1,3 +1,4 @@
+let totalCalories;
 //Exercise Feature Card data, fetches data from the database and displays it on the card
 window.addEventListener("load", getExerciseData);
 async function getExerciseData() {
@@ -18,11 +19,11 @@ async function getExerciseData() {
     //Display the data on the card 
     if (todaysLogs.length > 0) {
       let totalTime = 0;
-      let totalCalories = 0;
+      totalCalories = 0;
   
       todaysLogs.forEach(log => {
         totalTime += log.duration;
-        totalCalories += log.caloriesBurned;
+        totalCalories += parseInt(log.caloriesBurned);
       });
       document.getElementById("exerciseCalories").innerHTML = totalCalories;
       document.getElementById("time").innerHTML = totalTime + (totalTime === 1 ? " hour" : " hours");
