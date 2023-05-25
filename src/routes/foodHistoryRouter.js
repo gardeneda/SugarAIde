@@ -9,11 +9,7 @@ router
   .route("/")
   .get(validation.checkValidSession, foodHistoryController.createHTML);
 
-
-
-//TEST--------------------------------------------------------------------------
 router.delete('/foodDataByNameAndDate', foodHistoryController.deleteFoodDataByNameAndDate);
-
 
 router
   .route('/foodData')

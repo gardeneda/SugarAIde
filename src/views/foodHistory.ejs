@@ -24,7 +24,9 @@
 			src="https://kit.fontawesome.com/36e5d26d04.js"
 			crossorigin="anonymous"
 		></script>
-		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script 
+			src="https://cdn.jsdelivr.net/npm/chart.js">
+		</script>
 		<title>My chart.js chart</title>
 
 		<!--CSS-->
@@ -34,15 +36,17 @@
 	
 	<body>
 		<%- include("templates/header") %>
+		<br><br>
+		<!-- Tab links -->
+		<div class="tab" id="tab">
+			<button class="tablinks" onclick="window.location.href='/dietTrack'">Diet</button>
+		  	<button class="tablinks" onclick="window.location.href='/foodHistory/foodHistory'">Food Log</button>
+		</div>
 		<!--temp css-->
 		<div class="container mx-auto" style="margin-top: 75px">
-		  <!-- <select id="chart-type">
-			<option value="calories">Calories (kcal)</option>
-			<option value="sugar">Sugar (g)</option>
-		  </select> -->
-		  <canvas id="myChart"></canvas>
-		  <!--TEST-->
-		  <table id="summaryTable" class="table table-striped">
+		  <canvas id="myChart">
+		  </canvas>
+		  <table id="summaryTable" class="table">
 			<thead>
 				<tr>
 					<th scope="col" id="tableTitle">Food</th>
@@ -50,23 +54,19 @@
 					<th scope="col" id="tableTitle">Sugar</th>
 					<th scope="col" id="tableTitle">Carbs</th>
 					<th scope="col" id="tableTitle">Protein</th>
-					<th scope="col" id="tableTitle">Delete</th>
-
+					<th scope="col" id="tableTitle">Remove</th>
 				</tr>
 			</thead>
 			<tbody id="tableEntries">
 			<!-- Food data will be inserted here -->
 			</tbody>
 		</table>		
-		  <!--TEST-->
 		</div>
 	  
 		<script>
 			let days = <%- JSON.stringify(days) %>;
-		  
 			let labels = Object.keys(days);
 			let data = labels.map(day => days[day].totalCalories);
-		  
 			let ctx = document.getElementById('myChart').getContext('2d');
 			let chart = new Chart(ctx, {
 			  type: 'bar',
@@ -77,8 +77,6 @@
 				  data: data,
 				  backgroundColor: 'rgba(75, 192, 192, 0.2)',
 				  borderColor: 'rgba(75, 192, 192, 1)',
-				//   backgroundColor: 'rgba(255, 99, 132, 0.2)',
-				//   borderColor: 'rgba(255, 99, 132, 1)',
 				  borderWidth: 1
 				}]
 			  },
@@ -88,7 +86,6 @@
 					beginAtZero: true
 				  }
 				},
-				//TEST-------
 				onClick: handleClick
 			  }
 			});
@@ -107,49 +104,41 @@
 					})
 					.then(res => res.json())
 					.then(data => data.foodData); 
-					// Make sure to extract foodData from the response
-
 					// Create the table with this data
 					createSummaryTable(foodData);
 				}
 				}
-
-				function createSummaryTable(foodData) {
-					let tableBody = document.getElementById('summaryTable').getElementsByTagName('tbody')[0];
-					// Clear existing data
-					tableBody.innerHTML = '';
-					// Add new rows for each food item
-					for (let food of foodData) {
+			function createSummaryTable(foodData) {
+				let tableBody = document.getElementById('summaryTable').getElementsByTagName('tbody')[0];
+				// Clear existing data
+				tableBody.innerHTML = '';
+				// Add new rows for each food item
+				for (let food of foodData) {
 					let newRow = tableBody.insertRow();
-
 					newRow.innerHTML = `<td>${food.food}</td><td>${food.calories}</td>
 					<td>${food.sugar}</td><td>${food.carbohydrates}</td>
 					<td>${food.protein}</td>
-					<td><button class="delete-btn" data-food-name="${food.food}" data-food-date="${food.date}">X</button></td>`;
+					<td><button class="delete-btn" data-food-name="${food.food}" data-food-date="${food.date}">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+						<path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+					</svg>
+					</button></td>`;
 					let deleteBtn = newRow.querySelector('.delete-btn');
 					deleteBtn.addEventListener('click', handleDelete);
-					}
 				}
-				//TEST-------
+			}
 
-				async function handleDelete(evt) {
-					let foodName = evt.target.getAttribute('data-food-name');
-					let foodDate = evt.target.getAttribute('data-food-date');
-
-					await fetch(`/foodHistory/foodDataByNameAndDate?food=${foodName}&date=${foodDate}`, {
-						method: 'DELETE',
-					});
-
-					// // After successful deletion, re-fetch data or otherwise update your table
-					
-					window.location.reload();
-				}
-
-				//TEST-------
-		  </script>
-		  
-		<%- include("templates/footer") %>
-	  </body>
-	  
+			async function handleDelete(evt) {
+				let foodName = evt.target.getAttribute('data-food-name');
+				let foodDate = evt.target.getAttribute('data-food-date');
+				await fetch(`/foodHistory/foodDataByNameAndDate?food=${foodName}&date=${foodDate}`, {
+					method: 'DELETE',
+				});
+				// // After successful deletion, update table
+				window.location.reload();
+			}
+	  </script>
+	<%- include("templates/footer") %>
+  </body>
 </html>
 
