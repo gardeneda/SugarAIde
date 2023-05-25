@@ -228,7 +228,21 @@ exports.checkFirstLoginDay = async (req, res, next) => {
 
 		res.render("main");
 	}
+}
 
+exports.checkFirstLoginOnMain = async (req, res, next) => {
+	const response = await userCollection.findOne({ email: req.session.email, }, { projection: { report: 1 } });
+	const report = response.report;
+
+	if (report === 1) {
+		await userCollection.updateOne({ email: req.session.email }, { $set: { report: 0 } });
+
+		await exports.createHTML(req, res, next);
+		
+	} else {
+
+		next();
+	}
 }
 
 /**

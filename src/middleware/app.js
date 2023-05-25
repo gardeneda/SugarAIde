@@ -104,7 +104,7 @@ app.use("/", async (req, res, next) => {
 
 app.get("/", (req, res) => {
   if (req.session.authenticated) {
-    res.render('main');
+    res.redirect('main');
 
   } else {
     res.render("home");
