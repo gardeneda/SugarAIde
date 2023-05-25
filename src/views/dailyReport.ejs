@@ -1,35 +1,210 @@
 <!-- TO-DO List Page -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8"/>
-    <title>Risk Level</title>
+	<head>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1"
+			charset="utf-8"
+		/>
+		<title>Risk Level</title>
 
-    <!-- Bootstrap Link -->
-    <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
-    crossorigin="anonymous"
-    />
-    <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-    crossorigin="anonymous"
-    ></script>
-    <!-- Font Awesome Script Connected to Isaiah's Account -->
-    <script
-      src="https://kit.fontawesome.com/36e5d26d04.js"
-      crossorigin="anonymous"
-    ></script>
-    <link rel="stylesheet" href="/css/dailyReport.css" />
-    <link rel="stylesheet" href="/css/global.css" />
-  </head>
-  <body>
-    <%- include("templates/header") %>
-    <div class="main-container">
-      <div class=""></div>
-    </div>
-    <%- include("templates/footer") %>
-  </body>
+		<!-- Bootstrap Link -->
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+			crossorigin="anonymous"
+		/>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+			crossorigin="anonymous"
+		></script>
+		<!-- Font Awesome Script Connected to Isaiah's Account -->
+		<script
+			src="https://kit.fontawesome.com/36e5d26d04.js"
+			crossorigin="anonymous"
+		></script>
+		<link rel="stylesheet" href="/css/dailyReport.css" />
+		<link rel="stylesheet" href="/css/global.css" />
+	</head>
+	<body>
+		<%- include("templates/header") %>
+		<div class="main-container">
+      <div class="main-heading text-center">
+        <h2>Summary Report for __</h2>
+      </div>
+			<div class="sub-container">
+				<div class="row py-3">
+					<div class="col">
+						<h6 class="text-body-emphasis text-center">
+							Probability of Getting Diabetes
+						</h6>
+						<div class="progress-container">
+							<div class="circular-progress">
+								<span class="progress-value"> 0% </span>
+							</div>
+						</div>
+					</div>
+					<div class="col accordion-container">
+						<div class="accordion" id="accordionExample">
+							<div class="accordion-item" id="overall-summary">
+								<h2 class="accordion-header">
+									<button
+										class="accordion-button"
+										type="button"
+										data-bs-toggle="collapse"
+										data-bs-target="#collapseOne"
+										aria-expanded="true"
+										aria-controls="collapseOne"
+									>
+										Overall Summary
+									</button>
+								</h2>
+								<div
+									id="collapseOne"
+									class="accordion-collapse collapse show"
+									data-bs-parent="#accordionExample"
+								>
+									<div class="accordion-body">
+                    <table>
+                      <tr>
+                        <td id="consumed">Calories Consumed:</td>
+                        <td><%= consumed %> Cal</td>
+                      </tr>
+                      <tr>
+                        <td id="burned">Calories Burned:</td>
+                        <td><%= burned %> Cal</td>
+                      </tr>
+                      <tr>
+                        <td id="total-calories">Total Net Calories:</td>
+                        <td><%= total %> Cal</td>
+                      </tr>
+                      <tr>
+                        <td id="sugar">Sugar Consumed:</td>
+                        <td><%= sugar %>g</td>
+                      </tr>
+                      <tr>
+                        <td id="risk-before">Risk Before:</td>
+                        <td><%= riskBefore %>%</td>
+                      </tr>
+                      <tr>
+                        <td id="risk-after">Risk After:</td>
+                        <td><%= riskAfter %>%</td>
+                      </tr>
+                      <tr>
+                        <td id="change">Risk Level Change:</td>
+                        <td><%= riskChange %>%</td>
+                      </tr>
+                    </table>
+									</div>
+								</div>
+							</div>
+							<div class="accordion-item" id="">
+								<h2 class="accordion-header">
+									<button
+										class="accordion-button collapsed"
+										type="button"
+										data-bs-toggle="collapse"
+										data-bs-target="#collapseTwo"
+										aria-expanded="false"
+										aria-controls="collapseTwo"
+									>
+										Exercises Done
+									</button>
+								</h2>
+								<div
+									id="collapseTwo"
+									class="accordion-collapse collapse"
+									data-bs-parent="#accordionExample"
+								>
+									<div class="accordion-body">
+										<strong>This is the second item's accordion body.</strong>
+										It is hidden by default, until the collapse plugin adds the
+										appropriate classes that we use to style each element. These
+										classes control the overall appearance, as well as the
+										showing and hiding via CSS transitions. You can modify any
+										of this with custom CSS or overriding our default variables.
+										It's also worth noting that just about any HTML can go
+										within the <code>.accordion-body</code>, though the
+										transition does limit overflow.
+									</div>
+								</div>
+							</div>
+							<div class="accordion-item">
+								<h2 class="accordion-header">
+									<button
+										class="accordion-button collapsed"
+										type="button"
+										data-bs-toggle="collapse"
+										data-bs-target="#collapseThree"
+										aria-expanded="false"
+										aria-controls="collapseThree"
+									>
+										Foods Eaten
+									</button>
+								</h2>
+								<div
+									id="collapseThree"
+									class="accordion-collapse collapse"
+									data-bs-parent="#accordionExample"
+								>
+									<div class="accordion-body">
+										<strong>This is the third item's accordion body.</strong> It
+										is hidden by default, until the collapse plugin adds the
+										appropriate classes that we use to style each element. These
+										classes control the overall appearance, as well as the
+										showing and hiding via CSS transitions. You can modify any
+										of this with custom CSS or overriding our default variables.
+										It's also worth noting that just about any HTML can go
+										within the <code>.accordion-body</code>, though the
+										transition does limit overflow.
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row text-center">
+					<div class="col">
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<%- include("templates/footer") %>
+		<template class="activity-accordion">
+			<div class="accordion-item">
+				<h2 class="accordion-header">
+					<button
+						class="accordion-button collapsed"
+						type="button"
+						data-bs-toggle="collapse"
+						data-bs-target="#collapseThree"
+						aria-expanded="false"
+						aria-controls="collapseThree"
+					>
+						Accordion Item #3
+					</button>
+				</h2>
+				<div
+					id="collapseThree"
+					class="accordion-collapse collapse"
+					data-bs-parent="#accordionExample"
+				>
+					<div class="accordion-body">
+						<strong>This is the third item's accordion body.</strong> It is
+						hidden by default, until the collapse plugin adds the appropriate
+						classes that we use to style each element. These classes control the
+						overall appearance, as well as the showing and hiding via CSS
+						transitions. You can modify any of this with custom CSS or
+						overriding our default variables. It's also worth noting that just
+						about any HTML can go within the <code>.accordion-body</code>,
+						though the transition does limit overflow.
+					</div>
+				</div>
+			</div>
+		</template>
+	</body>
 </html>
