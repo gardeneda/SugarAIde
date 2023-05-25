@@ -15,12 +15,6 @@ const userCollection = database
 /* End of Required Packages and Constant Declaration */
 /* ///////////////////////////////////////////////// */
 
-/*
-    Send the user client the main landing page after you log-in.
-    Attaches a random picture when signed in.
-*/
-
-
 exports.getUserNutritionData = async (req, res, next) => {
   try {
     const email = req.session.email;
@@ -68,9 +62,7 @@ exports.createHTML = async (req, res) => {
               days: []
           });
       }
-  
-      // Assuming nutritionLog is now an object where keys are days of the week and values are the meals
-      const days = Object.entries(user.nutritionLog).map(([day, meal]) => ({ day, ...meal }));
+        const days = Object.entries(user.nutritionLog).map(([day, meal]) => ({ day, ...meal }));
 
       res.render('foodHistory', { days });
   } catch (err) {
@@ -106,8 +98,6 @@ exports.getFoodData = async (req, res) => {
 
     console.log('Filtered food data:', foodData); // Debug line
 
-    // return the filtered foodData
-    // return res.json({foodData:user.nutritionLog});-----------------
     return res.json({foodData:foodData});
 
   } catch (err) {
@@ -116,32 +106,9 @@ exports.getFoodData = async (req, res) => {
   }
 };
 
-//test---
-// exports.deleteFoodData = async (req, res) => {
-//   try {
-//       const email = req.session.email;
-//       const foodToDelete = req.params.food;
-//       const user = await userCollection.findOne({ email: email });
-
-//       if (!user) {
-//           return res.status(404).json({ message: 'User not found' });
-//       }
-
-//       user.nutritionLog = user.nutritionLog.filter(foodEntry => foodEntry.food !== foodToDelete);
-
-//       await userCollection.updateOne({ email: email }, { $set: { nutritionLog: user.nutritionLog } });
-
-//       res.status(200).json({ message: 'Food entry deleted successfully' });
-
-//   } catch (err) {
-//       console.error(err);
-//       res.status(500).json({ message: 'Server error' });
-//   }
-// };
-
 exports.deleteFoodDataByNameAndDate = async function (req, res) {
   const { food, date } = req.query;
-  const email = req.session.email; // assuming that the email of the current user is stored in the session
+  const email = req.session.email; 
   const user = await userCollection.findOne({ email: email });
   
   if (!user) {
