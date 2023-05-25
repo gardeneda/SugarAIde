@@ -34,6 +34,36 @@ async function getExerciseData() {
     }
   }
 
+// Display circular progress bar
+let circularProgress = document.querySelector(".circular-progress");
+let progressValue = document.querySelector(".progress-value");
+let calorieRequireElement = document.querySelector("#calorie-require");
+let remainingCal = document.querySelector(".remainingCalories").textContent;
+
+let progressStartValue = 0;
+let progressEndValue = 0; // 초기값 설정
+let speed = 1;
+
+// Step 1: Get calorieRequire value and check if it's valid
+let calorieRequire = calorieRequireElement.textContent;
+console.log("calorieRequire:", calorieRequire);
+
+// Step 2: Convert calorieRequire to a valid number format
+progressEndValue = parseFloat(calorieRequire);
+console.log("progressEndValue:", progressEndValue);
+
+let progress = setInterval(() => {
+  progressStartValue++;
+  progressValue.textContent = `${remainingCal} Remaining`;
+  circularProgress.style.background = `conic-gradient(#F9858b ${progressStartValue * 0.18 / progressEndValue}deg, #efefef ${progressStartValue * 360 / progressEndValue}deg)`;
+
+  if (progressStartValue >= Math.ceil(progressEndValue)) {
+    clearInterval(progress);
+  }
+}, speed);
+
+
+
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   // Button Animation and play Feature 
   var spinTimeout;
