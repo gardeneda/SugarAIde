@@ -3,7 +3,7 @@ window.addEventListener("DOMContentLoaded", function () {
   document.getElementById("defaultOpen").click();
 });
 
-
+//Function for switching between tabs
 function openPage(evt, tabName) {
   var i, tabcontent, tablinks;
 
