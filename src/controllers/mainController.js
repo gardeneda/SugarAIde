@@ -29,11 +29,24 @@ exports.createHTML = async (req, res, next) => {
   const dailyValues = user.dailyValues;
   if (!dailyValues) {
     res.render('main', {
-      message: "No daily values inputted for today"
+      message: "No daily values inputted for today",
+      username: user.username,
+      tdee: 0,
+      sugarLimit: 0,
+      carbsLimit : 0,
+      fatsLimit: 0,
+      proteinsLimit: 0,
+      totalCalories: 0,
+      totalFat: 0,
+      totalCarbs: 0,
+      totalSugar: 0,
+      totalProtein: 0,
+      remainingCal: 0
     });
+    return;
   }
-  console.log("dailyValues: " + dailyValues);
-  const tdee = (user.healthinfo?.tdee).toFixed(0);
+
+  const tdee = (user.healthinfo?.tdee ?? 0 ).toFixed(0);
 
   // Extract values from the dailyValues object
   const {
@@ -50,8 +63,6 @@ exports.createHTML = async (req, res, next) => {
   
 
   // Render the profile view with the user data and dailyValues
-  console.log("Username:", user.username);
-  console.log("dailyValues: " + dailyValues);
 
   res.render('main', { 
     username: user.username,
@@ -67,9 +78,6 @@ exports.createHTML = async (req, res, next) => {
     totalProtein: totalProtein,
     remainingCal: tdee - totalCalories
   });
-
-  console.log("dailyValues:", dailyValues);
-  console.log("totalCalories:", totalCalories);
 }
 
 
@@ -99,8 +107,6 @@ exports.getDailyValues = async (req, res, next) => {
       message: "No daily values found"
     });
   }
-
-  console.log("dailyValues:", dailyValues);
   
   res.json({ dailyValues: dailyValues });
 };
