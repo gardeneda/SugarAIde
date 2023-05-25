@@ -28,6 +28,9 @@
     <%- include("templates/header") %>
     <!-- <h2 class="title">Calorie/Nutrition Tracker</h2> -->
     <br><br>
+  <div class="container">
+    <div id="dietContainer" class="card">
+
     <!-- Tab links -->
     <div class="tab" id="tab">
       <!-- <button class="tablinks active" id="defaultOpen" onclick="openPage(event, 'diet')">Diet</button> -->
@@ -51,7 +54,8 @@
     <div id="foodLogs" class="tabcontent">
       <div id="foodLogsContent"></div>
     </div>
-
+  </div>
+  </div>
     <br>
     	<%- include("templates/footer") %>
     <script src="/js/dietTrack.js"></script>    

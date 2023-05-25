@@ -5,6 +5,8 @@ html, body {
 }
 
 .tabcontent {
+  border-bottom-left-radius:15px;
+  border-bottom-right-radius:15px;
   border: none !important;
   box-shadow: none !important;
   display: none;
@@ -29,6 +31,8 @@ html, body {
 }
 
 .tab {
+  border-top-left-radius:10px;
+  border-top-right-radius:10px;
   overflow: hidden;
   background: linear-gradient(#f9858b, #f985b9);
   display: flex;
@@ -58,4 +62,11 @@ html, body {
 /* Create an active/current tablink class */
 .tab button.active {
   background-color: #e77076;
+}
+
+#dietContainer{
+  border-top-left-radius:15px;
+  border-top-right-radius:15px;
+  max-width: 1100px;
+  margin:40px auto;
 }
