@@ -39,11 +39,16 @@ async function getExerciseData() {
 let circularProgress = document.querySelector(".circular-progress");
 let progressValue = document.querySelector(".progress-value");
 let calorieConsumed = document.querySelector("#calorie-consumed").innerHTML;
-const maxCalories = document.querySelector("#calorie-max").innerHTML;
+let maxCalories = document.querySelector("#calorie-max").innerHTML;
 let remainingCal = document.querySelector(".remainingCalories").textContent;
 
+maxCalories = Number(maxCalories);
+if (maxCalories == NaN || maxCalories == undefined || maxCalories == null) {
+  maxCalories = 1;
+}
+
 let progressEndValue = 0;
-let angleConstant = 360 / Number(maxCalories);
+let angleConstant = 360 / maxCalories;
 
 progressValue.textContent = `${remainingCal} Remaining`;
 circularProgress.style.background = `conic-gradient(#F9858b ${Number(calorieConsumed) * angleConstant}deg, #efefef 0deg)`;

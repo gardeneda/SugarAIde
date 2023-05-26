@@ -6,7 +6,13 @@
 */
 let circularProgress = document.querySelector(".circular-progress");
 let progressValue = document.querySelector(".progress-value");
-const maxCalories = document.querySelector("#calorie-max").innerHTML;
+let maxCalories = document.querySelector("#calorie-max").innerHTML;
+
+maxCalories = Number(maxCalories);
+if (maxCalories == NaN || maxCalories == undefined || maxCalories == null) {
+  maxCalories = 1;
+}
+
 
 let progressStartValue = 0;
 let progressEndValue = parseFloat(document.querySelector("#calorie-consumed").innerHTML);
