@@ -6,21 +6,17 @@
 */
 let circularProgress = document.querySelector(".circular-progress");
 let progressValue = document.querySelector(".progress-value");
+const maxCalories = document.querySelector("#calorie-max").innerHTML;
 
 let progressStartValue = 0;
-let progressEndValue = parseFloat(document.querySelector("#calorie-require").innerHTML);
-let maxAngle = 360; // Maximum angle for the progress bar to complete a full circle
+let progressEndValue = parseFloat(document.querySelector("#calorie-consumed").innerHTML);
+const angleConstant = 360 / maxCalories; // Maximum angle for the progress bar to complete a full circle
 let speed = 1;
 
 let progress = setInterval(() => {
   progressStartValue++;
   progressValue.textContent = `${progressStartValue} cal`;
-
-  let progressRatio = progressStartValue / progressEndValue;
-  let progressAngle = progressRatio * maxAngle;
-  let gradientAngle = 90 + (progressAngle / 2); // Adjusting the starting angle of the gradient
-
-  circularProgress.style.background = `conic-gradient(#F9858b ${gradientAngle}deg, #efefef 0deg)`;
+  circularProgress.style.background = `conic-gradient(#F9858b ${progressStartValue * angleConstant}deg, #efefef 0deg)`;
 
   if (progressStartValue >= progressEndValue) {
     clearInterval(progress);

@@ -48,8 +48,7 @@
 		</div>
 	<% } else { %>
 
-		<p class="hidden" id="calorie-require"><%= totalCalories %></p>
-		<p class="hidden" id="calorie-require">50</p>
+		<p class="hidden" id="calorie-consumed"><%= totalCalories %></p>
 		<div class="main-container">
 		<!-- circle progress bar -->
 		<div class="container">
@@ -58,7 +57,7 @@
 				Daily Carlorie Requirement
 				</h1>
 				<div class="text-body text-center">
-					You have intaken <b><%= totalCalories %> cal </b>out of <b><%= tdee %> cal</b>
+					You have consumed <b><%= totalCalories %> cal </b>out of <b><span id="calorie-max"><%= tdee %></span> cal</b>
 				</div>
 				<div class="progress-container">
 				<div class="circular-progress">

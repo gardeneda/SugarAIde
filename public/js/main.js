@@ -33,90 +33,70 @@ async function getExerciseData() {
       document.getElementById("time").innerHTML = "0 hours";
       document.getElementById("calories").innerHTML = "0cal";
     }
-  }
+}
 
 // Display circular progress bar
 let circularProgress = document.querySelector(".circular-progress");
 let progressValue = document.querySelector(".progress-value");
-let calorieRequireElement = document.querySelector("#calorie-require");
-let calorieMaxElement = document.querySelector("#calorie-max");
+let calorieConsumed = document.querySelector("#calorie-consumed").innerHTML;
+const maxCalories = document.querySelector("#calorie-max").innerHTML;
 let remainingCal = document.querySelector(".remainingCalories").textContent;
 
 let progressEndValue = 0;
-let maxAngle = 360;
+let angleConstant = 360 / Number(maxCalories);
 
-// Step 1: Get calorieRequire and calorieMax values
-let calorieRequire = parseFloat(calorieRequireElement.textContent);
-let calorieMax = parseFloat(calorieMaxElement.textContent);
-
-// Step 2: Convert calorieRequire to a valid number format
-progressEndValue = calorieRequire;
-
-// Step 3: Calculate progress ratio, angle, and gradient angle
-let progressRatio = progressEndValue / calorieMax;
-let progressAngle = progressRatio * maxAngle;
-let gradientAngle = 90 + (progressAngle / 2);
-
-console.log("calorieRequire: " + calorieRequire);
-console.log("calorieMax: " + calorieMax);
-console.log("progressEndValue: " + progressEndValue);
-console.log("progressRatio: " + progressRatio);
-console.log("progressAngle: " + progressAngle);
-console.log("gradientAngle: " + gradientAngle);
-
-// Step 4: Update progress value text and adjust the background style of the progress bar
 progressValue.textContent = `${remainingCal} Remaining`;
-circularProgress.style.background = `conic-gradient(#F9858b ${gradientAngle}deg, #efefef 0deg)`;
+circularProgress.style.background = `conic-gradient(#F9858b ${Number(calorieConsumed) * angleConstant}deg, #efefef 0deg)`;
 
 
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
-  // Button Animation and play Feature 
-  var spinTimeout;
-  var musicTimeout;
-  var audio = document.getElementById("audio");
-  var audioUnlocked = false;
-  
-  //Function to handle audio on mobile devices
-  function handleInteraction(isMobile) {
-    if (!audioUnlocked) {
-      // Unmute the audio for subsequent plays
-      audio.muted = false;
-      audioUnlocked = true;
-    }
-    startSpin(isMobile);
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// Button Animation and play Feature 
+var spinTimeout;
+var musicTimeout;
+var audio = document.getElementById("audio");
+var audioUnlocked = false;
+
+//Function to handle audio on mobile devices
+function handleInteraction(isMobile) {
+  if (!audioUnlocked) {
+    // Unmute the audio for subsequent plays
+    audio.muted = false;
+    audioUnlocked = true;
   }
-  //Main function, spins and plays the audio after 3 second press
-  function startSpin(isMobile) {
-    spinTimeout = setTimeout(function() {
-      addSpinClass();
-      playSound();
-    }, 3000);
-  }
-  //Stops the spin and audio
-  function stopSpin() {
-    clearTimeout(spinTimeout);
-    clearTimeout(musicTimeout);
-    removeSpinClass();
-    stopSound();
-  }
-  //Adds spin class to button
-  function addSpinClass() {
-    document.getElementById("chatButton").classList.add("spin");
-  }
-  //Removes spin class from button
-  function removeSpinClass() {
-    document.getElementById("chatButton").classList.remove("spin");
-  }
-  //Plays the audio
-  function playSound() {
-    musicTimeout = setTimeout(function() {
-      audio.play();
-    }, 500); // Adjust this delay if needed
-  }
-  //Stops the audio
-  function stopSound() {
-    audio.pause();
-    audio.currentTime = 0;
-  }
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
+  startSpin(isMobile);
+}
+//Main function, spins and plays the audio after 3 second press
+function startSpin(isMobile) {
+  spinTimeout = setTimeout(function() {
+    addSpinClass();
+    playSound();
+  }, 3000);
+}
+//Stops the spin and audio
+function stopSpin() {
+  clearTimeout(spinTimeout);
+  clearTimeout(musicTimeout);
+  removeSpinClass();
+  stopSound();
+}
+//Adds spin class to button
+function addSpinClass() {
+  document.getElementById("chatButton").classList.add("spin");
+}
+//Removes spin class from button
+function removeSpinClass() {
+  document.getElementById("chatButton").classList.remove("spin");
+}
+//Plays the audio
+function playSound() {
+  musicTimeout = setTimeout(function() {
+    audio.play();
+  }, 500); // Adjust this delay if needed
+}
+//Stops the audio
+function stopSound() {
+  audio.pause();
+  audio.currentTime = 0;
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////
