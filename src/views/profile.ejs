@@ -30,14 +30,14 @@
   </head>
   <body>
     <%- include("templates/header") %>
-    <div class="container bootstrap snippets bootdeys">
+    <div class="container">
       <div class="row">
         <div class="col-xs-12">
           <div class="panel panel-default py-5">
             <div class="panel-heading">
-                <h4 class="panel-title">User info</h4>
+                <h4 class="panel-title">User Info</h4>
             </div>
-            <div class="panel-body py-3">
+            <div id="firstContainer"  class="panel-body py-3">
                 <table class="table table-borderless">
                     <tr>
                         <td class="text-right col-sm-2">Name</td>
@@ -53,8 +53,10 @@
         
             <div class="panel panel-default">
               <div class="panel-heading">
-                <h4 class="panel-title">Health info</h4>
-              </div><br>
+                <h4 class="panel-title">Health Info</h4>
+              </div>
+              <div id="secondContainer">
+                <br>
               <% if (typeof message !== 'undefined') { %>
                 <div class="alert alert-warning" role="alert">
                   <%= message %>
@@ -67,13 +69,13 @@
                   </tr>
                   <tr>
                       <td class="text-right">Height</td>
-                      <td><%= height %>cm</td>
+                      <td><%= height %> cm</td>
                   </tr>
                   <tr>
                       <td class="text-right">Weight</td>
                       <td>
                           <div class="d-flex justify-content-center">
-                              <input id="weight-input" type="number" pattern="[0-9]{1,3}" value="<%= weight %>" class="form-control input-sm">kg
+                              <input id="weight-input" type="number" pattern="[0-9]{1,3}" value="<%= weight %>" class="form-control input-sm"> <span id="kg">kg</span>
                               <button id="update-weight-button" style="margin-left: auto;">Update</button> 
                           </div>
                       </td>
@@ -105,10 +107,11 @@
                     </td>
                 </tr>                
               </table>
-              <div class="form-group text-center text-black-50">
+              <div class="form-group text-center text-black">
                   <label class="col-sm-4 control-label">Diabetes risk level&nbsp;&nbsp;</label><B><%= risk %>%</B>
                 </div>
                 <% } %>
+            </div>
             </div>
                 </div>
               </div>
