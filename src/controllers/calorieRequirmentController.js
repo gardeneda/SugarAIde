@@ -1,7 +1,7 @@
 const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
 const express = require('express');
-const { x } = require("joi");
+const Joi = require("joi");
 const app = express();
 app.set('view engine', 'ejs');
 
