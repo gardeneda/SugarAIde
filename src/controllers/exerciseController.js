@@ -1,6 +1,4 @@
-// 
-
-
+//Requirements
 const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
 const express = require('express');
@@ -28,18 +26,18 @@ connectToDatabase(); // Call the function to establish the database connection
 const userCollection = () => {
   return dbClient.db(process.env.MONGODB_DATABASE).collection("users");
 };
-
+//Renders the HTML for the exercise page
 exports.createHTML = (req, res) => {
   res.render('exercisePage');
 };
-
+//Gets the exercise data from the database
 exports.getCalendarData = async (req, res, next) => {
   const userEmail = req.session.email;
   const user = await userCollection().findOne({ email: userEmail });
   const exerciseLog = user.exerciseLog;
   res.json({ exercise: exerciseLog });
 };
-
+//Deletes the exercise data from the database
 exports.deleteExerciseData = async (req, res) => {
   const id = req.params.id;
 
@@ -54,7 +52,7 @@ exports.deleteExerciseData = async (req, res) => {
     res.sendStatus(500);
   }
 };
-
+//Updates the exercise data in the database
 exports.updateExerciseData = async (req, res) => {
   const id = req.params.id;
   const newLog = req.body;

@@ -7,12 +7,12 @@ const calorieRequirement = require(`${__dirname}/../controllers/calorieRequirmen
 const todoController = require(`${__dirname}/../controllers/todoController`);
 
 const router = express.Router();
-
+//Route to create HTML, validate the session, and send the daily values
 router.route("/")
   .get(dailyReportController.checkFirstLoginOnMain,
     calorieRequirement.getDailyValuesOnMain,
     mainController.createHTML);
-  
+//Route to create HTML, validate the session, and get exercise data. 
 router.route('/exerciseData')
   .get(validation.checkValidSession,
     mainController.getExerciseData);

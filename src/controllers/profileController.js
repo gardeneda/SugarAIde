@@ -10,7 +10,19 @@ const userCollection = database
   .db(process.env.MONGODB_DATABASE)
   .collection("users");
 
-  const diabProbabilityLifestyle = function (
+/*
+  This is the formula attained from the MLR (OLS Regression) test for
+  the coefficients of all of the variables linked to diabetes from
+  the 'Diabetes Health Indicator' data set.
+
+
+  NOTE: This is used for health conditions, such as hypertension,
+  heart disease and blood glucose levels.
+
+  NOTE: Log Odds is a statistical formula that finds the 'odds' of the
+  dependent variable from happening.
+*/
+const diabProbabilityLifestyle = function (
     age,
     bmi,
     highchol = 0,
@@ -120,6 +132,13 @@ exports.diabProbability = function (
     return a * b;
 }
 
+/**
+ * Recalcuates the risk of the user with
+ * newly given information.
+ * 
+ * @param {Request.Express} email the user's account fetched from req.session.email
+ * @returns does not return anything; cancels the entire function
+ */
 const recalculateRisk = async function (email) {
   const user = await userCollection.findOne({ email: email });
 
@@ -160,7 +179,9 @@ const recalculateRisk = async function (email) {
   );
 };
 
-
+/*
+  Sends out the HTML to render on client side for 
+*/
 exports.createHTML = async (req, res, next) => {
   var email = req.session.email;
 
@@ -248,6 +269,14 @@ exports.updateHealthInfo = async (req, res, next) => {
   res.send("success");
 };
 
+/**
+ * Retrieves the risk level from the user's health info
+ * 
+ * @param {Express.Request} req 
+ * @param {Express.Response} res 
+ * @param {Express.next} next 
+ * @returns {Number} risk level
+ */
 exports.getRisk = async function (req, res, next) {
   const email = req.session.email;
 

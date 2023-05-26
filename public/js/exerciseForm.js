@@ -1,3 +1,5 @@
+
+//This function is used to open the tab for the exercise form when the page is loaded
 window.addEventListener("DOMContentLoaded", function () {
   document.getElementById("defaultOpen").click();
 });
@@ -15,7 +17,7 @@ function openExercise(evt, exercise) {
     document.getElementById(exercise).style.display = "block";
     evt.currentTarget.className += " active";
   }
-//This function is used to set up the tabs for the exercise form
+//This function is used to disable the button after the submission of the form.
   function disableSubmitButton(button) {
     var form = button.form;
       // Perform form validation

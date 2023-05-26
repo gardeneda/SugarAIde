@@ -10,12 +10,12 @@ const database = require(`${__dirname}/../config/databaseConfig`);
 const userCollection = database
     .db(process.env.MONGODB_DATABASE)
     .collection("users");
-
+//Renders the HTML page
 exports.createHTML = (req, res) => {
     res.render('exerciseForm')
 };
 
-
+//Processes the form data 
 exports.processForm = async (req, res, next) => {
   const formId = req.body.formId;
   const exercise = req.body.exercise;
