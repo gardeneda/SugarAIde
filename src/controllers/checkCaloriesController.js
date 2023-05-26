@@ -19,12 +19,7 @@ exports.createHTML = (req, res, next) => {
     //const username = req.session.username;
     const user = await userCollection.findOne({ email: email }); 
     const bmr = Number(user.healthinfo?.metabolism);
-    
-    console.log("activity: " + activity);
-    console.log("email: " + email);
-    console.log("user: " + user);
-    console.log("user.healthinfo?.metabolism: " +user.healthinfo?.metabolism);
-    console.log("bmr: " + bmr);
+
     // Multiply BMR by the appropriate activity factor to get TDEE (Total Daily Energy Expenditure)
     let tdee;
 
@@ -46,7 +41,6 @@ exports.createHTML = (req, res, next) => {
             break;
     }
 
-    console.log ("tdee: " + tdee);
     userCollection.updateOne({ email: email }, {
         $set: {
             "healthinfo.tdee": tdee,
