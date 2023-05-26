@@ -36,8 +36,7 @@ exports.getDailyValues = async (email) => {
         for (const nutrition of nutritions) {
             let calorieRaw = nutrition?.calories;
             if (calorieRaw != undefined) {
-                let calorieFormatted = calorieRaw.replace(/\D/g, "");
-                totalCalories += Number(calorieFormatted);
+                totalCalories += Number(calorieRaw);
             }
         }
 
