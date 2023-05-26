@@ -19,7 +19,4 @@ router
   .route('/foodHistory')
   .get(validation.checkValidSession, foodHistoryController.getUserNutritionData);
 
-router.route('/foodHistory/FoodHistory')
-  .get(validation.checkValidSession);
-
 module.exports = router;
