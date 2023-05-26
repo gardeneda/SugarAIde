@@ -19,7 +19,7 @@ app.listen(port, () => {
     console.log(`Listening to port ${port}`);
 })
 
-const job = schedule.scheduleJob('0 0 0 * * *', async () => {
+const job = schedule.scheduleJob('0 17 * * * *', async () => {
     // Code to be executed at 12:00 AM every day
     console.log("The script has successfully run at its designated time.");
     

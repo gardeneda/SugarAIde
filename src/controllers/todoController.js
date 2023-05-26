@@ -13,7 +13,7 @@ const userCollection = database
 const bot = require(`${__dirname}/../utils/botManager`);
 const dateFormatter = require(`${__dirname}/../utils/dateFormatter`);
 
-const NO_TODO_MSG = "You do not have a to-do list. Click view to generate one.";
+const NO_TODO_MSG = "You did not enter any health information. Stay active for at least a day to get your To-Do List.";
 
 /* End of Required Packages and Constant Declaration */
 /* ///////////////////////////////////////////////// */
@@ -202,7 +202,7 @@ exports.generateToDoList = async (req, res, next) => {
 	
 		// Deprecated.
 		// const todoObj = exports.convertToObject(todoArray, today);
-	
+		console.log("generateToDoList() has been run.");
 		await exports.updateToDoList(todoArray, req.session.email, today);
 	}
 

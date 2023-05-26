@@ -6,6 +6,8 @@ const userCollection = database
     .db(process.env.MONGODB_DATABASE)
     .collection("users");
 
+const todo = require(`${__dirname}/todoController`);
+
 /*
     Calculate the BMI with the respective formula.
 */
@@ -36,7 +38,12 @@ exports.createForm = (req, res, next) => {
     res.render('health-information');
 }
 
-exports.processForm = (req, res, next) => {
+/**
+ * Takes the user survey for the health information
+ * and enters it into their database. Also updates
+ * the customized to-Do list.
+ */
+exports.processForm = async (req, res, next) => {
     const height = Number(req.body.height);
     const weight = Number(req.body.weight);
     const gender = req.body.gender;
@@ -60,7 +67,7 @@ exports.processForm = (req, res, next) => {
     const bmi = this.bmiCalculator(height, weight);
     const metabolism = this.metabolismCalcuator(gender, height, weight, age);
 
-    userCollection
+    await userCollection
         .updateOne({ email: req.session.email }, {
             $set: {
                 healthinfo: {
@@ -86,6 +93,10 @@ exports.processForm = (req, res, next) => {
                 }
             }
         });
+    
+    const user = await userCollection.findOne({ email: req.session.email });
+    await todo.generateToDoListScript(req.session.email, user);
+    
     res.status(200);
     res.redirect('/risk');
 }

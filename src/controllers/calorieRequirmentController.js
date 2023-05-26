@@ -228,6 +228,8 @@ exports.getDailyValuesOnMain = async (req, res, next) => {
             proteinsLimit: proteinsLimit,
             date: date
         };
+
+        console.log("getDailyValuesOnMain() has been run.");
     
         // Update the user document with the new dailyValues
         await userCollection.updateOne(
