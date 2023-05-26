@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.route('/')
     .get(validation.checkValidSession,
-        dailyReportController.checkFirstLoginDay,
+        // dailyReportController.checkFirstLoginDay,
         dailyReportController.createHTML);
 
 module.exports = router;

@@ -22,7 +22,6 @@ const calorieRequirmentController = require(`${__dirname}/calorieRequirmentContr
 exports.createHTML = async (req, res, next) => {
   var email = req.session.email;
 
-  console.log("Email:", email);
   const user = await userCollection.findOne({ email: email });
   if (!user) {
     return res.send("User not found");

@@ -18,6 +18,29 @@ $(document).ready(function () {
     }
   }
 
+  const weightInput = document.getElementById('weight-input');
+  const updateWeightButton = document.getElementById('update-weight-button');
+  const ageInput = document.getElementById('age-input');
+  const updateAgeButton = document.getElementById('update-age-button');
+
+  // Weight input validation
+  weightInput.addEventListener('input', function() {
+      if (weightInput.value < 0) {
+          weightInput.value = '';
+      } else if (weightInput.value.length > 3) {
+          weightInput.value = weightInput.value.slice(0, 3);
+      }
+  });
+
+  // Age input validation
+  ageInput.addEventListener('input', function() {
+      if (ageInput.value < 0) {
+          ageInput.value = '';
+      } else if (ageInput.value.length > 3) {
+          ageInput.value = ageInput.value.slice(0, 3);
+      }
+  });
+
   // Update Weight Button Click Event
   $("#update-weight-button").on("click", function () {
     var newWeight = $("#weight-input").val();
@@ -63,7 +86,7 @@ $(document).ready(function () {
     );
   });
 
-  $.get('/profile/risk', { _t: new Date().getTime() }, function(data) {
+  $.get("/profile/risk", { _t: new Date().getTime() }, function (data) {
     updateRiskValue(data.risk);
   });
 });

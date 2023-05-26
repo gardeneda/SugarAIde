@@ -1,29 +1,35 @@
-/* ///////////////////////////////////////////////// */
-/*  Required Packages and Constant Declaration */
+// ///////////////////////////////////////////////// //
+//  Required Packages and Constant Declaration
 const dotenv = require("dotenv");
-dotenv.config({ path: "./.env" });
 const express = require('express');
 const app = express();
+const database = require(`${__dirname}/../config/databaseConfig`);
+
+// Load environment variables
+dotenv.config({ path: "./.env" });
+
+// Set the view engine to EJS for rendering views
 app.set('view engine', 'ejs');
 
-
-const database = require(`${__dirname}/../config/databaseConfig`);
+// Connect to the database
 const userCollection = database
   .db(process.env.MONGODB_DATABASE)
   .collection("users");
+// End of Required Packages and Constant Declaration
+// ///////////////////////////////////////////////// //
 
-/* End of Required Packages and Constant Declaration */
-/* ///////////////////////////////////////////////// */
-
+// Fetch user's nutrition data
 exports.getUserNutritionData = async (req, res, next) => {
   try {
     const email = req.session.email;
     const user = await userCollection.findOne({ email: email });
 
+    // If the user does not exist, render the error page
     if (!user) {
       return res.status(404).render('error', { message: 'User not found' });
     }
 
+    // Initialize a dictionary for days of the week
     let days = {
       'Sun': { totalCalories: 0 },
       'Mon': { totalCalories: 0 },
@@ -34,78 +40,71 @@ exports.getUserNutritionData = async (req, res, next) => {
       'Sat': { totalCalories: 0 },
     };
     
-    // Iterate over each key in nutritionLog
+    // Accumulate total calories for each day
     for (let key in user.nutritionLog) {
-      // Get the day of the week from the log's date
       let date = new Date(user.nutritionLog[key].date);
       let dayOfWeek = date.toLocaleString('en-us', { weekday: 'short' });
-
-      // Add the calories to the total for the day of the week
       days[dayOfWeek].totalCalories += Number(user.nutritionLog[key].calories);
     }
 
+    // Render the foodHistory page with accumulated data
     return res.render('foodHistory', { days });
-
   } catch (err) {
     console.error(err);
     return res.status(500).render('error', { message: 'Server error' });
   }
 };
 
+// Render the HTML page with user's nutrition data
 exports.createHTML = async (req, res) => {
   try {
       const email = req.session.email;
       const user = await userCollection.findOne({ email: email });
 
       if (!user || !user.nutritionLog) {
-          return res.render('foodHistory', {
-              days: []
-          });
+          return res.render('foodHistory', { days: [] });
       }
-        const days = Object.entries(user.nutritionLog).map(([day, meal]) => ({ day, ...meal }));
 
+      // Map the nutrition log to a list of day and meal pairs
+      const days = Object.entries(user.nutritionLog).map(([day, meal]) => ({ day, ...meal }));
+
+      // Render the foodHistory page with nutrition data
       res.render('foodHistory', { days });
   } catch (err) {
       console.error(err);
-      res.render('foodHistory', {
-          days: []
-      });
+      res.render('foodHistory', { days: [] });
   }
 };
 
+// Fetch food data for a specific day
 exports.getFoodData = async (req, res) => {
   try {
     const day = req.query.day;
     const email = req.session.email;
     const user = await userCollection.findOne({ email: email });
 
-    console.log('User:', user); // Debug line
-
     if (!user || !user.nutritionLog) {
       return res.json({ foodData: [] });
     }
 
-    // Filter nutritionLog entries by day
+    // Filter the nutrition log entries by day
     const foodData = user.nutritionLog.filter(entry => {
-      console.log('Entry:', entry); // Debug line
       const entryDate = new Date(entry.date);
       const entryDay = entryDate.toLocaleString('en-us', { weekday: 'short' });
-      console.log('Entry day:', entryDay); // Debug line
 
-      // Compare the parsed day with the day from the query
+      // If the entry's day matches the requested day, keep the entry
       return entryDay === day;
     });
 
-    console.log('Filtered food data:', foodData); // Debug line
-
+    // Return the filtered food data
     return res.json({foodData:foodData});
-
   } catch (err) {
     console.error(err);
     res.json({ foodData: [] });
   }
 };
 
+// Delete food data by food name and date
 exports.deleteFoodDataByNameAndDate = async function (req, res) {
   const { food, date } = req.query;
   const email = req.session.email; 
@@ -115,21 +114,18 @@ exports.deleteFoodDataByNameAndDate = async function (req, res) {
     return res.status(404).json({ message: 'User not found' });
   }
 
-  // Convert date string back to a Date object
+  // Convert the date string back to a Date object
   const dateObject = new Date(date);
 
-  // Find and delete the entry from nutritionLog
+  // Filter out the nutrition log entry that matches the food name and date
   user.nutritionLog = user.nutritionLog.filter(entry => {
     const entryDate = new Date(entry.date);
     return !(entry.food === food && entryDate.getTime() === dateObject.getTime());
   });
 
-  // update the user in the database
+  // Update the user in the database with the new nutrition log
   await userCollection.updateOne({ email: email }, { $set: { nutritionLog: user.nutritionLog } });
 
+  // Respond with a success message
   res.status(200).send({ message: 'Food data successfully deleted.' });
 };
-
-
-
-

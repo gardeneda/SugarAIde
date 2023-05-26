@@ -4,23 +4,27 @@
 
     All code has been tweaked and added upon with the core functionality from the above retained.
 */
+let circularProgress = document.querySelector(".circular-progress");
+let progressValue = document.querySelector(".progress-value");
+let maxCalories = document.querySelector("#calorie-max").innerHTML;
 
-console.log(document.querySelector("#calorie-require").innerHTML);
+maxCalories = Number(maxCalories);
+if (maxCalories == NaN || maxCalories == undefined || maxCalories == null) {
+  maxCalories = 1;
+}
 
-let circularProgress = document.querySelector(".circular-progress"),
-    progressValue = document.querySelector(".progress-value");
 
-
-let progressStartValue = 0,
-    progressEndValue = document.querySelector("#calorie-require").innerHTML;
-    speed = 1;
+let progressStartValue = 0;
+let progressEndValue = parseFloat(document.querySelector("#calorie-consumed").innerHTML);
+const angleConstant = 360 / maxCalories; // Maximum angle for the progress bar to complete a full circle
+let speed = 1;
 
 let progress = setInterval(() => {
-    progressStartValue++;
-    progressValue.textContent = `${progressStartValue} cal`;
-    circularProgress.style.background = `conic-gradient( #F9858b ${progressStartValue * 0.18}deg, #efefef 0deg)`
+  progressStartValue++;
+  progressValue.textContent = `${progressStartValue} cal`;
+  circularProgress.style.background = `conic-gradient(#F9858b ${progressStartValue * angleConstant}deg, #efefef 0deg)`;
 
-    if (progressStartValue == Math.trunc(progressEndValue)) {
-        clearInterval(progress);
-    }
+  if (progressStartValue >= progressEndValue) {
+    clearInterval(progress);
+  }
 }, speed);

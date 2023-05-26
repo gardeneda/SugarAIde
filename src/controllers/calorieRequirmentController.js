@@ -10,10 +10,12 @@ const userCollection = database
     .db(process.env.MONGODB_DATABASE)
     .collection("users");
 
+// Import necessary controllers and utility functions
 const dateFormatter = require(`${__dirname}/../utils/dateFormatter`);
 const dailyReportController = require(`${__dirname}/dailyReportController`);
 const checkCaloriesController = require(`${__dirname}/checkCaloriesController`);
 
+// Function to calculate and return daily nutrition values for a given email
 exports.getDailyValues = async (email) => {
     const user = await userCollection.findOne({ email: email });
     const date = dateFormatter.getToday();
@@ -133,6 +135,7 @@ exports.getDailyValues = async (email) => {
     }
 }
 
+// Middleware function to calculate and update daily nutrition values on main rout
 exports.getDailyValuesOnMain = async (req, res, next) => {
     const user = await userCollection.findOne({ email: req.session.email });
     const date = dateFormatter.getToday();
@@ -143,6 +146,8 @@ exports.getDailyValuesOnMain = async (req, res, next) => {
 
     } else {
         
+        // Retrieve nutrtions (sugar, carbs, protein, fats) from the current item
+
         let totalSugar = 0;
         for (const nutrition of nutritions) {
             let sugarRaw = nutrition?.sugar;
@@ -203,6 +208,7 @@ exports.getDailyValuesOnMain = async (req, res, next) => {
             }
         }
 
+        //tdee(total daily energy expenditure) to calculate personalized nutrional requirement 
         let tdee = user.healthinfo?.tdee;
 
         if (user.healthinfo?.tdee == undefined ||user.healthinfo?.tdee == null) {
@@ -228,6 +234,8 @@ exports.getDailyValuesOnMain = async (req, res, next) => {
             proteinsLimit: proteinsLimit,
             date: date
         };
+
+        console.log("getDailyValuesOnMain() has been run.");
     
         // Update the user document with the new dailyValues
         await userCollection.updateOne(
@@ -252,6 +260,7 @@ exports.createHTML = async (req, res, next) => {
     }
 }
 
+// Function to calculate and return daily nutrition values
 exports.calculateDailyValues = async (req, res, next) => {
     const email = req.session.email;
     const dailyValues = await getDailyValues(email);

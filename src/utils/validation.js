@@ -4,9 +4,8 @@
 */
 exports.checkValidSession = (req, res, next) => {
     if (!req.session.authenticated) {
-      res.redirect("login");
+      res.redirect("/login");
       return;
     }
     next();
 };
-  

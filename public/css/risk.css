@@ -55,11 +55,16 @@ body {
     /* padding: 10% 0;
     border-radius: 8px; */
     align-items: center;
+    margin-top: 5%;
+}
+
+.card-title {
+    font-size: 1.5rem;
 }
 
 .progress-container {
     display: flex;
-    width: 520px;
+    width: 80%;
     /* width: 100%; */
     /* height: 100%; */
     padding: 50px 0;
@@ -116,4 +121,9 @@ body {
 
 .btn-sugar {
 	background: linear-gradient(#F9858b, #F985B9);
+}
+
+.card-title {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }

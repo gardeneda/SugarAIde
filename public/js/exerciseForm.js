@@ -15,4 +15,14 @@ function openExercise(evt, exercise) {
     document.getElementById(exercise).style.display = "block";
     evt.currentTarget.className += " active";
   }
-
+//This function is used to set up the tabs for the exercise form
+  function disableSubmitButton(button) {
+    var form = button.form;
+      // Perform form validation
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+    button.disabled = true;
+    button.form.submit();
+}

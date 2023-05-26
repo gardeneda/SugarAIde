@@ -1,7 +1,6 @@
 const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
 const express = require('express');
-const bcrypt = require("bcrypt");
 const app = express();
 app.set('view engine', 'ejs');
 const crypto = require("crypto");
@@ -14,10 +13,6 @@ const userCollection = database
 
 exports.createHTML = (req, res) => {
     res.render('exerciseForm')
-};
-
-exports.createHTML = (req, res) => {
-    res.render('exerciseForm');
 };
 
 

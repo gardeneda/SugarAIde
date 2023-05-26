@@ -33,75 +33,75 @@ async function getExerciseData() {
       document.getElementById("time").innerHTML = "0 hours";
       document.getElementById("calories").innerHTML = "0cal";
     }
-  }
+}
 
 // Display circular progress bar
 let circularProgress = document.querySelector(".circular-progress");
 let progressValue = document.querySelector(".progress-value");
-let calorieRequireElement = document.querySelector("#calorie-require");
+let calorieConsumed = document.querySelector("#calorie-consumed").innerHTML;
+let maxCalories = document.querySelector("#calorie-max").innerHTML;
 let remainingCal = document.querySelector(".remainingCalories").textContent;
 
-let progressStartValue = 0;
-let progressEndValue = 0; // 초기값 설정
+maxCalories = Number(maxCalories);
+if (maxCalories == NaN || maxCalories == undefined || maxCalories == null) {
+  maxCalories = 1;
+}
 
-// Step 1: Get calorieRequire value and check if it's valid
-let calorieRequire = calorieRequireElement.textContent;
+let progressEndValue = 0;
+let angleConstant = 360 / maxCalories;
 
-// Step 2: Convert calorieRequire to a valid number format
-progressEndValue = parseFloat(calorieRequire);
 progressValue.textContent = `${remainingCal} Remaining`;
-circularProgress.style.background = `conic-gradient(#F9858b ${progressEndValue*0.18}deg, #efefef 0deg)`;
+circularProgress.style.background = `conic-gradient(#F9858b ${Number(calorieConsumed) * angleConstant}deg, #efefef 0deg)`;
 
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// Button Animation and play Feature 
+var spinTimeout;
+var musicTimeout;
+var audio = document.getElementById("audio");
+var audioUnlocked = false;
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
-  // Button Animation and play Feature 
-  var spinTimeout;
-  var musicTimeout;
-  var audio = document.getElementById("audio");
-  var audioUnlocked = false;
-  
-  //Function to handle audio on mobile devices
-  function handleInteraction(isMobile) {
-    if (!audioUnlocked) {
-      // Unmute the audio for subsequent plays
-      audio.muted = false;
-      audioUnlocked = true;
-    }
-    startSpin(isMobile);
+//Function to handle audio on mobile devices
+function handleInteraction(isMobile) {
+  if (!audioUnlocked) {
+    // Unmute the audio for subsequent plays
+    audio.muted = false;
+    audioUnlocked = true;
   }
-  //Main function, spins and plays the audio after 3 second press
-  function startSpin(isMobile) {
-    spinTimeout = setTimeout(function() {
-      addSpinClass();
-      playSound();
-    }, 3000);
-  }
-  //Stops the spin and audio
-  function stopSpin() {
-    clearTimeout(spinTimeout);
-    clearTimeout(musicTimeout);
-    removeSpinClass();
-    stopSound();
-  }
-  //Adds spin class to button
-  function addSpinClass() {
-    document.getElementById("chatButton").classList.add("spin");
-  }
-  //Removes spin class from button
-  function removeSpinClass() {
-    document.getElementById("chatButton").classList.remove("spin");
-  }
-  //Plays the audio
-  function playSound() {
-    musicTimeout = setTimeout(function() {
-      audio.play();
-    }, 500); // Adjust this delay if needed
-  }
-  //Stops the audio
-  function stopSound() {
-    audio.pause();
-    audio.currentTime = 0;
-  }
-  ////////////////////////////////////////////////////////////////////////////////////////////////////
+  startSpin(isMobile);
+}
+//Main function, spins and plays the audio after 3 second press
+function startSpin(isMobile) {
+  spinTimeout = setTimeout(function() {
+    addSpinClass();
+    playSound();
+  }, 3000);
+}
+//Stops the spin and audio
+function stopSpin() {
+  clearTimeout(spinTimeout);
+  clearTimeout(musicTimeout);
+  removeSpinClass();
+  stopSound();
+}
+//Adds spin class to button
+function addSpinClass() {
+  document.getElementById("chatButton").classList.add("spin");
+}
+//Removes spin class from button
+function removeSpinClass() {
+  document.getElementById("chatButton").classList.remove("spin");
+}
+//Plays the audio
+function playSound() {
+  musicTimeout = setTimeout(function() {
+    audio.play();
+  }, 500); // Adjust this delay if needed
+}
+//Stops the audio
+function stopSound() {
+  audio.pause();
+  audio.currentTime = 0;
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////
