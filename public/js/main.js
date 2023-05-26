@@ -30,8 +30,8 @@ async function getExerciseData() {
       document.getElementById("calories").innerHTML = totalCalories;
     } else {
       document.getElementById("exerciseCalories").innerHTML = 0;
-      document.getElementById("time").innerHTML = "0";
-      document.getElementById("calories").innerHTML = "0 hours";
+      document.getElementById("time").innerHTML = "0 hours";
+      document.getElementById("calories").innerHTML = "0cal";
     }
   }
 
