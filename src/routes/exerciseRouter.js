@@ -13,8 +13,9 @@ router.route('/calendarData')
 
 router.delete('/calendarData/:id', exerciseController.deleteExerciseData);
 
+router.put('/calendarData/:id', exerciseController.updateExerciseData);
+
 
 module.exports = router;
 
    
-

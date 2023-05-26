@@ -8,19 +8,22 @@
 console.log(document.querySelector("#risk-level").innerHTML);
 
 let circularProgress = document.querySelector(".circular-progress"),
-    progressValue = document.querySelector(".progress-value");
+	progressValue = document.querySelector(".progress-value");
 
 let progressStartValue = 0,
-    progressEndValue = document.querySelector("#risk-level").innerHTML;
-    speed = 10;
+	progressEndValue = document.querySelector("#risk-level").innerHTML;
+speed = 10;
 
 let progress = setInterval(() => {
-    progressStartValue++;
+	progressStartValue++;
 
-    progressValue.textContent = `${progressStartValue}%`;
-    circularProgress.style.background = `conic-gradient( #F9858b ${progressStartValue * 3.6}deg, #efefef 0deg)`
+	progressValue.textContent = `${progressStartValue}%`;
+	circularProgress.style.background = `conic-gradient( #F9858b ${
+		progressStartValue * 3.6
+	}deg, #efefef 0deg)`;
 
-    if (progressStartValue == Math.trunc(progressEndValue)) {
-        clearInterval(progress);
-    }
+	if (progressStartValue == Math.trunc(progressEndValue)) {
+		clearInterval(progress);
+		progressValue.textContent = `${progressEndValue}%`;
+	}
 }, speed);

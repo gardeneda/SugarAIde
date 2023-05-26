@@ -54,3 +54,26 @@ exports.deleteExerciseData = async (req, res) => {
     res.sendStatus(500);
   }
 };
+
+exports.updateExerciseData = async (req, res) => {
+  const id = req.params.id;
+  const newLog = req.body;
+
+  try {
+    await userCollection().updateOne(
+      { exerciseLog: { $elemMatch: { id: id } } },
+      {
+        $set: {
+          "exerciseLog.$.exercise": newLog.exercise,
+          "exerciseLog.$.duration": newLog.duration,
+          "exerciseLog.$.caloriesBurned": newLog.caloriesBurned,
+        },
+      }
+    );
+
+    res.sendStatus(200);
+  } catch (error) {
+    console.error("Failed to update exercise data", error);
+    res.sendStatus(500);
+  }
+};

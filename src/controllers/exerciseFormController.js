@@ -34,7 +34,7 @@ exports.processForm = async (req, res, next) => {
 
   if (formId === 'cardiovascularForm') {
     const duration = Number(req.body.duration);
-    const calories_burned = Number(req.body.calories_burned);
+    const caloriesBurned = Number(req.body.caloriesBurned);
 
     updateData = {
       $push: {
@@ -44,7 +44,7 @@ exports.processForm = async (req, res, next) => {
           end_date: new Date().toString(),
           exercise: exercise,
           duration: duration,
-          calories_burned: calories_burned,
+          caloriesBurned: caloriesBurned,
           notes: notes
         }
       }
@@ -54,7 +54,7 @@ exports.processForm = async (req, res, next) => {
     const sets = Number(req.body.sets);
     const reps = Number(req.body.reps);
     let duration = Number(req.body.duration);
-    const calories_burned = Number(req.body.calories_burned);
+    const caloriesBurned = Number(req.body.caloriesBurned);
 
     if (isNaN(duration)) {
       duration = 0;
@@ -67,7 +67,7 @@ exports.processForm = async (req, res, next) => {
           end_date: new Date().toString(),
           exercise: exercise,
           duration: duration,
-          calories_burned: calories_burned,
+          caloriesBurned: caloriesBurned,
           weight: weight,
           set: sets,
           reps: reps,
@@ -83,9 +83,17 @@ exports.processForm = async (req, res, next) => {
   try {
     await userCollection.updateOne({ email: req.session.email }, updateData);
     res.status(200);
-    res.redirect('/exercisePage');
+    const script = `
+    <script>
+      window.alert('Form submitted successfully!');
+      window.location.href = '/exercisePage';
+    </script>
+  `;
+    res.send(script);
   } catch (error) {
     console.error('Error processing form: ', error);
     res.status(500).send('Error processing form');
+    
   }
 };
+

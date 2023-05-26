@@ -9,13 +9,14 @@ router
   .route("/")
   .get(validation.checkValidSession, foodHistoryController.createHTML);
 
-module.exports = router;
+router.delete('/foodDataByNameAndDate', foodHistoryController.deleteFoodDataByNameAndDate);
 
-//TEST--------------------------------------------------------------------------
-// router
-//   .route("/nutritionLog")
-//   .get(validation.checkValidSession, foodHistoryController.getUserNutritionData);
 router
-  .route('/nutritionLog')
+  .route('/foodData')
+  .get(validation.checkValidSession, foodHistoryController.getFoodData);
+
+router
+  .route('/foodHistory')
   .get(validation.checkValidSession, foodHistoryController.getUserNutritionData);
 
+module.exports = router;

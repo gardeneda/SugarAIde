@@ -24,7 +24,7 @@ exports.checkUserInput = (req, res, next) => {
     email = req.body.email;
     password = req.body.password;
 
-    const schema = Joi.string().max(20).required();
+    const schema = Joi.string().max(30).required();
     const validationResult = schema.validate(email);
 
     if (validationResult.error != null) {

@@ -15,33 +15,6 @@ const userCollection = database
 /* End of Required Packages and Constant Declaration */
 /* ///////////////////////////////////////////////// */
 
-/*
-    Send the user client the main landing page after you log-in.
-    Attaches a random picture when signed in.
-*/
-
-
-//For placeholder chart (calories/sugar) 
-// exports.createHTML = (req, res) => {
-//   res.render('foodHistory');
-// };
-
-// exports.getUserNutritionData = async (req, res, next) => {
-//   try {
-//     const email = req.session.email;
-//     const user = await userCollection.findOne({ email: email });
-
-//     if (!user) {
-//       return res.status(404).json({ message: 'User not found' });
-//     }
-
-//     return res.status(200).json(user.nutritionLog);
-//   } catch (err) {
-//     console.error(err);
-//     return res.status(500).json({ message: 'Server error' });
-//   }
-// };
-
 exports.getUserNutritionData = async (req, res, next) => {
   try {
     const email = req.session.email;
@@ -51,25 +24,27 @@ exports.getUserNutritionData = async (req, res, next) => {
       return res.status(404).render('error', { message: 'User not found' });
     }
 
-    // create arrays for each nutrition category
-    let caloriesArray = [];
-    let sugarArray = [];
-    let proteinArray = [];
+    let days = {
+      'Sun': { totalCalories: 0 },
+      'Mon': { totalCalories: 0 },
+      'Tue': { totalCalories: 0 },
+      'Wed': { totalCalories: 0 },
+      'Thu': { totalCalories: 0 },
+      'Fri': { totalCalories: 0 },
+      'Sat': { totalCalories: 0 },
+    };
+    
+    // Iterate over each key in nutritionLog
+    for (let key in user.nutritionLog) {
+      // Get the day of the week from the log's date
+      let date = new Date(user.nutritionLog[key].date);
+      let dayOfWeek = date.toLocaleString('en-us', { weekday: 'short' });
 
-    // loop through each log in nutritionLog
-    for (let log of user.nutritionLog) {
-      // push the respective nutrition value into its array
-      caloriesArray.push(log.calories);
-      sugarArray.push(log.sugar);
-      proteinArray.push(log.protein);
+      // Add the calories to the total for the day of the week
+      days[dayOfWeek].totalCalories += Number(user.nutritionLog[key].calories);
     }
 
-    // render the data on foodHistory view
-    return res.render('foodHistory', { 
-      calories: caloriesArray, 
-      sugar: sugarArray, 
-      protein: proteinArray 
-    });
+    return res.render('foodHistory', { days });
 
   } catch (err) {
     console.error(err);
@@ -87,9 +62,7 @@ exports.createHTML = async (req, res) => {
               days: []
           });
       }
-  
-      // Assuming nutritionLog is now an object where keys are days of the week and values are the meals
-      const days = Object.entries(user.nutritionLog).map(([day, meal]) => ({ day, ...meal }));
+        const days = Object.entries(user.nutritionLog).map(([day, meal]) => ({ day, ...meal }));
 
       res.render('foodHistory', { days });
   } catch (err) {
@@ -98,6 +71,63 @@ exports.createHTML = async (req, res) => {
           days: []
       });
   }
+};
+
+exports.getFoodData = async (req, res) => {
+  try {
+    const day = req.query.day;
+    const email = req.session.email;
+    const user = await userCollection.findOne({ email: email });
+
+    console.log('User:', user); // Debug line
+
+    if (!user || !user.nutritionLog) {
+      return res.json({ foodData: [] });
+    }
+
+    // Filter nutritionLog entries by day
+    const foodData = user.nutritionLog.filter(entry => {
+      console.log('Entry:', entry); // Debug line
+      const entryDate = new Date(entry.date);
+      const entryDay = entryDate.toLocaleString('en-us', { weekday: 'short' });
+      console.log('Entry day:', entryDay); // Debug line
+
+      // Compare the parsed day with the day from the query
+      return entryDay === day;
+    });
+
+    console.log('Filtered food data:', foodData); // Debug line
+
+    return res.json({foodData:foodData});
+
+  } catch (err) {
+    console.error(err);
+    res.json({ foodData: [] });
+  }
+};
+
+exports.deleteFoodDataByNameAndDate = async function (req, res) {
+  const { food, date } = req.query;
+  const email = req.session.email; 
+  const user = await userCollection.findOne({ email: email });
+  
+  if (!user) {
+    return res.status(404).json({ message: 'User not found' });
+  }
+
+  // Convert date string back to a Date object
+  const dateObject = new Date(date);
+
+  // Find and delete the entry from nutritionLog
+  user.nutritionLog = user.nutritionLog.filter(entry => {
+    const entryDate = new Date(entry.date);
+    return !(entry.food === food && entryDate.getTime() === dateObject.getTime());
+  });
+
+  // update the user in the database
+  await userCollection.updateOne({ email: email }, { $set: { nutritionLog: user.nutritionLog } });
+
+  res.status(200).send({ message: 'Food data successfully deleted.' });
 };
 
 

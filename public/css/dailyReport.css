@@ -1,0 +1,142 @@
+/* @font-face {
+    font-family: "Poppins";
+    src: url(/fonts/Poppins-Regular.ttf),
+         url(/fonts/Poppins-Medium.ttf),
+         url(/fonts/Poppins-Thin.ttf);
+} */
+
+/* 
+      CSS and JS reagarding how to implement the Circular Progress Bar has been attained from: 
+        https://www.youtube.com/watch?v=SKU2gExpkPI&ab_channel=CodingLab
+  
+      All code has been tweaked and added upon with the core functionality from the above retained.
+  */
+body {
+	height: 100vh;
+}
+
+.row {
+	display: flex;
+	align-items: center;
+}
+
+.container {
+	width: 100%;
+	/* height: 100%; */
+	/* padding: 10% 0;
+      border-radius: 8px; */
+	align-items: center;
+}
+
+.progress-container {
+	display: flex;
+	/* width: 520px; */
+	/* height: 100%; */
+	padding: 50px 0;
+	/* padding: 10% 0; */
+	border-radius: 8px;
+	/* border-radius: 10%; */
+	background: #fff;
+	flex-direction: column;
+	align-items: center;
+}
+
+.circular-progress {
+	position: relative;
+	height: 350px;
+	/* height: 100%; */
+	width: 350px;
+	/* width: 100%; */
+	border-radius: 50%;
+	background-color: #f0ff !important;
+	background: conic-gradient(#f9858b 3.6deg, #efefef 0deg);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.circular-progress::before {
+	content: "";
+	position: absolute;
+	height: 310px;
+	/* height: 100%; */
+	width: 310px;
+	/* width: 100%; */
+	border-radius: 50%;
+	background-color: #fff;
+}
+
+.progress-value {
+	position: relative;
+	font-size: 3rem;
+}
+
+.button-box {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: row;
+}
+
+.accordion-container {
+	margin: 2%;
+}
+
+table {
+    border-collapse: collapse;
+	text-transform: capitalize;
+}
+
+#exercise-table,
+#nutrition-table {
+	width: 100%;
+	text-align: center;
+}
+
+#consumed,
+#burned,
+#total-calories,
+#sugar,
+#risk-before,
+#risk-after,
+#change,
+th {
+	padding-right: 20px;
+}
+
+.main-heading,
+.sub-container {
+	margin-top: 5%;
+}
+
+.sub-container {
+	overflow: hidden;
+}
+
+.welcome-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(#F9858b, #F985B9);
+	padding: 5% 5% 5% 5%;
+}
+
+.main-container {
+	width: 100vw;
+	height: 100vh;
+}
+
+#carouselExample,
+.carousel-inner,
+.carousel-item {
+	width: 100%;
+	height: 100%;
+}
+
+.btn-sugar {
+	background: linear-gradient(#F9858b, #F985B9);
+}

@@ -6,7 +6,8 @@
 			content="width=device-width, initial-scale=1"
 			charset="utf-8"
 		/>
-		<title>Log In</title>
+		<title>Food History</title>
+		<link rel="icon" type="image/x-icon" href="/img/sugaraide-favicon.png">
 		<link
 			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
 			rel="stylesheet"
@@ -18,164 +19,144 @@
 			integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
 			crossorigin="anonymous"
 		></script>
-		<!-- Font Awesome Script Connected to Isaiah's Account -->
+		<!-- Font Awesome Script Connected to .Isaiah's Account -->
 		<script
 			src="https://kit.fontawesome.com/36e5d26d04.js"
 			crossorigin="anonymous"
 		></script>
-		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script 
+			src="https://cdn.jsdelivr.net/npm/chart.js">
+		</script>
 		<title>My chart.js chart</title>
+
+		<!--CSS-->
+		<link rel="stylesheet" href="/css/foodHistory.css">
 		<link rel="stylesheet" href="/css/global.css" />
 	</head>
 	
 	<body>
+		<%- include("templates/header") %>
+		<br>
+		<div class="container">
+		<div id="dietContainer" class="card">
+		<!-- Tab links -->
+		<div class="tab" id="tab">
+			<button class="tablinks" onclick="window.location.href='/dietTrack'">Diet</button>
+		  	<button class="tablinks" onclick="window.location.href='/foodHistory/foodHistory'">Food Log</button>
+		</div>
 		<!--temp css-->
 		<div class="container mx-auto" style="margin-top: 75px">
-			<select id="chart-type">
-				<option value="calories">Calories (kcal)</option>
-				<option value="sugar">Sugar (g)</option>
-			</select>
-			<canvas id="myChart"></canvas>
+		  <canvas id="myChart">
+		  </canvas>
+		  <div class="table-responsive-sm">
+		  <table id="summaryTable" class="table">
+			<thead>
+				<tr>
+					<th scope="col" id="tableTitle">Food</th>
+					<th scope="col" id="tableTitle">Calories</th>
+					<th scope="col" id="tableTitle">Sugar</th>
+					<th scope="col" id="tableTitle">Carbs</th>
+					<th scope="col" id="tableTitle">Protein</th>
+					<th scope="col" id="tableTitle">Remove</th>
+				</tr>
+			</thead>
+			<tbody id="tableEntries">
+			<!-- Food data will be inserted here -->
+			</tbody>
+		</table>		
 		</div>
+	</div>
 
 		<script>
-
-			const days = <%- JSON.stringify(days) %>;
-
-			const ctx = document.getElementById('myChart').getContext('2d');
-
-			const caloriesData = days.map(dayInfo => dayInfo.calories);
-			const labels = days.map(dayInfo => dayInfo.day);
-
-			new Chart(ctx, {
-				type: 'bar',
-				data: {
-					labels: [
-						"Sunday",
-						"Monday",
-						"Tuesday",
-						"Wednesday",
-						"Thursday",
-						"Friday",
-						"Saturday",
-					],  // Use days of the week as labels
-					datasets: [{
-						label: 'Calories',
-						data: caloriesData,
-						backgroundColor: 'rgba(255, 99, 132, 0.2)',
-						borderColor: 'rgba(255, 99, 132, 1)',
-						borderWidth: 1
-					}]
+			let days = <%- JSON.stringify(days) %>;
+			let labels = Object.keys(days);
+			let data = labels.map(day => days[day].totalCalories);
+			let ctx = document.getElementById('myChart').getContext('2d');
+			let chart = new Chart(ctx, {
+			  type: 'bar',
+			  data: {
+				labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+				datasets: [{
+				  label: 'Total Calories',
+				  data: data,
+				  backgroundColor: 'rgba(75, 192, 192, 0.2)',
+				  borderColor: 'rgba(75, 192, 192, 1)',
+				  borderWidth: 1
+				}]
+			  },
+			  options: {
+				scales: {
+				  y: {
+					beginAtZero: true
+				  }
 				},
-				options: {
-					scales: {
-						y: {
-							beginAtZero: true
-						}
+				onClick: handleClick
+			  }
+			});
+
+			async function handleClick(evt) {
+				var activePoints = chart.getElementsAtEventForMode(evt, 'nearest', { intersect: true }, true);
+				var firstPoint = activePoints[0];
+				if (firstPoint) {
+					var label = chart.data.labels[firstPoint.index];
+
+					let foodData = await fetch(`/foodHistory/foodData?day=${label}`, {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json'
+					}
+					})
+					.then(res => res.json())
+					.then(data => data.foodData); 
+					// Create the table with this data
+					createSummaryTable(foodData);
+				}
+				}
+			function createSummaryTable(foodData) {
+				let tableBody = document.getElementById('summaryTable').getElementsByTagName('tbody')[0];
+				// Clear existing data
+				tableBody.innerHTML = '';
+				// Add new rows for each food item
+				for (let food of foodData) {
+					let newRow = tableBody.insertRow();
+					newRow.innerHTML = `<td>${food.food}</td><td>${food.calories}</td>
+					<td>${food.sugar}</td><td>${food.carbohydrates}</td>
+					<td>${food.protein}</td>
+					<td><button class="delete-btn" data-food-name="${food.food}" data-food-date="${food.date}">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+						<path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+					</svg>
+					</button></td>`;
+					let deleteBtn = newRow.querySelector('.delete-btn');
+					deleteBtn.addEventListener('click', handleDelete);
+				}
+			}
+
+			async function handleDelete(evt) {
+				let foodName = evt.currentTarget.getAttribute('data-food-name');
+				let foodDate = evt.currentTarget.getAttribute('data-food-date');
+				
+				const confirmed = confirm("Do you want to delete this entry?");
+				if (confirmed) {
+					const response = await fetch(`/foodHistory/foodDataByNameAndDate?food=${foodName}&date=${foodDate}`, {
+						method: 'DELETE',
+					});
+
+					const responseData = await response.json();
+
+					if (response.ok) {
+						// After successful deletion, update table
+						window.location.reload();
+					} else {
+						console.error('Delete operation failed: ', responseData.message);
 					}
 				}
-			});
-			let myChart = document.getElementById("myChart").getContext("2d");
-			
-			// Placeholder Charts-------------------------------------------------------
-			
-			// let foodChart = new Chart(myChart, {
-			// 	type: "bar",
-			// 	data: {
-			// 		//bar labels
-			// 		labels: [
-			// 			"Sunday",
-			// 			"Monday",
-			// 			"Tuesday",
-			// 			"Wednesday",
-			// 			"Thursday",
-			// 			"Friday",
-			// 			"Saturday",
-			// 		],
-			// 		datasets: [
-			// 			{
-			// 				label: "Calories",
-			// 				//bars; values to be visually displayed
-			// 				data: [2650, 2050, 2200, 1850, 1850, 2750, 2350],
-			// 				//bar colour (array for individual bars)
-			// 				backgroundColor: ["rgba(54, 162, 235, 0.8)"],
-			// 			},
-			// 		],
-			// 	},
-			// });
-			// //resizes chart based on display size
-			// window.addEventListener("resize", function () {
-			// 	foodChart.resize();
-			// });
-			// // event listener for dropdown menu
-			// document
-			// 	.getElementById("chart-type")
-			// 	.addEventListener("change", function () {
-			// 		let selectedOption = document.getElementById("chart-type").value;
-			// 		if (selectedOption === "calories") {
-			// 			foodChart.data.datasets[0].label = "Calories";
-			// 			foodChart.data.datasets[0].data = [
-			// 				2650, 2050, 2200, 1850, 1850, 2750, 2350,
-			// 			];
-			// 			foodChart.data.datasets[0].backgroundColor = [
-			// 				"rgba(54, 162, 235, 0.8)",
-			// 			];
-			// 		} else if (selectedOption === "sugar") {
-			// 			foodChart.data.datasets[0].label = "Sugar";
-			// 			foodChart.data.datasets[0].data = [50, 35, 20, 40, 30, 25, 60];
-			// 			foodChart.data.datasets[0].backgroundColor = [
-			// 				"rgba(255, 99, 132, 0.8)",
-			// 			];
-			// 		} else if (selectedOption === "protein") {
-			// 			foodChart.data.datasets[0].label = "Protein";
-			// 			foodChart.data.datasets[0].data = [33, 67, 45, 33, 87, 53, 39];
-			// 			foodChart.data.datasets[0].backgroundColor = [
-			// 				"rgba(255, 99, 132, 0.8)",
-			// 			];
-			// 		}
-			// 		foodChart.update();
-			// 	});
+			}
 
-			// Fetch nutrition data from the server.-------------------------------------------------------
-			// fetch("/foodHistory/nutritionLog")
-			// .then(response => response.json())
-			// .then(nutritionData => {
-			// 	// Initialize chart with nutrition data.
-			// 	let foodChart = new Chart(myChart, {
-			// 	type: "bar",
-			// 	data: {
-			// 		labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-			// 		datasets: [
-			// 		{
-			// 			label: "Calories",
-			// 			data: nutritionData.calories, // calories is an array with values for each day of the week
-			// 			backgroundColor: ["rgba(54, 162, 235, 0.8)"],
-			// 		},
-			// 		],
-			// 	},
-			// 	});
-			
-			// 	// Update chart with new nutrition data when the dropdown changes.
-			// 	document
-			// 	.getElementById("chart-type")
-			// 	.addEventListener("change", function () {
-			// 		let selectedOption = document.getElementById("chart-type").value;
-			// 		if (selectedOption === "calories") {
-			// 		foodChart.data.datasets[0].label = "calories";
-			// 		foodChart.data.datasets[0].data = nutritionData.calories;
-			// 		foodChart.data.datasets[0].backgroundColor = ["rgba(54, 162, 235, 0.8)"];
-			// 		} else if (selectedOption === "sugar") {
-			// 		foodChart.data.datasets[0].label = "Sugar";
-			// 		foodChart.data.datasets[0].data = nutritionData.sugar;
-			// 		foodChart.data.datasets[0].backgroundColor = ["rgba(255, 99, 132, 0.8)"];
-			// 		} else if (selectedOption === "protein") {
-			// 		foodChart.data.datasets[0].label = "Protein";
-			// 		foodChart.data.datasets[0].data = nutritionData.protein;
-			// 		foodChart.data.datasets[0].backgroundColor = ["rgba(255, 206, 86, 0.8)"];
-			// 		}
-			// 		foodChart.update();
-			// 	});
-			// });
-		</script>
-	</body>
+	  </script>
+	  	</div>
+	</div>
+	<%- include("templates/footer") %>
+  </body>
 </html>
+

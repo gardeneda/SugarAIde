@@ -2,12 +2,48 @@ body {
     font-family: Arial;
 }
 
+
+@media only screen and (max-width: 767px) {
+  .containerForm{
+    width: 90%;
+  }
+  textarea{
+    width: 100%;
+  }
+  .tabcontent{
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  .tab{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+}
+  
+
+@media only screen and (min-width: 768px) {
+
+  .containerForm{
+    width: 50%;
+  }
+  .tabcontent{
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  .tab{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+}
+  
+
 /* Style the tab */
 .tab {
   overflow: hidden;
   background: linear-gradient(#F9858b, #F985B9);
   display: flex;
   justify-content: space-around;
+
 }
 
 /* Style the buttons inside the tab */
@@ -38,6 +74,7 @@ body {
   display: none;
   padding: 6px 12px;
   border-top: none;
+  border: 1px solid #b0adad;
 }
 
 .bg-pink{
@@ -51,8 +88,9 @@ h2{
   justify-content: center;
   align-items: center;
   background: linear-gradient(#F9858b, #F985B9);
-  width: 200px; /* Set the width to your preferred value */
-  margin: auto; /* This is to center the button */
+  width: 200px; 
+  margin: auto; 
+  border-radius: 10px;
 }
 
 
