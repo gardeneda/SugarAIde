@@ -25,6 +25,8 @@ function openPage(evt, tabName) {
     }
   };
 
+  // Assign the URL to '/checkCalories' if the tabName is 'diet'. 
+  // If not, assign the URL to '/foodHistory'
   var url = (tabName == 'diet') ? '/checkCalories' : '/foodHistory';
   xhttp.open("GET", url, true);
   xhttp.send();
@@ -47,7 +49,6 @@ function loadDietContent() {
   .then(response => response.json())
   .then(data => {
       // Check if user.healthinfo?.activity exists
-      console.log("activity:" + data.activity);
       if (data.activity) {
           // User health info exists, load calorieRequirement page
           loadPage('/calorieRequirement', 'dietContent');

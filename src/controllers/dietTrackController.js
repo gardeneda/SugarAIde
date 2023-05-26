@@ -11,13 +11,10 @@ const userCollection = database
     .collection("users");
 
 exports.checkCalories = async (req, res) => {
-    console.log ("inside of checkCalories function")
 
     const email = req.session.email;
 
     const user = await userCollection.findOne({ email: email });
-
-    console.log("user: " + user)
 
     res.render("checkCalories", { activity: user?.healthinfo?.activity });
 };
