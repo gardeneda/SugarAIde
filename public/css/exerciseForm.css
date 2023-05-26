@@ -83,14 +83,17 @@ body {
 h2{
   color: #F9858b;
 }
-.submit-buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(#F9858b, #F985B9);
-  width: 200px; 
-  margin: auto; 
+
+.button-container input{
   border-radius: 10px;
+  color: white;
+  background: linear-gradient(#F9858b, #F985B9);
+  border: #F9858b;
+}
+.button-container{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
 }
 
 

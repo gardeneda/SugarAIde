@@ -41,10 +41,11 @@
                 <form 
                 id="cardiovascularForm"          
                 action="/exerciseForm/form"
-                method="post">
+                method="post"
+                onsubmit="return validateForm(this)">
                     <input type="hidden" name="formId" value="cardiovascularForm">
                     <label for="exercise" >*Exercise:</label>
-                    <input type="text" id="exercise" name="exercise" placeholder="Exercise" required>
+                    <input type="text" id="exercise" name="exercise" placeholder="Exercise" required pattern="[a-zA-Z ]+">
                     <br><br>
                     <label for="duration">*Duration (hours):</label>
                     <input type="number" step=".01" min="0.15" id="duration" name="duration" placeholder="Duration" required>
@@ -55,20 +56,21 @@
                     <label for="notes">Notes (Optional):</label>
                     <textarea rows="3" cols="40" id="notes" name="notes"></textarea>            
                     <br><br>
-                    <div class="submit-buttons" role="button" onclick="window.location.href='exerciseForm'">
-                        <button class="btn btn-lg text-white  px-4 me-md-2" type="submit">Submit &raquo;</button>
-                    </div>
+                    <div class="button-container">
+                        <input class="btn btn-lg text-white btn-block" type="reset" value="Reset">
+                        <input class="btn btn-lg text-white btn-block" type="submit" value="Submit &raquo;" onclick="disableSubmitButton(this)">
+                      </div>
                 </form>
             </div>
         
             <div id="Weightlifting" class="tabcontent">
                 <form
                 id="weightliftingForm"
-                action="/exerciseForm/form"
+                action="/exerciseForm/form"18
                 method="post">
                     <input type="hidden" name="formId" value="weightliftingForm">
                     <label for="exercise" >*Exercise: </label>
-                    <input type="text" id="exercise" name="exercise" placeholder="Exercise" required>
+                    <input type="text" id="exercise" name="exercise" placeholder="Exercise" required pattern="[a-zA-Z ]+">
                     <br><br>
                     <label for="duration">*Duration (hours):</label>
                     <input type="number" step=".01" min="0.15" id="duration" name="duration" placeholder="Duration">
@@ -88,9 +90,10 @@
                     <label for="notes">Notes (Optional):</label>
                     <textarea rows="3" cols="40" id="notes" name="Notes:" pattern="[A-Za-z]"></textarea>            
                     <br><br>
-                    <div class="submit-buttons" role="button" onclick="window.location.href='exerciseForm'">
-                        <button class="btn btn-lg text-white  px-4 me-md-2" type="submit">Submit &raquo;</button>
-                    </div>
+                    <div class="button-container">
+                        <input class="btn btn-lg text-white btn-block" type="reset" value="Reset">
+                        <input class="btn btn-lg text-white btn-block" type="submit" value="Submit &raquo;" onclick="disableSubmitButton(this)">
+                      </div>
                 </form>
             </div>
         </div>
