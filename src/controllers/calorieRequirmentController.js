@@ -38,7 +38,7 @@ exports.getDailyValues = async (email) => {
             let calorieRaw = nutrition?.calories;
             if (calorieRaw != undefined && typeof calorieRaw == 'string') {
                 let calorieFormatted = calorieRaw.replace(/\D/g, "");
-                totalCalories += calorieFormatted;
+                totalCalories += Number(calorieFormatted);
 
             } else if (typeof calorieRaw == 'number') {
                 totalCalories += calorieRaw;
@@ -145,8 +145,12 @@ exports.getDailyValuesOnMain = async (req, res, next) => {
         let totalCalories = 0;
         for (const nutrition of nutritions) {
             let calorieRaw = nutrition?.calories;
-            if (calorieRaw != undefined) {
-                totalCalories += Number(calorieRaw);
+            if (calorieRaw != undefined && typeof calorieRaw == 'string') {
+                let calorieFormatted = calorieRaw.replace(/\D/g, "");
+                totalCalories += Number(calorieFormatted);
+
+            } else if (typeof calorieRaw == 'number') {
+                totalCalories += calorieRaw;
             }
         }
 
@@ -176,8 +180,6 @@ exports.getDailyValuesOnMain = async (req, res, next) => {
                 totalProtein += Number(proteinFormatted);
             }
         }
-
-
 
         let tdee = user.healthinfo?.tdee;
 
