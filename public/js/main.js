@@ -39,19 +39,34 @@ async function getExerciseData() {
 let circularProgress = document.querySelector(".circular-progress");
 let progressValue = document.querySelector(".progress-value");
 let calorieRequireElement = document.querySelector("#calorie-require");
+let calorieMaxElement = document.querySelector("#calorie-max");
 let remainingCal = document.querySelector(".remainingCalories").textContent;
 
-let progressStartValue = 0;
-let progressEndValue = 0; // 초기값 설정
+let progressEndValue = 0;
+let maxAngle = 360;
 
-// Step 1: Get calorieRequire value and check if it's valid
-let calorieRequire = calorieRequireElement.textContent;
+// Step 1: Get calorieRequire and calorieMax values
+let calorieRequire = parseFloat(calorieRequireElement.textContent);
+let calorieMax = parseFloat(calorieMaxElement.textContent);
 
 // Step 2: Convert calorieRequire to a valid number format
-progressEndValue = parseFloat(calorieRequire);
-progressValue.textContent = `${remainingCal} Remaining`;
-circularProgress.style.background = `conic-gradient(#F9858b ${progressEndValue*0.18}deg, #efefef 0deg)`;
+progressEndValue = calorieRequire;
 
+// Step 3: Calculate progress ratio, angle, and gradient angle
+let progressRatio = progressEndValue / calorieMax;
+let progressAngle = progressRatio * maxAngle;
+let gradientAngle = 90 + (progressAngle / 2);
+
+console.log("calorieRequire: " + calorieRequire);
+console.log("calorieMax: " + calorieMax);
+console.log("progressEndValue: " + progressEndValue);
+console.log("progressRatio: " + progressRatio);
+console.log("progressAngle: " + progressAngle);
+console.log("gradientAngle: " + gradientAngle);
+
+// Step 4: Update progress value text and adjust the background style of the progress bar
+progressValue.textContent = `${remainingCal} Remaining`;
+circularProgress.style.background = `conic-gradient(#F9858b ${gradientAngle}deg, #efefef 0deg)`;
 
 
 
