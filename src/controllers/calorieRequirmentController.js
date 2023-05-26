@@ -27,9 +27,12 @@ exports.getDailyValues = async (email) => {
         let totalSugar = 0;
         for (const nutrition of nutritions) {
             let sugarRaw = nutrition?.sugar;
-            if (sugarRaw != undefined) {
+            if (sugarRaw != undefined && typeof sugarRaw == 'string') {
                 let sugarFormatted = sugarRaw.replace(/\D/g, "");
                 totalSugar += Number(sugarFormatted);
+
+            } else if (typeof sugarRaw == 'number') {
+                totalSugar += sugarRaw;
             }
         }
 
@@ -48,31 +51,38 @@ exports.getDailyValues = async (email) => {
         let totalFat = 0;
         for (const nutrition of nutritions) {
             let fatRaw = nutrition?.fat;
-            if (fatRaw != undefined) {
+            if (fatRaw != undefined && typeof fatRaw == 'string') {
                 let fatFormatted = fatRaw.replace(/\D/g, "");
                 totalFat += Number(fatFormatted);
+
+            } else if (typeof fatRaw == 'number') {
+                totalFat += fatRaw;
             }
         }
             
         let totalCarbs = 0;
         for (const nutrition of nutritions) {
             let carbRaw = nutrition?.carbohydrates;
-            if (carbRaw != undefined) {
+            if (carbRaw != undefined && typeof carbRaw == 'string') {
                 let carbFormatted = carbRaw.replace(/\D/g, "");
                 totalCarbs += Number(carbFormatted);
+
+            } else if (typeof carbRaw == 'number') {
+                totalCarbs += carbRaw;
             }
         }
 
         let totalProtein = 0;
         for (const nutrition of nutritions) {
             let proteinRaw = nutrition?.protein;
-            if (proteinRaw != undefined) {
+            if (proteinRaw != undefined && typeof proteinRaw == 'string') {
                 let proteinFormatted = proteinRaw.replace(/\D/g, "");
                 totalProtein += Number(proteinFormatted);
+
+            } else if (typeof proteinRaw == 'number') {
+                totalProtein += proteinRaw;
             }
         }
-
-
 
         let tdee = user.healthinfo?.tdee;
 
@@ -136,9 +146,12 @@ exports.getDailyValuesOnMain = async (req, res, next) => {
         let totalSugar = 0;
         for (const nutrition of nutritions) {
             let sugarRaw = nutrition?.sugar;
-            if (sugarRaw != undefined) {
+            if (sugarRaw != undefined && typeof sugarRaw == 'string') {
                 let sugarFormatted = sugarRaw.replace(/\D/g, "");
                 totalSugar += Number(sugarFormatted);
+
+            } else if (typeof sugarRaw == 'number') {
+                totalSugar += sugarRaw;
             }
         }
 
@@ -157,27 +170,36 @@ exports.getDailyValuesOnMain = async (req, res, next) => {
         let totalFat = 0;
         for (const nutrition of nutritions) {
             let fatRaw = nutrition?.fat;
-            if (fatRaw != undefined) {
+            if (fatRaw != undefined && typeof fatRaw == 'string') {
                 let fatFormatted = fatRaw.replace(/\D/g, "");
                 totalFat += Number(fatFormatted);
+
+            } else if (typeof fatRaw == 'number') {
+                totalFat += fatRaw;
             }
         }
             
         let totalCarbs = 0;
         for (const nutrition of nutritions) {
             let carbRaw = nutrition?.carbohydrates;
-            if (carbRaw != undefined) {
+            if (carbRaw != undefined && typeof carbRaw == 'string') {
                 let carbFormatted = carbRaw.replace(/\D/g, "");
                 totalCarbs += Number(carbFormatted);
+
+            } else if (typeof carbRaw == 'number') {
+                totalCarbs += carbRaw;
             }
         }
 
         let totalProtein = 0;
         for (const nutrition of nutritions) {
             let proteinRaw = nutrition?.protein;
-            if (proteinRaw != undefined) {
+            if (proteinRaw != undefined && typeof proteinRaw == 'string') {
                 let proteinFormatted = proteinRaw.replace(/\D/g, "");
                 totalProtein += Number(proteinFormatted);
+
+            } else if (typeof proteinRaw == 'number') {
+                totalProtein += proteinRaw;
             }
         }
 
