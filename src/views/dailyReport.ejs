@@ -34,195 +34,200 @@
 		<div class="main-container">
 			<div id="carouselExample" class="carousel slide">
 				<div class="carousel-inner">
-				  <div class="carousel-item active">
-					<div class="welcome-container text-white">
-						<div class="welcome">
-							<h1>Welcome <%= username %></h1>
-							<br>
-							<br>
-							<h4>Here's a report on your performance yesterday.</h4>
-						</div>
-					</div>
-				  </div>
-				  <div class="carousel-item">
-					  <div class="main-heading text-center">
-						  <h2>Daily Progress Report</h2>
-					  </div>
-					<div class="sub-container">
-						<div class="row py-3">
-							<div class="col">
-								<div class="progress-container">
-									<h6 class="text-body-emphasis text-center">
-										Probability of Getting Diabetes
-									</h6>
-									<br/>
-									<div class="circular-progress">
-										<span class="progress-value"> 0% </span>
-									</div>
-								</div>
-							</div>
-							<div class="col accordion-container">
-								<div class="accordion" id="accordionExample">
-									<div class="accordion-item" id="overall-summary">
-										<h2 class="accordion-header">
-											<button
-												class="accordion-button"
-												type="button"
-												data-bs-toggle="collapse"
-												data-bs-target="#collapseOne"
-												aria-expanded="true"
-												aria-controls="collapseOne"
-											>
-												Overall Summary
-											</button>
-										</h2>
-										<div
-											id="collapseOne"
-											class="accordion-collapse collapse show"
-											data-bs-parent="#accordionExample"
-										>
-											<div class="accordion-body">
-												<table>
-													<tr>
-														<td>Calories Consumed:</td>
-														<td id="consumed"><%= consumed %> Cal</td>
-													</tr>
-													<tr>
-														<td>Calories Burned:</td>
-														<td id="burned"><%= burned %> Cal</td>
-													</tr>
-													<tr>
-														<td>Total Net Calories:</td>
-														<td id="total-calories"><%= total %> Cal</td>
-													</tr>
-													<tr>
-														<td>Sugar Consumed:</td>
-														<td id="sugar"><%= sugar %>g</td>
-													</tr>
-													<tr>
-														<td>Risk Before:</td>
-														<td id="risk-before"><%= riskBefore %>%</td>
-													</tr>
-													<tr>
-														<td>Risk After:</td>
-														<td id="risk-after"><%= riskAfter %>%</td>
-													</tr>
-													<tr>
-														<td id="change">Risk Level Change:</td>
-														<td><%= riskChange %>%</td>
-													</tr>
-												</table>
-											</div>
-										</div>
-									</div>
-									<div class="accordion-item" id="">
-										<h2 class="accordion-header">
-											<button
-												class="accordion-button collapsed"
-												type="button"
-												data-bs-toggle="collapse"
-												data-bs-target="#collapseTwo"
-												aria-expanded="false"
-												aria-controls="collapseTwo"
-											>
-												Exercises Done
-											</button>
-										</h2>
-										<div
-											id="collapseTwo"
-											class="accordion-collapse collapse"
-											data-bs-parent="#accordionExample"
-										>
-											<div class="accordion-body">
-												<table id="exercise-table">
-													<% if (exerciseList.length > 0) { %>
-													<thead>
-														<th>Date</th>
-														<th>Exercise</th>
-														<th>Duration</th>
-														<th>Cal Burned</th>
-													</thead>
-													<tbody>
-														<% for (exercise of exerciseList) { %>
-														<tr>
-															<td><%= exercise.date_real %></td>
-															<td><%= exercise.exercise %></td>
-															<td><%= exercise.duration%> hours</td>
-															<td><%= exercise.caloriesBurned %> Cal</td>
-														</tr>
-														<% } %> <% } else { %> You didn't log any exercises yesterday. <%
-														} %>
-													</tbody>
-												</table>
-											</div>
-										</div>
-									</div>
-									<div class="accordion-item">
-										<h2 class="accordion-header">
-											<button
-												class="accordion-button collapsed"
-												type="button"
-												data-bs-toggle="collapse"
-												data-bs-target="#collapseThree"
-												aria-expanded="false"
-												aria-controls="collapseThree"
-											>
-												Foods Eaten
-											</button>
-										</h2>
-										<div
-											id="collapseThree"
-											class="accordion-collapse collapse"
-											data-bs-parent="#accordionExample"
-										>
-											<div class="accordion-body">
-												<table id="nutrition-table">
-													<% if (nutritionList.length > 0) { %>
-													<thead>
-														<th>Date</th>
-														<th>Food</th>
-														<th>Sugar</th>
-														<th>Calories</th>
-													</thead>
-													<tbody>
-														<% for (nutrition of nutritionList) { %>
-														<tr>
-															<td><%= nutrition.date_real %></td>
-															<td><%= nutrition.food %></td>
-															<td><%= nutrition.sugar %></td>
-															<td><%= nutrition.calories %> Cal</td>
-														</tr>
-														<% } %> <% } else { %> You didn't log any diet entries yesterday. <%
-														} %>
-													</tbody>
-												</table>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row text-center">
-							<div class="col">
-								<a href="/">
-									<div class="btn text-white btn-sugar">
-										Go to Main
-									</div>
-								</a>
+					<div class="carousel-item active">
+						<div class="welcome-container text-white">
+							<div class="welcome">
+								<h1>Welcome <%= username %></h1>
+								<br />
+								<br />
+								<h4>Here's a report on your performance yesterday.</h4>
 							</div>
 						</div>
 					</div>
-				  </div>
+					<div class="carousel-item">
+						<div class="card py-3">
+							<div class="card-title text-white text-center btn-sugar">
+								Daily Progress Report
+							</div>
+							<div class="sub-container">
+								<div class="row py-3">
+									<div class="col">
+										<div class="progress-container">
+											<h6 class="text-body-emphasis text-center">
+												Probability of Getting Diabetes
+											</h6>
+											<br />
+											<div class="circular-progress">
+												<span class="progress-value"> 0% </span>
+											</div>
+										</div>
+									</div>
+									<div class="col accordion-container">
+										<div class="accordion" id="accordionExample">
+											<div class="accordion-item" id="overall-summary">
+												<h2 class="accordion-header">
+													<button
+														class="accordion-button"
+														type="button"
+														data-bs-toggle="collapse"
+														data-bs-target="#collapseOne"
+														aria-expanded="true"
+														aria-controls="collapseOne"
+													>
+														Overall Summary
+													</button>
+												</h2>
+												<div
+													id="collapseOne"
+													class="accordion-collapse collapse show"
+													data-bs-parent="#accordionExample"
+												>
+													<div class="accordion-body">
+														<table>
+															<tr>
+																<td>Calories Consumed:</td>
+																<td id="consumed"><%= consumed %> Cal</td>
+															</tr>
+															<tr>
+																<td>Calories Burned:</td>
+																<td id="burned"><%= burned %> Cal</td>
+															</tr>
+															<tr>
+																<td>Total Net Calories:</td>
+																<td id="total-calories"><%= total %> Cal</td>
+															</tr>
+															<tr>
+																<td>Sugar Consumed:</td>
+																<td id="sugar"><%= sugar %>g</td>
+															</tr>
+															<tr>
+																<td>Risk Before:</td>
+																<td id="risk-before"><%= riskBefore %>%</td>
+															</tr>
+															<tr>
+																<td>Risk After:</td>
+																<td id="risk-after"><%= riskAfter %>%</td>
+															</tr>
+															<tr>
+																<td id="change">Risk Level Change:</td>
+																<td><%= riskChange %>%</td>
+															</tr>
+														</table>
+													</div>
+												</div>
+											</div>
+											<div class="accordion-item" id="">
+												<h2 class="accordion-header">
+													<button
+														class="accordion-button collapsed"
+														type="button"
+														data-bs-toggle="collapse"
+														data-bs-target="#collapseTwo"
+														aria-expanded="false"
+														aria-controls="collapseTwo"
+													>
+														Exercises Done
+													</button>
+												</h2>
+												<div
+													id="collapseTwo"
+													class="accordion-collapse collapse"
+													data-bs-parent="#accordionExample"
+												>
+													<div class="accordion-body">
+														<table id="exercise-table">
+															<% if (exerciseList.length > 0) { %>
+															<thead>
+																<th>Date</th>
+																<th>Exercise</th>
+																<th>Duration</th>
+																<th>Cal Burned</th>
+															</thead>
+															<tbody>
+																<% for (exercise of exerciseList) { %>
+																<tr>
+																	<td><%= exercise.date_real %></td>
+																	<td><%= exercise.exercise %></td>
+																	<td><%= exercise.duration%> hours</td>
+																	<td><%= exercise.caloriesBurned %> Cal</td>
+																</tr>
+																<% } %> <% } else { %> You didn't log any
+																exercises yesterday. <% } %>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+											<div class="accordion-item">
+												<h2 class="accordion-header">
+													<button
+														class="accordion-button collapsed"
+														type="button"
+														data-bs-toggle="collapse"
+														data-bs-target="#collapseThree"
+														aria-expanded="false"
+														aria-controls="collapseThree"
+													>
+														Foods Eaten
+													</button>
+												</h2>
+												<div
+													id="collapseThree"
+													class="accordion-collapse collapse"
+													data-bs-parent="#accordionExample"
+												>
+													<div class="accordion-body">
+														<table id="nutrition-table">
+															<% if (nutritionList.length > 0) { %>
+															<thead>
+																<th>Date</th>
+																<th>Food</th>
+																<th>Sugar</th>
+																<th>Calories</th>
+															</thead>
+															<tbody>
+																<% for (nutrition of nutritionList) { %>
+																<tr>
+																	<td><%= nutrition.date_real %></td>
+																	<td><%= nutrition.food %></td>
+																	<td><%= nutrition.sugar %></td>
+																	<td><%= nutrition.calories %> Cal</td>
+																</tr>
+																<% } %> <% } else { %> You didn't log any diet
+																entries yesterday. <% } %>
+															</tbody>
+														</table>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row text-center">
+									<div class="col">
+										<a href="/">
+											<div class="btn text-white btn-sugar">Go to Main</div>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 				<!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
 				  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
 				  <span class="visually-hidden">Previous</span>
 				</button> -->
-				<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-				  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-				  <span class="visually-hidden">Next</span>
+				<button
+					class="carousel-control-next"
+					type="button"
+					data-bs-target="#carouselExample"
+					data-bs-slide="next"
+				>
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Next</span>
 				</button>
-			  </div>
+			</div>
 		</div>
 		<%- include("templates/footer") %>
 		<script src="/js/dailyReport.js"></script>
