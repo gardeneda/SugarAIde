@@ -39,7 +39,7 @@ exports.getDailyValues = async (email) => {
             if (calorieRaw != undefined && typeof calorieRaw == 'string') {
                 let calorieFormatted = calorieRaw.replace(/\D/g, "");
                 totalCalories += calorieFormatted;
-                
+
             } else if (typeof calorieRaw == 'number') {
                 totalCalories += calorieRaw;
             }
@@ -182,7 +182,7 @@ exports.getDailyValuesOnMain = async (req, res, next) => {
         let tdee = user.healthinfo?.tdee;
 
         if (user.healthinfo?.tdee == undefined ||user.healthinfo?.tdee == null) {
-            await userCollection.updateOne({ email: email }, { $set: { 'healthinfo.tdee': (user.healthinfo?.metabolism * 1.2) } });
+            await userCollection.updateOne({ email: req.session.email }, { $set: { 'healthinfo.tdee': (user.healthinfo?.metabolism * 1.2) } });
             tdee = user.healthinfo?.metabolism * 1.2;
         }
 
