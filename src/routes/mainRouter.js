@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.route("/")
   .get(dailyReportController.checkFirstLoginOnMain,
-    calorieRequirement.getDailyValues,
+    calorieRequirement.getDailyValuesOnMain,
     mainController.createHTML);
   
 router.route('/exerciseData')
