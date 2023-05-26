@@ -150,7 +150,7 @@ exports.createHTML = async (req, res, next) => {
         $set: { "healthinfo.risk": risk }
     });
 
-    const formattedRisk = (risk * 100).toFixed(1);
+    const formattedRisk = (risk* 100).toFixed(2);
 
     res.render("risk-assessment", { risk: formattedRisk });
 }
