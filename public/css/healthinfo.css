@@ -1,0 +1,8 @@
+#reset {
+    width: 15%;
+}
+
+.reset-container {
+    display: flex;
+    justify-content: flex-end;;
+}
