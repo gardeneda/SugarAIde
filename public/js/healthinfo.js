@@ -18,7 +18,8 @@ form.addEventListener("submit", async function (event) {
     if (form.checkValidity()) {
         // Add is-valid class to the form
         form.classList.add("is-valid");
-        console.log("#1 Flag: Finished");
+        loader.style.display = 'block';
+
     } else {
         // Add is-invalid class to the form
         form.classList.add("is-invalid");
@@ -29,13 +30,12 @@ form.addEventListener("submit", async function (event) {
         if (element.checkValidity()) {
             element.classList.remove("is-invalid");
             element.classList.add("is-valid");
-            console.log(('#2 Flag: Finished'));
+
         } else {
             element.classList.remove("is-valid");
             element.classList.add("is-invalid");
         }
     });
-})
     
     if (form.checkValidity()) {
         const response = await fetch("https://drab-rose-indri-sari.cyclic.app/health/form", {
