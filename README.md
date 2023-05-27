@@ -1,7 +1,7 @@
 # SugarAIde
 Made by team BBY-21 at BCIT for COMP2800 2023.
 
-- Isiah Youm (gardeneda)
+- Isaiah Youm (gardeneda)
  
 - Hiroshi Nakasone (hiroshinaka)
 
