@@ -33,7 +33,7 @@ form.addEventListener("submit", async function (event) {
 
 		// Make the form submission
 		const response = await fetch(
-			`${API_BASE_URL}/health/form`,
+			`/health/form`,
 			{
 				method: "post",
 				headers: {

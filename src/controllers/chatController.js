@@ -19,27 +19,20 @@ const dateFormatter = require(`${__dirname}/../utils/dateFormatter`);
     Optimizes and fine-tunes the user message so that the AI
 */
 exports.modifyMessage = function (prompt, userMessage, temperature) {
-	const optimizePrompt = prompt;
-
-	const request = {
-		model: "text-davinci-003",
+	return {
+		model: "gpt-3.5-turbo",
+		messages: [
+			{ role: "system", content: prompt },
+			{ role: "user", content: String(userMessage) }
+		],
 		temperature: temperature,
-		max_tokens: 256,
+		max_tokens: 150,
 		top_p: 1,
 		frequency_penalty: 0,
-		presence_penalty: 0,
+		presence_penalty: 0
 	};
-
-	const optimizedMessage = optimizePrompt + userMessage;
-	const embeddedRequest = Object.assign(
-		{
-			prompt: optimizedMessage,
-		},
-		request
-	);
-	
-	return embeddedRequest;
 };
+
 
 exports.stripJSON = function (message) {
 	console.log(message);
