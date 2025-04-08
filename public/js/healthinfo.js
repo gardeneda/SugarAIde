@@ -33,7 +33,7 @@ form.addEventListener("submit", async function (event) {
 
 		// Make the form submission
 		const response = await fetch(
-			"https://drab-rose-indri-sari.cyclic.app/health/form",
+			`${API_BASE_URL}/health/form`,
 			{
 				method: "post",
 				headers: {

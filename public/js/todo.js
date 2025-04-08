@@ -23,7 +23,7 @@ const getValues = () => {
 const postCheckList = async () => {
     const valueArr = getValues();
     const request = { checkedValues: valueArr } ;
-    const response = await fetch("https://drab-rose-indri-sari.cyclic.app/todo", {
+    const response = await fetch(`${API_BASE_URL}/todo`, {
         method: 'post',
         headers: {
             'Content-type': 'application/json'
