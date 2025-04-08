@@ -23,7 +23,7 @@ const getValues = () => {
 const postCheckList = async () => {
     const valueArr = getValues();
     const request = { checkedValues: valueArr } ;
-    const response = await fetch(`${API_BASE_URL}/todo`, {
+    const response = await fetch(`/todo`, {
         method: 'post',
         headers: {
             'Content-type': 'application/json'
