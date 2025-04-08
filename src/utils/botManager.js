@@ -9,11 +9,15 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 exports.processMessage = async (msg) => {
-
-    const response = await openai.createCompletion(msg);
-    const fullData = response.data;
-  
-    const answer = fullData.choices[0].text;
-
-    return answer;
-}
+	const response = await openai.createChatCompletion({
+		model: "gpt-3.5-turbo",
+		messages: [
+			{ role: "system", content: "You are a helpful assistant." },
+			{ role: "user", content: String(msg) }
+		],
+		temperature: 1,
+		max_tokens: 150
+	});
+	const answer = response.data.choices[0].message.content;
+	return answer;
+};
